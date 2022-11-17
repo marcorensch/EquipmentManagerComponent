@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="component" method="upgrade">
+	<name>Equipment Manager</name>
+	<creationDate>17.11.22</creationDate>
+	<author>NXD | Marco Rensch</author>
+	<authorEmail>support@nx-designs.ch</authorEmail>
+	<authorUrl>https://www.nx-designs.ch</authorUrl>
+	<copyright>Copyright ©2022 by NXD | nx-designs</copyright>
+	<license>GNU General Public License version 2 or later;</license>
+	<version>1.0.0</version>
+	<description>COM_EQUIPMENT_MANAGER_XML_DESCRIPTION</description>
+	<namespace path="src">NXD\Component\Equipmentmanager</namespace>
+	<scriptfile>script.php</scriptfile>
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<update>  <!-- Runs on update -->
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+	<!-- Frond-end files -->
+	<files folder="components/com_equipmentmanager">
+		<folder>language</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+	</files>
+    <media folder="media/com_equipmentmanager" destination="com_equipmentmanager">
+		<folder>js</folder>
+    </media>
+	<!-- Back-end files -->
+	<administration>
+		<!-- Menu entries -->
+		<menu view="equipmentmanager">COM_EQUIPMENT_MANAGER</menu>
+		<submenu>
+			<menu link="option=com_equipmentmanager">COM_EQUIPMENT_MANAGER</menu>
+			<submenu>
+			<menu link="option=com_categories&amp;extension=com_equipmentmanager"
+				view="equipmentmanager" img="class:equipmentmanager-cat" alt="Equipmentmanager/Categories">JCATEGORY</menu>
+			</submenu>
+		</submenu>
+		<files folder="administrator/components/com_equipmentmanager">
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<folder>forms</folder>
+			<folder>language</folder>
+			<folder>services</folder>
+			<folder>sql</folder>
+			<folder>src</folder>
+			<folder>tmpl</folder>
+		</files>
+	</administration>
+	<changelogurl>https://raw.githubusercontent.com/astridx/boilerplate/tutorial/changelog.xml</changelogurl>
+	<updateservers>
+		<server type="extension" name="Equipmentmanager Updates">https://raw.githubusercontent.com/astridx/boilerplate/tutorial/equipmentmanager_update.xml</server>
+	</updateservers>
+	<dlid prefix="dlid=" suffix="" />
+</extension>

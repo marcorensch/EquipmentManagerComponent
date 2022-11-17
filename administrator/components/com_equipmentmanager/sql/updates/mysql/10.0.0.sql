@@ -1,0 +1,1 @@
+/** Placeholder File for the new version of the component. */
