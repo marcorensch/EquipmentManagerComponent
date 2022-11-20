@@ -88,8 +88,8 @@ class HtmlView extends BaseHtmlView
 	 *
 	 * @return  void
 	 *
-	 * @since   1.0.0
 	 * @throws  Exception
+	 * @since   1.0.0
 	 */
 	public function display($tpl = null): void
 	{
@@ -109,13 +109,16 @@ class HtmlView extends BaseHtmlView
 
 		// Preprocess the list of items to find ordering divisions.
 		// TODO: Complete the ordering stuff with nested sets
-		foreach ($this->items as &$item)
+		if ($this->items)
 		{
-			$item->order_up = true;
-			$item->order_dn = true;
+			foreach ($this->items as &$item)
+			{
+				$item->order_up = true;
+				$item->order_dn = true;
+			}
 		}
 
-		if (!count($this->items) && $this->get('IsEmptyState'))
+		if ((!$this->items || !count($this->items)) && $this->get('IsEmptyState'))
 		{
 			$this->setLayout('emptystate');
 		}
@@ -154,8 +157,8 @@ class HtmlView extends BaseHtmlView
 	 *
 	 * @return  void
 	 *
-	 * @since   1.0.0
 	 * @throws  Exception
+	 * @since   1.0.0
 	 */
 	protected function addToolbar()
 	{
