@@ -128,6 +128,13 @@ class ItemTable extends Table implements TaggableTableInterface
 			$this->publish_down = null;
 		}
 
+		// Set checked_out to 0 if checked_out is null
+		error_log("this->checked_out = " . $this->checked_out);
+		if (!$this->checked_out)
+		{
+			$this->checked_out = 0;
+		}
+
 		return true;
 	}
 

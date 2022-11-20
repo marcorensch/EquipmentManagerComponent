@@ -41,10 +41,10 @@
 		<menu view="equipmentmanager">COM_EQUIPMENT_MANAGER</menu>
 		<submenu>
 			<menu link="option=com_equipmentmanager">COM_EQUIPMENT_MANAGER</menu>
-			<submenu>
 			<menu link="option=com_categories&amp;extension=com_equipmentmanager"
-				view="equipmentmanager" img="class:equipmentmanager-cat" alt="Equipmentmanager/Categories">JCATEGORY</menu>
-			</submenu>
+				view="equipmentmanager" img="class:equipmentmanager-cat" alt="Equipmentmanager/Categories">JCATEGORIES</menu>
+			<menu link="option=com_fields&amp;context=com_equipmentmanager.item">JGLOBAL_FIELDS</menu>
+			<menu link="option=com_fields&amp;view=groups&amp;context=com_equipmentmanager.item">JGLOBAL_FIELD_GROUPS</menu>
 		</submenu>
 		<files folder="administrator/components/com_equipmentmanager">
 			<filename>access.xml</filename>
