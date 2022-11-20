@@ -74,7 +74,7 @@ class ItemModel extends AdminModel
 	{
 		// Get the form.
 		$form = $this->loadForm('com_equipmentmanager.item',
-			'equipmentmanager', ['control' => 'jform', 'load_data' => $loadData]);
+			'equipment', ['control' => 'jform', 'load_data' => $loadData]);
 
 		if (empty($form))
 		{

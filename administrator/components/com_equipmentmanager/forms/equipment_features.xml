@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field name="feature" type="textarea" label="COM_EQUIPMENT_MANAGER_FIELD_FEATURE_LABEL" cols="40" rows="1" />
+</form>

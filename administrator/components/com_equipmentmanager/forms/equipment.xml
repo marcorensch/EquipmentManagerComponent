@@ -14,12 +14,11 @@
 		/>
 
 		<field
-			name="name"
+			name="title"
 			type="text"
-			validate="Letter"
-			class="validate-letter"
 			label="COM_EQUIPMENT_MANAGER_FIELD_NAME_LABEL"
-			size="40"
+			size="255"
+			limit="255"
 			required="true"
 		 />
 
@@ -30,6 +29,57 @@
 			size="45"
 			hint="JFIELD_ALIAS_PLACEHOLDER"
 		/>
+
+		<field
+				name="short_description"
+				type="editor"
+				label="COM_EQUIPMENT_MANAGER_FIELD_SHORT_DESCRIPTION_LABEL"
+				filter="safehtml"
+				height="200"
+				buttons="false"
+				hide="readmore,pagebreak,image"
+		/>
+
+		<field
+			name="description"
+			type="editor"
+			label="COM_EQUIPMENT_MANAGER_FIELD_DESCRIPTION_LABEL"
+			filter="safehtml"
+			buttons="true"
+			hide="readmore,pagebreak,image"
+		/>
+
+		<field
+			name="image"
+			type="media"
+			label="COM_EQUIPMENT_MANAGER_FIELD_IMAGE_LABEL"
+			accept="image/*"
+			preview="true"
+			preview_width="200"
+			preview_height="200"
+			/>
+
+		<field
+			name="gallery_path"
+			type="text"
+			label="COM_EQUIPMENT_MANAGER_FIELD_GALLERY_PATH_LABEL"
+			size="255"
+			limit="255"
+			/>
+
+		<field
+			name="features"
+			type="subform"
+			formsource="administrator/components/com_equipmentmanager/forms/equipment_features.xml"
+			label="COM_EQUIPMENT_MANAGER_FIELD_FEATURES_LABEL"
+			multiple="true"
+			layout="joomla.form.field.subform.repeatable"
+			min="0"
+		>
+
+		</field>
+
+
 
 		<field
 			name="language"

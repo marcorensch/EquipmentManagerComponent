@@ -37,7 +37,7 @@ class ItemsModel extends ListModel
 		{
 			$config['filter_fields'] = [
 				'id', 'a.id',
-				'name', 'a.name',
+				'title', 'a.title',
 				'alias', 'a.alias',
 				'catid', 'a.catid', 'category_id', 'category_title',
 				'checked_out', 'a.checked_out',
@@ -64,14 +64,14 @@ class ItemsModel extends ListModel
 	/**
 	 * Build an SQL query to load the list data.
 	 *
-	 * @return  \JDatabaseQuery
+	 * @return  \Joomla\Database\QueryInterface
 	 *
 	 * @since   1.0
 	 */
-	protected function getListQuery()
+	protected function getListQuery(): \Joomla\Database\QueryInterface
 	{
 		// Create a new query object.
-		$db = $this->getDbo();
+		$db = $this->getDatabase();
 		$query = $db->getQuery(true);
 
 		// Select the required fields from the table.
@@ -81,7 +81,7 @@ class ItemsModel extends ListModel
 					', ',
 					$this->getState(
 						'list.select',
-						'a.id, a.name, a.catid' .
+						'a.id, a.title, a.catid' .
 						', a.access' .
 						', a.checked_out' .
 						', a.checked_out_time' .
@@ -110,6 +110,7 @@ class ItemsModel extends ListModel
 				'LEFT',
 				$db->quoteName('#__categories', 'c') . ' ON ' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid')
 			);
+
 
 		// Join over the language
 		$query->select($db->quoteName('l.title', 'language_title'))
@@ -142,6 +143,7 @@ class ItemsModel extends ListModel
 				'LEFT',
 				$db->quoteName('#__users', 'uc') . ' ON ' . $db->quoteName('uc.id') . ' = ' . $db->quoteName('a.checked_out')
 			);
+
 
 		// Filter by access level.
 		if ($access = $this->getState('filter.access'))
@@ -198,7 +200,7 @@ class ItemsModel extends ListModel
 		}
 
 		// Add the list ordering clause.
-		$orderCol = $this->state->get('list.ordering', 'a.name');
+		$orderCol = $this->state->get('list.ordering', 'a.title');
 		$orderDirn = $this->state->get('list.direction', 'asc');
 
 		if ($orderCol == 'a.ordering' || $orderCol == 'category_title')
@@ -206,7 +208,7 @@ class ItemsModel extends ListModel
 			$orderCol = $db->quoteName('c.title') . ' ' . $orderDirn . ', ' . $db->quoteName('a.ordering');
 		}
 
-		$query->order($db->escape($orderCol . ' ' . $orderDirn));
+		$query->order($db->quote($orderCol . ' ' . $orderDirn));
 
 		return $query;
 	}
@@ -221,9 +223,10 @@ class ItemsModel extends ListModel
 	 *
 	 * @return  void
 	 *
+	 * @throws \Exception
 	 * @since   1.0
 	 */
-	protected function populateState($ordering = 'a.name', $direction = 'asc')
+	protected function populateState($ordering = 'a.name', $direction = 'asc'): void
 	{
 		$app = Factory::getApplication();
 
