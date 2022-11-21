@@ -189,7 +189,7 @@ class ItemsModel extends ListModel
 			{
 				$search = $db->quote('%' . str_replace(' ', '%', $db->escape(trim($search), true) . '%'));
 				$query->where(
-					'(' . $db->quoteName('a.name') . ' LIKE ' . $search . ')'
+					'(' . $db->quoteName('a.title') . ' LIKE ' . $search . ')'
 				);
 			}
 		}
@@ -204,10 +204,10 @@ class ItemsModel extends ListModel
 		$orderCol = $this->state->get('list.ordering', 'a.title');
 		$orderDirn = $this->state->get('list.direction', 'asc');
 
-//		if ($orderCol == 'a.ordering' || $orderCol == 'category_title')
-//		{
-//			$orderCol = $db->quoteName('c.title') . ' ' . $orderDirn . ', ' . $db->quoteName('a.ordering');
-//		}
+		if ($orderCol == 'a.ordering' || $orderCol == 'category_title')
+		{
+			$orderCol = $db->quoteName('c.title') . ' ' . $orderDirn . ', ' . $db->quoteName('a.ordering');
+		}
 
 		$query->order($db->escape($orderCol . ' ' . $orderDirn));
 
@@ -227,7 +227,7 @@ class ItemsModel extends ListModel
 	 * @throws \Exception
 	 * @since   1.0
 	 */
-	protected function populateState($ordering = 'a.name', $direction = 'asc'): void
+	protected function populateState($ordering = 'a.title', $direction = 'asc'): void
 	{
 		$app = Factory::getApplication();
 
