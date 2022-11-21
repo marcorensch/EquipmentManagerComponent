@@ -159,6 +159,16 @@
 			label="JFIELD_ORDERING_LABEL"
 			content_type="com_equipmentmanager.item"
 		/>
+
+		<field
+				name="created"
+				type="calendar"
+				label="COM_EQUIPMENT_MANAGER_FIELD_CREATED_LABEL"
+				translateformat="true"
+				showtime="true"
+				size="22"
+				filter="user_utc"
+		/>
 	</fieldset>
 	<fields name="params" label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">
 		<fieldset name="display" label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">

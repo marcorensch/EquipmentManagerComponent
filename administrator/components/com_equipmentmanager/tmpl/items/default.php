@@ -75,6 +75,9 @@ if ($saveOrder && !empty($this->items))
 								<th scope="col" class="w-3 d-none d-lg-table-cell">
 									<?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 								</th>
+                                <th scope="col" class="w-3 d-none d-lg-table-cell">
+									<?php echo HTMLHelper::_('searchtools.sort', 'JGRID_ORDERING', 'a.ordering', $listDirn, $listOrder); ?>
+                                </th>
 							</tr>
 						</thead>
 						<tbody<?php if ($saveOrder) : ?> class="js-draggable" data-url="<?php echo $saveOrderingUrl; ?>" data-direction="<?php echo strtolower($listDirn); ?>" data-nested="true"<?php endif; ?>>
@@ -118,13 +121,13 @@ if ($saveOrder && !empty($this->items))
 									<?php if ($item->checked_out) : ?>
 										<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'equipmentmanager.', true); ?>
 									<?php endif; ?>
-									<div>
-										<?php echo $this->escape($item->name); ?>
-									</div>
 									<?php $editIcon = '<span class="fa fa-pencil-square mr-2" aria-hidden="true"></span>'; ?>
 									<a class="hasTooltip" href="<?php echo Route::_('index.php?option=com_equipmentmanager&task=item.edit&id=' . (int) $item->id); ?>" title="<?php echo Text::_('JACTION_EDIT'); ?> <?php echo $this->escape(addslashes($item->title)); ?>">
 										<?php echo $editIcon; ?><?php echo $this->escape($item->title); ?></a>
 									<div class="small">
+                                        <?php echo Text::_('JALIAS'); ?>: <?php echo $this->escape($item->alias); ?>
+                                    </div>
+                                    <div class="small">
 										<?php echo Text::_('JCATEGORY') . ': ' . $this->escape($item->category_title); ?>
 									</div>
 
@@ -149,6 +152,9 @@ if ($saveOrder && !empty($this->items))
 								<td class="d-none d-md-table-cell">
 									<?php echo $item->id; ?>
 								</td>
+                                <td class="d-none d-md-table-cell">
+									<?php echo $item->ordering; ?>
+                                </td>
 							</tr>
 							<?php endforeach; ?>
 						</tbody>

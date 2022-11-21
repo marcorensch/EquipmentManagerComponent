@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `#__equipmentmanager_items` (
     `gallery_path` varchar(255) NOT NULL DEFAULT '',
     `image` varchar(255) NOT NULL DEFAULT '',
     `ordering` int(11) NOT NULL DEFAULT 0,
-    `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
+    `checked_out` int(10) unsigned DEFAULT NULL,
     `checked_out_time` datetime,
     `language` char(7) NOT NULL DEFAULT '*',
     `state` tinyint(3) NOT NULL DEFAULT 0,
@@ -18,6 +18,8 @@ CREATE TABLE IF NOT EXISTS `#__equipmentmanager_items` (
     `published` tinyint(1) NOT NULL DEFAULT 0,
     `publish_down` datetime,
     `publish_up` datetime,
+    `created` datetime,
+    `created_by` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 

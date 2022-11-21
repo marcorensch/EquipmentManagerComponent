@@ -129,11 +129,6 @@ class ItemTable extends Table implements TaggableTableInterface
 		}
 
 		// Set checked_out to 0 if checked_out is null
-		error_log("this->checked_out = " . $this->checked_out);
-		if (!$this->checked_out)
-		{
-			$this->checked_out = 0;
-		}
 		if($this->short_description == null) {
 			$this->short_description = "";
 		}
@@ -143,6 +138,12 @@ class ItemTable extends Table implements TaggableTableInterface
 
 		if($this->features == null) {
 			$this->features = "";
+		}else{
+			$this->features = json_encode($this->features);
+		}
+
+		if($this->id == 0) {
+			$this->created = date("Y-m-d H:i:s");
 		}
 
 		return true;

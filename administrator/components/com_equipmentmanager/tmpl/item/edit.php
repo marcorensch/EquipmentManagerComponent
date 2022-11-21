@@ -97,6 +97,7 @@ $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=componen
 	            <?php echo $this->getForm()->renderField('language'); ?>
             </div>
             <div class="col-md-6">
+	            <?php echo $this->getForm()->renderField('created'); ?>
 	            <?php echo $this->getForm()->renderField('published'); ?>
 	            <?php echo $this->getForm()->renderField('publish_up'); ?>
 	            <?php echo $this->getForm()->renderField('publish_down'); ?>

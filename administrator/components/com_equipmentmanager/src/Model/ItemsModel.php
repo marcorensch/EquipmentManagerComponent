@@ -82,6 +82,7 @@ class ItemsModel extends ListModel
 					$this->getState(
 						'list.select',
 						'a.id, a.title, a.catid' .
+						', a.alias' .
 						', a.access' .
 						', a.checked_out' .
 						', a.checked_out_time' .
