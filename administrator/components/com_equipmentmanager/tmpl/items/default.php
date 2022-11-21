@@ -153,9 +153,20 @@ if ($saveOrder && !empty($this->items))
 
 					<?php echo $this->pagination->getListFooter(); ?>
 
-
-
-
+                    <?php // Load the batch processing form.
+                    if ($user->authorise('core.create', 'com_equipmentmanager')
+                        && $user->authorise('core.edit', 'com_equipmentmanager')
+                        && $user->authorise('core.edit.state', 'com_equipmentmanager')) :
+                        echo HTMLHelper::_(
+                            'bootstrap.renderModal',
+                            'collapseModal',
+                            array(
+                                'title' => Text::_('COM_EQUIPMENTMANAGER_ITEMS_BATCH_OPTIONS'),
+                                'footer' => $this->loadTemplate('batch_footer')
+                            ),
+                            $this->loadTemplate('batch_body')
+                        );
+                    endif; ?>
 				<input type="hidden" name="task" value="">
 				<input type="hidden" name="boxchecked" value="0">
 				<?php echo HTMLHelper::_('form.token'); ?>

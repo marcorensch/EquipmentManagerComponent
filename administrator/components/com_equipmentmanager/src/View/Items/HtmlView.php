@@ -185,8 +185,8 @@ class HtmlView extends BaseHtmlView
 			$dropdown = $toolbar->dropdownButton('status-group')
 				->text('JTOOLBAR_CHANGE_STATUS')
 				->toggleSplit(false)
-				->icon('fa fa-globe')
-				->buttonClass('btn btn-info')
+				->icon('fa fa-ellipsis-h')
+				->buttonClass('btn btn-action')
 				->listCheck(true);
 
 			$childBar = $dropdown->getChildToolbar();
@@ -206,12 +206,16 @@ class HtmlView extends BaseHtmlView
 			{
 				$childBar->trash('items.trash')->listCheck(true);
 			}
+			$childBar->popupButton('batch')
+				->text('JTOOLBAR_BATCH')
+				->selector('collapseModal')
+				->listCheck(true);
 		}
 
-		$toolbar->popupButton('batch')
-			->text('JTOOLBAR_BATCH')
-			->selector('collapseModal')
-			->listCheck(true);
+//		$toolbar->popupButton('batch')
+//			->text('JTOOLBAR_BATCH')
+//			->selector('collapseModal')
+//			->listCheck(true);
 
 		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
 		{

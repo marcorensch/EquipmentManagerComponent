@@ -57,6 +57,7 @@ class ItemModel extends AdminModel
 		= [
 			'assetgroup_id' => 'batchAccess',
 			'language_id'   => 'batchLanguage',
+			'user_id'       => 'batchUser',
 		];
 
 	/**
