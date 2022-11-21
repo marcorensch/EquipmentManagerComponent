@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS `#__equipmentmanager_items` (
     `title` varchar(255) NOT NULL DEFAULT '',
     `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
     `catid` int(11) NOT NULL DEFAULT 0,
+    `rental_price` int(11) DEFAULT 0,
     `short_description` text NOT NULL,
     `description` text NOT NULL,
     `features` text NOT NULL,
