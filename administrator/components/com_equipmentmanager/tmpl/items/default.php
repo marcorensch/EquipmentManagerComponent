@@ -29,7 +29,7 @@ $saveOrder = $listOrder === 'a.ordering';
 
 if ($saveOrder && !empty($this->items))
 {
-	$saveOrderingUrl = 'index.php?option=com_equipmentmanager&task=item.saveOrderAjax&tmpl=component&' . Session::getFormToken() . '=1';
+	$saveOrderingUrl = 'index.php?option=com_equipmentmanager&task=items.saveOrderAjax&tmpl=component&' . Session::getFormToken() . '=1';
 	HTMLHelper::_('draggablelist.draggable');
 }
 ?>
@@ -75,9 +75,6 @@ if ($saveOrder && !empty($this->items))
 								<th scope="col" class="w-3 d-none d-lg-table-cell">
 									<?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 								</th>
-                                <th scope="col" class="w-3 d-none d-lg-table-cell">
-									<?php echo HTMLHelper::_('searchtools.sort', 'JGRID_ORDERING', 'a.ordering', $listDirn, $listOrder); ?>
-                                </th>
 							</tr>
 						</thead>
 						<tbody<?php if ($saveOrder) : ?> class="js-draggable" data-url="<?php echo $saveOrderingUrl; ?>" data-direction="<?php echo strtolower($listDirn); ?>" data-nested="true"<?php endif; ?>>
@@ -152,9 +149,6 @@ if ($saveOrder && !empty($this->items))
 								<td class="d-none d-md-table-cell">
 									<?php echo $item->id; ?>
 								</td>
-                                <td class="d-none d-md-table-cell">
-									<?php echo $item->ordering; ?>
-                                </td>
 							</tr>
 							<?php endforeach; ?>
 						</tbody>
