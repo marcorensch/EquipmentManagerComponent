@@ -57,7 +57,7 @@ if ($saveOrder && !empty($this->items))
 									<?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
 								</th>
 								<th scope="col" style="min-width:100px">
-									<?php echo HTMLHelper::_('searchtools.sort', 'COM_EQUIPMENT_MANAGER_TABLE_TABLEHEAD_NAME', 'a.name', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_EQUIPMENT_MANAGER_TABLE_TABLEHEAD_NAME', 'a.title', $listDirn, $listOrder); ?>
 								</th>
 								<th scope="col" class="w-10 d-none d-md-table-cell">
 									<?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_ACCESS', 'access_level', $listDirn, $listOrder); ?>
