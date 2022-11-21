@@ -19,6 +19,7 @@ use Joomla\CMS\Component\Router\RouterServiceInterface;
 use Joomla\CMS\Component\Router\RouterServiceTrait;
 use Joomla\CMS\Extension\BootableExtensionInterface;
 use Joomla\CMS\Extension\MVCComponent;
+use Joomla\CMS\Helper\ContentHelper;
 use Joomla\CMS\HTML\HTMLRegistryAwareTrait;
 use NXD\Component\Equipmentmanager\Administrator\Service\HTML\AdministratorService;
 use Psr\Container\ContainerInterface;
@@ -52,6 +53,22 @@ implements BootableExtensionInterface, CategoryServiceInterface, AssociationServ
 	public function boot(ContainerInterface $container)
 	{
 		$this->getRegistry()->register('equipmentmanageradministrator', new AdministratorService);
+	}
+
+	public function countItems(array $items, string $section)
+	{
+		try{
+			$config = (object) array(
+				'related_tbl' => $this->getTableNameForSection($section),
+				'state_col' => 'published',
+				'group_col' => 'catid',
+				'relation_type' => 'category_or_group',
+			);
+			ContentHelper::countRelations($items, $config);
+		}
+		catch (Exception $e){
+			// do nothing
+		}
 	}
 
 	/**
