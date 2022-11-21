@@ -37,30 +37,72 @@ $this->useCoreUI        = true;
 $isModal = $input->get('layout') == 'modal' ? true : false;
 $layout  = $isModal ? 'modal' : 'edit';
 $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=component' : '';
+
+
 ?>
+
+
 
 <form action="<?php echo Route::_('index.php?option=com_equipmentmanager&layout=' . $layout . $tmpl . '&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="equipmentmanager-form" class="form-validate">
 
-	<?php echo LayoutHelper::render('joomla.edit.title_alias', $this); ?>
+    <div>
+        <div class="row form-vertical mb-3">
+            <div class="col-12 col-md-4">
+	            <?php echo $this->getForm()->renderField('title'); ?>
+            </div>
+            <div class="col-12 col-md-4">
+	            <?php echo $this->getForm()->renderField('catid'); ?>
+            </div>
+            <div class="col-12 col-md-4">
+		        <?php echo $this->getForm()->renderField('alias'); ?>
+            </div>
+        </div>
+    </div>
 
 	<div>
 		<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'details')); ?>
 
-		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'details', Text::_('COM_EQUIPMENT_MANAGER_EQUIPMENT_LABEL')); ?>
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'details', Text::_('COM_EQUIPMENT_MANAGER_DETAILS_LABEL')); ?>
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-md-12">
 				<div class="row">
-					<div class="col-md-6">
-						<?php echo $this->getForm()->renderField('access'); ?>
-						<?php echo $this->getForm()->renderField('published'); ?>
-						<?php echo $this->getForm()->renderField('publish_up'); ?>
-						<?php echo $this->getForm()->renderField('publish_down'); ?>
-						<?php echo $this->getForm()->renderField('catid'); ?>
-						<?php echo $this->getForm()->renderField('language'); ?>
-					</div>
+                    <div class="col-md-7">
+						<?php echo $this->getForm()->renderField('short_description'); ?>
+						<?php echo $this->getForm()->renderField('description'); ?>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4 form-vertical">
+	                    <?php echo $this->getForm()->renderField('features'); ?>
+                    </div>
 				</div>
 			</div>
 		</div>
+		<?php echo HTMLHelper::_('uitab.endTab'); ?>
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'images', Text::_('COM_EQUIPMENT_MANAGER_IMAGES_LABEL')); ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-7">
+                        <?php echo $this->getForm()->renderField('image'); ?>
+                        <?php echo $this->getForm()->renderField('gallery_path'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<?php echo HTMLHelper::_('uitab.endTab'); ?>
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'publishing', Text::_('COM_EQUIPMENT_MANAGER_PUBLISHING_LABEL')); ?>
+        <div class="row">
+            <div class="col-md-6">
+	            <?php echo $this->getForm()->renderField('access'); ?>
+	            <?php echo $this->getForm()->renderField('language'); ?>
+            </div>
+            <div class="col-md-6">
+	            <?php echo $this->getForm()->renderField('created'); ?>
+	            <?php echo $this->getForm()->renderField('published'); ?>
+	            <?php echo $this->getForm()->renderField('publish_up'); ?>
+	            <?php echo $this->getForm()->renderField('publish_down'); ?>
+            </div>
+        </div>
 		<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
 		<?php if ( !$isModal && $assoc) : ?>

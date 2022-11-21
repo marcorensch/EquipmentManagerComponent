@@ -101,11 +101,13 @@ class HtmlView extends BaseHtmlView
 		// Since we don't track these assets at the item level, use the category id.
 		$canDo = ContentHelper::getActions('com_equipmentmanager', 'category', $this->item->catid);
 
+		$itemCreatable = $canDo->get('core.create');
+
 		// Build the actions for new and existing records.
 		if ($isNew)
 		{
 			// For new records, check the create permission.
-			if ($isNew && (count($user->getAuthorisedCategories('com_equipmentmanager', 'core.create')) > 0))
+			if ( $itemCreatable )
 			{
 				ToolbarHelper::apply('item.apply');
 

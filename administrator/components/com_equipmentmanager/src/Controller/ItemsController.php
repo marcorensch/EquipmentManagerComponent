@@ -26,7 +26,7 @@ class ItemsController extends AdminController
 	 * @var    string
 	 * @since  1.0.0
 	 */
-	protected $text_prefix = 'COM_EQUIPMENT_MANAGER_EQUIPMENT_MANAGERS';
+	protected $text_prefix = 'items';
 
 	/**
 	 * Proxy for getModel.

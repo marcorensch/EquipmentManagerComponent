@@ -109,7 +109,7 @@ class ItemTable extends Table implements TaggableTableInterface
 			$this->alias = Factory::getDate()->format('Y-m-d-H-i-s');
 		}
 
-		// Check the publish down date is not earlier than publish up.
+		// Check the publishing down date is not earlier than publish up.
 		if ($this->publish_down > $this->_db->getNullDate() && $this->publish_down < $this->publish_up)
 		{
 			$this->setError(Text::_('JGLOBAL_START_PUBLISH_AFTER_FINISH'));
@@ -126,6 +126,24 @@ class ItemTable extends Table implements TaggableTableInterface
 		if (!$this->publish_down)
 		{
 			$this->publish_down = null;
+		}
+
+		// Set checked_out to 0 if checked_out is null
+		if($this->short_description == null) {
+			$this->short_description = "";
+		}
+		if($this->description == null) {
+			$this->description = "";
+		}
+
+		if($this->features == null) {
+			$this->features = "";
+		}else{
+			$this->features = json_encode($this->features);
+		}
+
+		if($this->id == 0) {
+			$this->created = date("Y-m-d H:i:s");
 		}
 
 		return true;
