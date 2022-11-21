@@ -32,6 +32,7 @@ if ($saveOrder && !empty($this->items))
 	$saveOrderingUrl = 'index.php?option=com_equipmentmanager&task=items.saveOrderAjax&tmpl=component&' . Session::getFormToken() . '=1';
 	HTMLHelper::_('draggablelist.draggable');
 }
+echo '<pre>' . var_export($this->items[0], true) . '</pre>';
 ?>
 <form action="<?php echo Route::_('index.php?option=com_equipmentmanager'); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="row">
@@ -75,6 +76,9 @@ if ($saveOrder && !empty($this->items))
 								<th scope="col" class="w-3 d-none d-lg-table-cell">
 									<?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 								</th>
+                                <th scope="col" class="w-3 d-none d-lg-table-cell">
+									<?php echo HTMLHelper::_('searchtools.sort', 'JAUTHOR', 'a.created_by', $listDirn, $listOrder); ?>
+                                </th>
 							</tr>
 						</thead>
 						<tbody<?php if ($saveOrder) : ?> class="js-draggable" data-url="<?php echo $saveOrderingUrl; ?>" data-direction="<?php echo strtolower($listDirn); ?>" data-nested="true"<?php endif; ?>>
@@ -146,6 +150,15 @@ if ($saveOrder && !empty($this->items))
 								<td class="d-none d-md-table-cell">
 									<?php echo $item->id; ?>
 								</td>
+                                <td class="d-none d-md-table-cell">
+									<?php if((int)$item->created_by > 0) : ?>
+                                    <a href="<?php echo Route::_('index.php?option=com_users&task=user.edit&id=' . (int) $item->created_by); ?>" title="<?php echo Text::_('JAUTHOR'); ?>">
+                                        <?php echo $item->author_name; ?>
+                                    </a>
+                                    <?php else : ?>
+                                        <?php echo Text::_('JNONE'); ?>
+                                    <?php endif; ?>
+                                </td>
 							</tr>
 							<?php endforeach; ?>
 						</tbody>

@@ -39,6 +39,7 @@ class ItemsModel extends ListModel
 				'id', 'a.id',
 				'title', 'a.title',
 				'alias', 'a.alias',
+				'created_by', 'a.created_by',
 				'catid', 'a.catid', 'category_id', 'category_title',
 				'checked_out', 'a.checked_out',
 				'checked_out_time', 'a.checked_out_time',
@@ -83,6 +84,7 @@ class ItemsModel extends ListModel
 						'list.select',
 						'a.id, a.title, a.catid' .
 						', a.alias' .
+						', a.created_by' .
 						', a.access' .
 						', a.checked_out' .
 						', a.checked_out_time' .
@@ -143,6 +145,13 @@ class ItemsModel extends ListModel
 			->join(
 				'LEFT',
 				$db->quoteName('#__users', 'uc') . ' ON ' . $db->quoteName('uc.id') . ' = ' . $db->quoteName('a.checked_out')
+			);
+
+		// Join over the users for the author user.
+		$query->select($db->quoteName('ua.name', 'author_name'))
+			->join(
+				'LEFT',
+				$db->quoteName('#__users', 'ua') . ' ON ' . $db->quoteName('ua.id') . ' = ' . $db->quoteName('a.created_by')
 			);
 
 
