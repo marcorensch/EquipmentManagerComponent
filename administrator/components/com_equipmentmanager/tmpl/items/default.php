@@ -32,7 +32,7 @@ if ($saveOrder && !empty($this->items))
 	$saveOrderingUrl = 'index.php?option=com_equipmentmanager&task=items.saveOrderAjax&tmpl=component&' . Session::getFormToken() . '=1';
 	HTMLHelper::_('draggablelist.draggable');
 }
-echo '<pre>' . var_export($this->items[0], true) . '</pre>';
+
 ?>
 <form action="<?php echo Route::_('index.php?option=com_equipmentmanager'); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="row">
