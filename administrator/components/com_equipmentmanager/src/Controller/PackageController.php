@@ -19,7 +19,7 @@ use Joomla\CMS\Router\Route;
  *
  * @since  1.0
  */
-class ItemController extends FormController
+class PackageController extends FormController
 {
 	/**
 	 * The prefix to use with controller messages.
@@ -27,7 +27,7 @@ class ItemController extends FormController
 	 * @var    string
 	 * @since  1.0.0
 	 */
-	protected $text_prefix = 'COM_EQUIPMENT_MANAGER_ITEM';
+	protected $text_prefix = 'COM_EQUIPMENT_MANAGER_PACKAGE';
 
 	/**
 	 * Method to run batch operations.
@@ -42,10 +42,10 @@ class ItemController extends FormController
 	{
 		$this->checkToken();
 
-		$model = $this->getModel('Item', 'Administrator', array());
+		$model = $this->getModel('Package', 'Administrator', array());
 
 		// Preset the redirect
-		$this->setRedirect(Route::_('index.php?option=com_equipmentmanager&view=items' . $this->getRedirectToListAppend(), false));
+		$this->setRedirect(Route::_('index.php?option=com_equipmentmanager&view=Packages' . $this->getRedirectToListAppend(), false));
 
 		return parent::batch($model);
 	}

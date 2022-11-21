@@ -40,7 +40,8 @@
 		<!-- Menu entries -->
 		<menu view="equipmentmanager">COM_EQUIPMENT_MANAGER</menu>
 		<submenu>
-			<menu link="option=com_equipmentmanager">COM_EQUIPMENT_MANAGER_ITEMS</menu>
+			<menu link="option=com_equipmentmanager&amp;view=items">COM_EQUIPMENT_MANAGER_ITEMS</menu>
+			<menu link="option=com_equipmentmanager&amp;view=packages">COM_EQUIPMENT_MANAGER_PACKAGES</menu>
 			<menu link="option=com_categories&amp;extension=com_equipmentmanager"
 				view="equipmentmanager" img="class:equipmentmanager-cat" alt="Equipmentmanager/Categories">JCATEGORIES</menu>
 			<menu link="option=com_fields&amp;context=com_equipmentmanager.item">JGLOBAL_FIELDS</menu>

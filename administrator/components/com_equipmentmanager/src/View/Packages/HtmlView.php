@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace NXD\Component\Equipmentmanager\Administrator\View\Items;
+namespace NXD\Component\Equipmentmanager\Administrator\View\Packages;
 
 defined('_JEXEC') or die;
 
@@ -126,7 +126,7 @@ class HtmlView extends BaseHtmlView
 		// We don't need toolbar in the modal window.
 		if ($this->getLayout() !== 'modal')
 		{
-			EquipmentmanagerHelper::addSubmenu('items');
+			EquipmentmanagerHelper::addSubmenu('Packages');
 			$this->addToolbar();
 			$this->sidebar = \JHtmlSidebar::render();
 		}
@@ -170,8 +170,8 @@ class HtmlView extends BaseHtmlView
 		// Get the toolbar object instance
 		$toolbar = Toolbar::getInstance('toolbar');
 
-		ToolbarHelper::title(Text::_('COM_EQUIPMENT_MANAGER_MANAGE_ITEMS_TITLE'),
-			'fas fa-warehouse equipmentmanager');
+		ToolbarHelper::title(Text::_('COM_EQUIPMENT_MANAGER_MANAGE_PACKAGES_TITLE'),
+			'fas fa-boxes equipmentmanager');
 
 		if ($canDo->get('core.create')
 			|| count($user->getAuthorisedCategories('com_equipmentmanager',
@@ -191,20 +191,20 @@ class HtmlView extends BaseHtmlView
 
 			$childBar = $dropdown->getChildToolbar();
 
-			$childBar->publish('items.publish')->listCheck(true);
+			$childBar->publish('Packages.publish')->listCheck(true);
 
-			$childBar->unpublish('items.unpublish')->listCheck(true);
+			$childBar->unpublish('Packages.unpublish')->listCheck(true);
 
-			$childBar->archive('items.archive')->listCheck(true);
+			$childBar->archive('Packages.archive')->listCheck(true);
 
 			if ($user->authorise('core.admin'))
 			{
-				$childBar->checkin('items.checkin')->listCheck(true);
+				$childBar->checkin('Packages.checkin')->listCheck(true);
 			}
 
 			if ($this->state->get('filter.published') != -2)
 			{
-				$childBar->trash('items.trash')->listCheck(true);
+				$childBar->trash('Packages.trash')->listCheck(true);
 			}
 			$childBar->popupButton('batch')
 				->text('JTOOLBAR_BATCH')
@@ -219,7 +219,7 @@ class HtmlView extends BaseHtmlView
 
 		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
 		{
-			$toolbar->delete('item.delete')
+			$toolbar->delete('package.delete')
 				->text('JTOOLBAR_EMPTY_TRASH')
 				->message('JGLOBAL_CONFIRM_DELETE')
 				->listCheck(true);
