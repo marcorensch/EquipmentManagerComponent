@@ -110,17 +110,14 @@ if ($saveOrder && !empty($this->items))
 									<?php endif; ?>
 								</td>
 								<td class="text-center object-status">
-									<div class="btn-group">
-										<?php echo HTMLHelper::_('jgrid.published', $item->published, $i, 'equipmentmanager.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
-									</div>
+									<?php echo HTMLHelper::_('jgrid.published', $item->published, $i, 'items.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
 								</td>
 								<th scope="row" class="has-context">
 									<?php if ($item->checked_out) : ?>
-										<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'equipmentmanager.', true); ?>
+										<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'items.', true); ?>
 									<?php endif; ?>
-									<?php $editIcon = '<span class="fa fa-pencil-square mr-2" aria-hidden="true"></span>'; ?>
 									<a class="hasTooltip" href="<?php echo Route::_('index.php?option=com_equipmentmanager&task=item.edit&id=' . (int) $item->id); ?>" title="<?php echo Text::_('JACTION_EDIT'); ?> <?php echo $this->escape(addslashes($item->title)); ?>">
-										<?php echo $editIcon; ?><?php echo $this->escape($item->title); ?></a>
+										<?php echo $this->escape($item->title); ?></a>
 									<div class="small">
                                         <?php echo Text::_('JALIAS'); ?>: <?php echo $this->escape($item->alias); ?>
                                     </div>

@@ -68,6 +68,13 @@
 			/>
 
 		<field
+				name="rental_price"
+				type="text"
+				filter="integer"
+				label="COM_EQUIPMENT_MANAGER_FIELD_RENTAL_PRICE_LABEL"
+		/>
+
+		<field
 			name="features"
 			type="subform"
 			formsource="administrator/components/com_equipmentmanager/forms/equipment_features.xml"
@@ -78,8 +85,6 @@
 		>
 
 		</field>
-
-
 
 		<field
 			name="language"
@@ -168,6 +173,12 @@
 				showtime="true"
 				size="22"
 				filter="user_utc"
+		/>
+		<field
+				name="created_by"
+				type="user"
+				label="COM_EQUIPMENT_MANAGER_FIELD_CREATED_BY_LABEL"
+				readonly="true"
 		/>
 	</fieldset>
 	<fields name="params" label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">

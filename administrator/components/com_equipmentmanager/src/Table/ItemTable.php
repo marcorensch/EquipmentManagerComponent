@@ -60,7 +60,7 @@ class ItemTable extends Table implements TaggableTableInterface
 	 *
 	 * @since   1.0.0
 	 */
-	public function store($updateNulls = false)
+	public function store($updateNulls = true)
 	{
 		// Transform the params field
 		if (is_array($this->params))
@@ -144,6 +144,8 @@ class ItemTable extends Table implements TaggableTableInterface
 
 		if($this->id == 0) {
 			$this->created = date("Y-m-d H:i:s");
+			$this->created_by = Factory::getUser()->id;
+			$this->published = 1;
 		}
 
 		return true;

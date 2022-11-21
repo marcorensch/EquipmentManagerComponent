@@ -72,6 +72,7 @@ $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=componen
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-4 form-vertical">
+	                    <?php echo $this->getForm()->renderField('rental_price'); ?>
 	                    <?php echo $this->getForm()->renderField('features'); ?>
                     </div>
 				</div>
@@ -95,9 +96,12 @@ $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=componen
             <div class="col-md-6">
 	            <?php echo $this->getForm()->renderField('access'); ?>
 	            <?php echo $this->getForm()->renderField('language'); ?>
+                <hr>
+	            <?php echo $this->getForm()->renderField('created'); ?>
+	            <?php echo $this->getForm()->renderField('created_by'); ?>
             </div>
             <div class="col-md-6">
-	            <?php echo $this->getForm()->renderField('created'); ?>
+
 	            <?php echo $this->getForm()->renderField('published'); ?>
 	            <?php echo $this->getForm()->renderField('publish_up'); ?>
 	            <?php echo $this->getForm()->renderField('publish_down'); ?>
