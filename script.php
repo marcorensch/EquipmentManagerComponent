@@ -181,7 +181,7 @@ class Com_EquipmentmanagerInstallerScript extends InstallerScript
 	}
 
 	private function removeDashboardMenu(){
-
+			// TODO: Remove Dashboard Method otherwise it will be duplicated
 	}
 
 	/**
