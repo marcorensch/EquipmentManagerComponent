@@ -14,13 +14,14 @@ use Joomla\CMS\Installer\InstallerAdapter;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Log\Log;
 use Joomla\CMS\Table\Table;
+use Joomla\CMS\Installer\InstallerScript;
 
 /**
  * Script file of Equipmentmanager Component
  *
  * @since  1.0.0
  */
-class Com_EquipmentmanagerInstallerScript
+class Com_EquipmentmanagerInstallerScript extends InstallerScript
 {
 	/**
 	 * Minimum Joomla version to check
@@ -91,6 +92,9 @@ class Com_EquipmentmanagerInstallerScript
 		{
 			return false;
 		}
+
+		// Add Dashboard
+		$this->addDashboardMenu('equipmentmanager','equipmentmanager');
 
 		return true;
 
@@ -170,7 +174,14 @@ class Com_EquipmentmanagerInstallerScript
 	{
 		echo Text::_('COM_EQUIPMENT_MANAGER_INSTALLERSCRIPT_UPDATE');
 
+		// Add Dashboard
+		$this->addDashboardMenu('equipmentmanager','equipmentmanager');
+
 		return true;
+	}
+
+	private function removeDashboardMenu(){
+
 	}
 
 	/**

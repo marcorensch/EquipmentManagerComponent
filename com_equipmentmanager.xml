@@ -40,9 +40,23 @@
 	<!-- Back-end files -->
 	<administration>
 		<!-- Menu entries -->
-		<menu view="equipmentmanager">COM_EQUIPMENT_MANAGER</menu>
+		<!--<menu view="equipmentmanager">COM_EQUIPMENT_MANAGER</menu>-->
+		<menu img="class:comment">COM_EQUIPMENT_MANAGER
+			<params>
+				<dashboard>equipmentmanager</dashboard>
+			</params>
+		</menu>
 		<submenu>
-			<menu link="option=com_equipmentmanager&amp;view=items">COM_EQUIPMENT_MANAGER_ITEMS</menu>
+			<menu link="option=com_equipmentmanager&amp;view=items">
+				COM_EQUIPMENT_MANAGER_ITEMS
+				<params>
+					<menu-quicktask-title link="option=com_equipmentmanager&amp;view=item&amp;layout=edit">
+						COM_EQUIPMENT_MANAGER_NEW_ITEM
+					</menu-quicktask-title>
+					<menu-quicktask>index.php?option=com_equipmentmanager&amp;view=item&amp;layout=edit</menu-quicktask>
+				</params>
+			</menu>
+
 			<menu link="option=com_equipmentmanager&amp;view=packages">COM_EQUIPMENT_MANAGER_PACKAGES</menu>
 			<menu link="option=com_categories&amp;extension=com_equipmentmanager"
 				  view="equipmentmanager" img="class:equipmentmanager-cat" alt="Equipmentmanager/Categories">JCATEGORIES</menu>
