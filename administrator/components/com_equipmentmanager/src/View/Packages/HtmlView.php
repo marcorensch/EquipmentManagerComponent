@@ -162,22 +162,17 @@ class HtmlView extends BaseHtmlView
 	 */
 	protected function addToolbar()
 	{
-		$canDo = ContentHelper::getActions('com_equipmentmanager',
-			'category',
-			$this->state->get('filter.category_id'));
+		$canDo = ContentHelper::getActions('com_equipmentmanager', 'component');
 		$user  = Factory::getApplication()->getIdentity();
 
 		// Get the toolbar object instance
 		$toolbar = Toolbar::getInstance('toolbar');
 
-		ToolbarHelper::title(Text::_('COM_EQUIPMENT_MANAGER_MANAGE_PACKAGES_TITLE'),
-			'fas fa-boxes equipmentmanager');
+		ToolbarHelper::title(Text::_('COM_EQUIPMENT_MANAGER_MANAGE_PACKAGES_TITLE'), 'fas fa-boxes equipmentmanager');
 
-		if ($canDo->get('core.create')
-			|| count($user->getAuthorisedCategories('com_equipmentmanager',
-				'core.create')) > 0)
+		if ($canDo->get('core.create') || count($user->getAuthorisedCategories('com_equipmentmanager', 'core.create')) > 0)
 		{
-			$toolbar->addNew('item.add');
+			$toolbar->addNew('package.add');
 		}
 
 		if ($canDo->get('core.edit.state'))
@@ -212,14 +207,9 @@ class HtmlView extends BaseHtmlView
 				->listCheck(true);
 		}
 
-//		$toolbar->popupButton('batch')
-//			->text('JTOOLBAR_BATCH')
-//			->selector('collapseModal')
-//			->listCheck(true);
-
 		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
 		{
-			$toolbar->delete('package.delete')
+			$toolbar->delete('packages.delete')
 				->text('JTOOLBAR_EMPTY_TRASH')
 				->message('JGLOBAL_CONFIRM_DELETE')
 				->listCheck(true);

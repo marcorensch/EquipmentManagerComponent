@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form
+        addruleprefix="NXD\Component\Equipmentmanager\Administrator\Rule"
+        addfieldprefix="NXD\Component\Equipmentmanager\Administrator\Field"
+>
+    <field name="equipment_item" type="selectitem" label="COM_EQUIPMENT_MANAGER_FIELD_ITEM_LABEL" multiple="false" required="true" />
+    <field name="count" type="text" filter="integer" label="COM_EQUIPMENT_MANAGER_FIELD_ITEM_COUNT_LABEL" required="true" />
+    <field name="description" type="textarea" filter="safehtml" label="COM_EQUIPMENT_MANAGER_FIELD_ITEM_DESC_LABEL" rows="1" />
+</form>

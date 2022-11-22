@@ -15,6 +15,7 @@
           <mappings>
             <mapping deploy="components" local="$PROJECT_DIR$/components" web="/" />
             <mapping deploy="administrator" local="$PROJECT_DIR$/administrator" web="/" />
+            <mapping deploy="media" local="$PROJECT_DIR$/media" web="/" />
           </mappings>
         </serverdata>
       </paths>

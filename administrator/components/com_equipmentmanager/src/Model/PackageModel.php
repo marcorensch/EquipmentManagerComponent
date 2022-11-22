@@ -46,7 +46,7 @@ class PackageModel extends AdminModel
 	 *
 	 * @var  string
 	 */
-	protected $batch_copymove = false;
+	protected $batch_copymove = 'category_id';
 
 	/**
 	 * Allowed batch commands
@@ -74,8 +74,7 @@ class PackageModel extends AdminModel
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_equipmentmanager.package',
-			'package', ['control' => 'jform', 'load_data' => $loadData]);
+		$form = $this->loadForm($this->typeAlias, 'package', ['control' => 'jform', 'load_data' => $loadData]);
 
 		if (empty($form))
 		{
@@ -97,7 +96,16 @@ class PackageModel extends AdminModel
 	{
 		$app = Factory::getApplication();
 
-		$data = $this->getItem();
+		$data = $app->getUserState('com_equipmentmanager.edit.package.data', array());
+
+		if(empty($data))
+		{
+			$data = $this->getItem();
+			if($this->getState('item.id') == 0)
+			{
+				$data->set('catid', $app->getInput()->getInt('catid', $app->getUserState('com_equipmentmanager.packages.filter.category_id')));
+			}
+		}
 
 		$this->preprocessData('com_equipmentmanager.package', $data);
 
@@ -186,5 +194,32 @@ class PackageModel extends AdminModel
 		}
 
 		parent::preprocessForm($form, $data, $group);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public function save($data): bool
+	{
+		$input = Factory::getApplication()->input;
+
+
+		if($input->get('task') == 'save2copy')
+		{
+			$origTable = $this->getTable();
+			$origTable->load($input->getInt('id'));
+			if($origTable->title == $data['title'])
+			{
+				list($title, $alias) = $this->generateNewTitle($data['catid'], $data['alias'], $data['title']);
+				$data['title'] = $title;
+				$data['alias'] = $alias;
+			}
+		}
+
+		if (parent::save($data))
+		{
+			return true;
+		}
+		return false;
 	}
 }

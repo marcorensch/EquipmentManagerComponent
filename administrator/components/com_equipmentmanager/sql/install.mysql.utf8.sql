@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `#__equipmentmanager_packages` (
     `title` varchar(255) NOT NULL DEFAULT '',
     `usage` varchar(255) NOT NULL DEFAULT '',
     `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+    `catid` int(11) NOT NULL DEFAULT 0,
     `rental_price_first` varchar(100) DEFAULT '',
     `rental_price_follow` varchar(100) DEFAULT '',
     `description` text NOT NULL,

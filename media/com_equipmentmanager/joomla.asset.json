@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_equipmentmanager",
+  "version": "1.0.0",
+  "description": "Joomla CMS web assets for Equipment Manager Component",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "com_equipmentmanager.admin-package-edit",
+      "type": "style",
+      "uri": "com_equipmentmanager/admin-package-edit.css"
+    }
+  ]
+}

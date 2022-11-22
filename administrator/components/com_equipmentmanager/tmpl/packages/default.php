@@ -29,12 +29,12 @@ $saveOrder = $listOrder === 'a.ordering';
 
 if ($saveOrder && !empty($this->items))
 {
-	$saveOrderingUrl = 'index.php?option=com_equipmentmanager&task=Packages.saveOrderAjax&tmpl=component&' . Session::getFormToken() . '=1';
+	$saveOrderingUrl = 'index.php?option=com_equipmentmanager&task=packages.saveOrderAjax&tmpl=component&' . Session::getFormToken() . '=1';
 	HTMLHelper::_('draggablelist.draggable');
 }
 
 ?>
-<form action="<?php echo Route::_('index.php?option=com_equipmentmanager'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo Route::_('index.php?option=com_equipmentmanager'); ?>&view=packages" method="post" name="adminForm" id="adminForm">
 	<div class="row">
 		<div class="col-md-12">
 			<div id="j-main-container" class="j-main-container">

@@ -97,7 +97,16 @@ class ItemModel extends AdminModel
 	{
 		$app = Factory::getApplication();
 
-		$data = $this->getItem();
+		$data = $app->getUserState('com_equipmentmanager.edit.item.data', array());
+
+		if(empty($data))
+		{
+			$data = $this->getItem();
+			if($this->getState('item.id') == 0)
+			{
+				$data->set('catid', $app->getInput()->getInt('catid', $app->getUserState('com_equipmentmanager.items.filter.category_id')));
+			}
+		}
 
 		$this->preprocessData('com_equipmentmanager.item', $data);
 

@@ -23,7 +23,8 @@ use NXD\Component\Equipmentmanager\Administrator\View\Item\HtmlView;
 /** @var WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
-	->useScript('form.validate');
+	->useScript('form.validate')
+    ->useStyle('com_equipmentmanager.admin-package-edit');
 
 HTMLHelper::_('script', 'com_equipmentmanager/admin-equipmentmanager-letter.js', array('version' => 'auto', 'relative' => true));
 
@@ -46,6 +47,7 @@ $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=componen
 <form action="<?php echo Route::_('index.php?option=com_equipmentmanager&layout=' . $layout . $tmpl . '&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="equipmentmanager-form" class="form-validate">
 
 	<div>
+
 		<div class="row form-vertical mb-3">
 			<div class="col-12 col-md-4">
 				<?php echo $this->getForm()->renderField('title'); ?>
@@ -66,11 +68,11 @@ $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=componen
 		<div class="row">
 			<div class="col-md-12">
 				<div class="row">
-					<div class="col-md-7">
+					<div class="col-md-8 form-vertical">
 						<?php echo $this->getForm()->renderField('description'); ?>
 					</div>
-					<div class="col-md-1"></div>
-					<div class="col-md-4 form-vertical">
+
+					<div class="col-md-4" style="margin-top:33.6px;">
 						<?php echo $this->getForm()->renderField('rental_price_first'); ?>
 						<?php echo $this->getForm()->renderField('rental_price_follow'); ?>
 					</div>
@@ -80,7 +82,7 @@ $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=componen
 		<?php echo HTMLHelper::_('uitab.endTab'); ?>
 		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'images', Text::_('COM_EQUIPMENT_MANAGER_RELATED_ITEMS_LABEL')); ?>
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12 form-vertical">
 				<?php echo $this->getForm()->renderField('related_items'); ?>
 			</div>
 		</div>

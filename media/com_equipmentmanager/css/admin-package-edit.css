@@ -1,0 +1,19 @@
+.control-label label{
+
+}
+
+#subfieldList_jform_related_items > thead > tr > th:not(:last-of-type){
+    width: 5% !important;
+}
+
+#subfieldList_jform_related_items > thead > tr > th:first-of-type{
+    width: 20% !important;
+}
+
+#subfieldList_jform_related_items > tbody > tr > td textarea{
+    width: 100% !important;
+}
+
+#subfieldList_jform_related_items td:first-of-type .control-group{
+
+}

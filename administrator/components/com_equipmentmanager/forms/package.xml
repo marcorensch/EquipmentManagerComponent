@@ -5,6 +5,16 @@
 		addfieldprefix="NXD\Component\Equipmentmanager\Administrator\Field"
 	>
 		<field
+			name="related_items"
+			type="subform"
+			formsource="administrator/components/com_equipmentmanager/forms/package_related_items.xml"
+			label="COM_EQUIPMENT_MANAGER_FIELD_RELATED_ITEMS_LABEL"
+			multiple="true"
+			layout="joomla.form.field.subform.repeatable-table"
+			min="0"
+			max="100"
+		/>
+		<field
 			name="id"
 			type="number"
 			label="JGLOBAL_FIELD_ID_LABEL"
@@ -55,6 +65,15 @@
 				label="COM_EQUIPMENT_MANAGER_FIELD_RENTAL_PRICE_FOLLOW_LABEL"
 		/>
 
+		<field
+				name="catid"
+				type="categoryedit"
+				label="JCATEGORY"
+				extension="com_equipmentmanager"
+				addfieldprefix="Joomla\Component\Categories\Administrator\Field"
+				required="true"
+				default=""
+		/>
 
 		<field
 			name="language"

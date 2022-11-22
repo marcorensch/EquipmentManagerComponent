@@ -62,8 +62,7 @@ class HtmlView extends BaseHtmlView
 		$this->item = $model->getItem();
 
 		// If we are forcing a language in modal (used for associations).
-		if ($this->getLayout() === 'modal'
-			&& $forcedLanguage = Factory::getApplication()->input->get('forcedLanguage', ''))
+		if ($this->getLayout() === 'modal' && $forcedLanguage = Factory::getApplication()->input->get('forcedLanguage', ''))
 		{
 			// Set the language field to the forcedLanguage and disable changing it.
 			$this->form->setValue('language', null, $forcedLanguage);
@@ -94,13 +93,9 @@ class HtmlView extends BaseHtmlView
 		$userId = $user->id;
 		$isNew  = ($this->item->id == 0);
 
-		ToolbarHelper::title($isNew ? Text::_('COM_EQUIPMENT_MANAGER_NEW_PACKAGE')
-			: Text::_('COM_EQUIPMENT_MANAGER_EDIT_PACKAGE'),
-			'pencil equipmentmanager');
+		ToolbarHelper::title($isNew ? Text::_('COM_EQUIPMENT_MANAGER_NEW_PACKAGE') : Text::_('COM_EQUIPMENT_MANAGER_EDIT_PACKAGE'), 'pencil equipmentmanager');
 
-		// Since we don't track these assets at the item level, use the category id.
-		$canDo = ContentHelper::getActions('com_equipmentmanager', 'category', $this->item->catid);
-
+		$canDo = ContentHelper::getActions('com_equipmentmanager', 'component');
 		$itemCreatable = $canDo->get('core.create');
 
 		// Build the actions for new and existing records.
@@ -109,46 +104,44 @@ class HtmlView extends BaseHtmlView
 			// For new records, check the create permission.
 			if ( $itemCreatable )
 			{
-				ToolbarHelper::apply('item.apply');
+				ToolbarHelper::apply('package.apply');
 
 				ToolbarHelper::saveGroup(
 					[
-						['save', 'item.save'],
-						['save2new', 'item.save2new'],
+						['save', 'package.save'],
+						['save2new', 'package.save2new'],
 					],
 					'btn-success'
 				);
 			}
 
-			ToolbarHelper::cancel('item.cancel');
+			ToolbarHelper::cancel('package.cancel');
 		}
 		else
 		{
 			// Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
-			$itemEditable = $canDo->get('core.edit')
-				|| ($canDo->get('core.edit.own')
-					&& $this->item->created_by == $userId);
+			$itemEditable = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
 
 			$toolbarButtons = [];
 
 			// Can't save the record if it's not editable
 			if ($itemEditable)
 			{
-				ToolbarHelper::apply('item.apply');
+				ToolbarHelper::apply('package.apply');
 
-				$toolbarButtons[] = ['save', 'item.save'];
+				$toolbarButtons[] = ['save', 'package.save'];
 
 				// We can save this record, but check the create permission to see if we can return to make a new one.
 				if ($canDo->get('core.create'))
 				{
-					$toolbarButtons[] = ['save2new', 'item.save2new'];
+					$toolbarButtons[] = ['save2new', 'package.save2new'];
 				}
 			}
 
 			// If checked out, we can still save
 			if ($canDo->get('core.create'))
 			{
-				$toolbarButtons[] = ['save2copy', 'item.save2copy'];
+				$toolbarButtons[] = ['save2copy', 'package.save2copy'];
 			}
 
 			ToolbarHelper::saveGroup(
@@ -158,11 +151,11 @@ class HtmlView extends BaseHtmlView
 
 			if (Associations::isEnabled() && ComponentHelper::isEnabled('com_associations'))
 			{
-				ToolbarHelper::custom('item.editAssociations', 'contract', 'contract',
+				ToolbarHelper::custom('package.editAssociations', 'contract', 'contract',
 					'JTOOLBAR_ASSOCIATIONS', false, false);
 			}
 
-			ToolbarHelper::cancel('item.cancel', 'JTOOLBAR_CLOSE');
+			ToolbarHelper::cancel('package.cancel', 'JTOOLBAR_CLOSE');
 		}
 
 		ToolbarHelper::divider();

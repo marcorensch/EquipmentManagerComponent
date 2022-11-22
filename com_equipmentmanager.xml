@@ -33,7 +33,9 @@
 		<folder>tmpl</folder>
 	</files>
     <media folder="media/com_equipmentmanager" destination="com_equipmentmanager">
+		<folder>css</folder>
 		<folder>js</folder>
+		<filename>joomla.asset.json</filename>
     </media>
 	<!-- Back-end files -->
 	<administration>
@@ -43,7 +45,8 @@
 			<menu link="option=com_equipmentmanager&amp;view=items">COM_EQUIPMENT_MANAGER_ITEMS</menu>
 			<menu link="option=com_equipmentmanager&amp;view=packages">COM_EQUIPMENT_MANAGER_PACKAGES</menu>
 			<menu link="option=com_categories&amp;extension=com_equipmentmanager"
-				view="equipmentmanager" img="class:equipmentmanager-cat" alt="Equipmentmanager/Categories">JCATEGORIES</menu>
+				  view="equipmentmanager" img="class:equipmentmanager-cat" alt="Equipmentmanager/Categories">JCATEGORIES</menu>
+
 			<menu link="option=com_fields&amp;context=com_equipmentmanager.item">JGLOBAL_FIELDS</menu>
 			<menu link="option=com_fields&amp;view=groups&amp;context=com_equipmentmanager.item">JGLOBAL_FIELD_GROUPS</menu>
 		</submenu>

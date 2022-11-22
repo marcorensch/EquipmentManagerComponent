@@ -40,6 +40,7 @@ class PackagesModel extends ListModel
 				'title', 'a.title',
 				'alias', 'a.alias',
 				'created_by', 'a.created_by',
+				'catid', 'a.catid', 'category_id', 'category_title',
 				'checked_out', 'a.checked_out',
 				'checked_out_time', 'a.checked_out_time',
 				'published', 'a.published',
@@ -81,7 +82,7 @@ class PackagesModel extends ListModel
 					', ',
 					$this->getState(
 						'list.select',
-						'a.id, a.title '.
+						'a.id, a.title, a.catid'.
 						', a.alias' .
 						', a.created_by' .
 						', a.access' .
@@ -104,6 +105,13 @@ class PackagesModel extends ListModel
 			->join(
 				'LEFT',
 				$db->quoteName('#__viewlevels', 'ag') . ' ON ' . $db->quoteName('ag.id') . ' = ' . $db->quoteName('a.access')
+			);
+
+		// Join over the categories.
+		$query->select($db->quoteName('c.title', 'category_title'))
+			->join(
+				'LEFT',
+				$db->quoteName('#__categories', 'c') . ' ON ' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid')
 			);
 
 		// Join over the language
