@@ -11,14 +11,14 @@
 			addfieldprefix="NXD\Component\Equipmentmanager\Administrator\Field"
 		>
 			<field
-				name="id"
-				type="modal_equipmentmanager"
-				label="COM_EQUIPMENT_MANAGER_SELECT_EQUIPMENT_MANAGER_LABEL"
-				required="true"
-				select="true"
-				new="true"
-				edit="true"
-				clear="true"
+					name="id"
+					type="modal_item"
+					label="COM_EQUIPMENT_MANAGER_SELECT_ITEM_LABEL"
+					required="true"
+					select="true"
+					new="true"
+					edit="true"
+					clear="true"
 			/>
 		</fieldset>
 	</fields>

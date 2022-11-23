@@ -5,7 +5,7 @@
         xsi:schemaLocation="urn:joomla.org menu.xsd"
 >
     <menuitem
-            title="COM_EQUIPMENTMANAGER"
+            title="COM_EQUIPMENT_MANAGER"
             type="heading"
             icon="comment"
             class="class:comment"

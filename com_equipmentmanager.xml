@@ -57,7 +57,15 @@
 				</params>
 			</menu>
 
-			<menu link="option=com_equipmentmanager&amp;view=packages">COM_EQUIPMENT_MANAGER_PACKAGES</menu>
+			<menu link="option=com_equipmentmanager&amp;view=packages">
+				COM_EQUIPMENT_MANAGER_PACKAGES
+				<params>
+					<menu-quicktask-title link="option=com_equipmentmanager&amp;view=package&amp;layout=edit">
+						COM_EQUIPMENT_MANAGER_NEW_PACKAGE
+					</menu-quicktask-title>
+					<menu-quicktask>index.php?option=com_equipmentmanager&amp;view=package&amp;layout=edit</menu-quicktask>
+				</params>
+			</menu>
 			<menu link="option=com_categories&amp;extension=com_equipmentmanager"
 				  view="equipmentmanager" img="class:equipmentmanager-cat" alt="Equipmentmanager/Categories">JCATEGORIES</menu>
 

@@ -6,6 +6,17 @@
   "license": "GPL-2.0-or-later",
   "assets": [
     {
+      "name": "com_equipmentmanager.admin-items-modal",
+      "type": "script",
+      "uri": "com_equipmentmanager/admin-items-modal.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
       "name": "com_equipmentmanager.admin-package-edit",
       "type": "style",
       "uri": "com_equipmentmanager/admin-package-edit.css"

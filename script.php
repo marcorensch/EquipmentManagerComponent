@@ -167,6 +167,7 @@ class Com_EquipmentmanagerInstallerScript extends InstallerScript
 	 *
 	 * @return  boolean  True on success
 	 *
+	 * @throws Exception
 	 * @since  1.0.0
 	 *
 	 */
@@ -175,13 +176,31 @@ class Com_EquipmentmanagerInstallerScript extends InstallerScript
 		echo Text::_('COM_EQUIPMENT_MANAGER_INSTALLERSCRIPT_UPDATE');
 
 		// Add Dashboard
-		$this->addDashboardMenu('equipmentmanager','equipmentmanager');
+		if(!$this->checkIfDashboardMenuExists('equipmentmanager','equipmentmanager'))
+		{
+			$this->addDashboardMenu('equipmentmanager','equipmentmanager');
+		}
 
 		return true;
 	}
 
+	private function checkIfDashboardMenuExists($dashboard,$preset){
+		$db    = Factory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query
+			->select($db->quoteName('id'))
+			->from($db->quoteName('#__modules'))
+			->where($db->quoteName('module') . ' = ' . $db->quote('mod_submenu'))
+			->where($db->quoteName('title') . ' = ' . $db->quote('Equipmentmanager Dashboard'));
+
+		$db->setQuery($query);
+
+		return $db->loadResult();
+	}
+
 	private function removeDashboardMenu(){
-			// TODO: Remove Dashboard Method otherwise it will be duplicated
+			// TODO: Remove Dashboard Method otherwise it will may be duplicated
 	}
 
 	/**
