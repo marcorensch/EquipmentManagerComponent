@@ -20,8 +20,8 @@ class PackagesModel extends BaseDatabaseModel{
 	public function getPackages(){
 		$app = Factory::getApplication();
 		$categories_filter = $app->getParams()->get('categories_filter', '');
-		$categories_filter = $categories_filter ? explode(',', $categories_filter) : [];
 		$categories_filter = array_map('intval', $categories_filter);
+		$categories_filter = $categories_filter ? implode(',', $categories_filter) : [];
 
 		error_log(print_r($categories_filter, true));
 
@@ -34,7 +34,7 @@ class PackagesModel extends BaseDatabaseModel{
 				->where('a.published = 1');
 
 			if(!empty($categories_filter)){
-				$query->where('a.catid IN (' . implode(',', $categories_filter) . ')');
+				$query->where('a.catid IN (' .  $categories_filter . ')');
 			}
 
 

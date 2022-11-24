@@ -18,6 +18,7 @@
             <field
                     name="categories_filter"
                     type="category"
+                    layout="joomla.form.field.list-fancy-select"
                     extension="com_equipmentmanager"
                     label="COM_EQUIPMENT_MANAGER_FIELD_CATEGORIES_FILTER_LABEL"
                     multiple="true"
