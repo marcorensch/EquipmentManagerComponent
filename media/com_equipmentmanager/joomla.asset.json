@@ -20,6 +20,21 @@
       "name": "com_equipmentmanager.admin-package-edit",
       "type": "style",
       "uri": "com_equipmentmanager/admin-package-edit.css"
+    },
+    {
+      "name": "com_equipmentmanager.uikit-js",
+      "type": "script",
+      "uri": "com_equipmentmanager/uikit.min.js"
+    },
+    {
+      "name": "com_equipmentmanager.uikit-icons",
+      "type": "script",
+      "uri": "com_equipmentmanager/uikit-icons.min.js"
+    },
+    {
+      "name": "com_equipmentmanager.uikit-css",
+      "type": "style",
+      "uri": "com_equipmentmanager/uikit.min.css"
     }
   ]
 }

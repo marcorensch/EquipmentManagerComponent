@@ -2,39 +2,21 @@
 <config>
 	<fieldset
 		name="equipmentmanager"
-		label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_INDIVIDUAL_EQUIPMENT_MANAGER_DISPLAY"
-		description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_INDIVIDUAL_EQUIPMENT_MANAGER_DESC"
+		label="COM_EQUIPMENT_MANAGER_FIELDSET_CONFIG_INDIVIDUAL"
+		description="COM_EQUIPMENT_MANAGER_FIELDSET_CONFIG_INDIVIDUAL_DESC"
 		>
-		<field
-			name="show_equipmentmanager_name_label"
-			type="list"
-			label="COM_EQUIPMENT_MANAGER_FIELD_EQUIPMENT_MANAGER_SHOW_CATEGORY_LABEL"
-			default="1"
-			>
-			<option value="0">JNO</option>
-			<option value="1">JYES</option>
-		</field>
 
 		<field
-			name="custom_fields_enable"
+			name="load_uikit"
 			type="radio"
-			class="switcher"
-			label="JGLOBAL_CUSTOM_FIELDS_ENABLE_LABEL"
+			class="btn-group btn-group-yesno"
+			label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_LOAD_UIKIT"
+			description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_LOAD_UIKIT_DESC"
 			default="1"
+			filter="integer"
 			>
-			<option value="0">JNO</option>
 			<option value="1">JYES</option>
-		</field>
-
-		<field
-			name="show_name"
-			type="radio"
-			label="COM_EQUIPMENT_MANAGER_FIELD_PARAMS_NAME_LABEL"
-			default="1"
-			class="switcher"
-			>
-			<option value="0">JHIDE</option>
-			<option value="1">JSHOW</option>
+			<option value="0">JNO</option>
 		</field>
 
 	</fieldset>

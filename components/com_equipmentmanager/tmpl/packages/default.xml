@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<metadata>
+    <layout title="COM_EQUIPMENTMANAGER_PACKAGES_VIEW_DEFAULT_TITLE">
+        <message>
+            <![CDATA[COM_EQUIPMENTMANAGER_PACKAGES_VIEW_DEFAULT_DESC]]>
+        </message>
+    </layout>
+
+    <!-- Add fields to the request variables for the layout. -->
+    <fields name="request">
+        <fieldset name="request" addfieldprefix="NXD\Component\Equipmentmanager\Administrator\Field">
+
+        </fieldset>
+    </fields>
+    <fields name="params">
+        <fieldset name="options" label="COM_EQUIPMENTMANAGER_FIELDSET_OPTIONS_LABEL">
+            <field
+                    name="categories_filter"
+                    type="category"
+                    extension="com_equipmentmanager"
+                    label="COM_EQUIPMENT_MANAGER_FIELD_CATEGORIES_FILTER_LABEL"
+                    multiple="true"
+            />
+        </fieldset>
+    </fields>
+</metadata>
