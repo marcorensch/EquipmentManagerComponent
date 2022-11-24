@@ -15,14 +15,14 @@ use Joomla\CMS\Categories\CategoryNode;
 use Joomla\CMS\Language\Multilanguage;
 
 /**
- * Equipment_managers Component Route Helper
+ * Equipment Manager Component Route Helper
  *
  * @static
  * @package     Joomla.Site
  * @subpackage  com_equipmentmanager
  * @since       1.5
  */
-abstract class Route
+abstract class RouteHelper
 {
 	/**
 	 * Get the URL route for a equipmentmanager from a item ID, equipmentmanager category ID and language
@@ -35,10 +35,46 @@ abstract class Route
 	 *
 	 * @since   1.5
 	 */
-	public static function getEquipment_managersRoute($id, $catid, $language = 0)
+	public static function getItemRoute($id, $catid, $language = 0)
 	{
 		// Create the link
 		$link = 'index.php?option=com_equipmentmanager&view=item&id=' . $id;
+
+		if ($catid > 1)
+		{
+			$link .= '&catid=' . $catid;
+		}
+
+		if ($language && $language !== '*' && Multilanguage::isEnabled())
+		{
+			$link .= '&lang=' . $language;
+		}
+
+		return $link;
+	}
+
+	public static function getItemsRoute($catid, $language = 0)
+	{
+		// Create the link
+		$link = 'index.php?option=com_equipmentmanager&view=items';
+
+		if ($catid > 1)
+		{
+			$link .= '&catid=' . $catid;
+		}
+
+		if ($language && $language !== '*' && Multilanguage::isEnabled())
+		{
+			$link .= '&lang=' . $language;
+		}
+
+		return $link;
+	}
+
+	public static function getPackagesRoute($catid, $language = 0)
+	{
+		// Create the link
+		$link = 'index.php?option=com_equipmentmanager&view=packages';
 
 		if ($catid > 1)
 		{

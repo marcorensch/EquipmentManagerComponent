@@ -70,8 +70,10 @@
 				type="categoryedit"
 				label="JCATEGORY"
 				extension="com_equipmentmanager"
+				layout="joomla.form.field.list-fancy-select"
 				addfieldprefix="Joomla\Component\Categories\Administrator\Field"
 				required="true"
+				multiple="false"
 				default=""
 		/>
 

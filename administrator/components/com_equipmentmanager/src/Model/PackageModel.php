@@ -95,13 +95,14 @@ class PackageModel extends AdminModel
 	protected function loadFormData()
 	{
 		$app = Factory::getApplication();
-
 		$data = $app->getUserState('com_equipmentmanager.edit.package.data', array());
 
 		if(empty($data))
 		{
 			$data = $this->getItem();
-			if($this->getState('item.id') == 0)
+
+			// Predefined values for new package elements
+			if($this->getState('package.id') == 0)
 			{
 				$data->set('catid', $app->getInput()->getInt('catid', $app->getUserState('com_equipmentmanager.packages.filter.category_id')));
 			}

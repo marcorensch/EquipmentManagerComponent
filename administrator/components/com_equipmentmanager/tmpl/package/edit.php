@@ -40,6 +40,7 @@ $layout  = $isModal ? 'modal' : 'edit';
 $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=component' : '';
 
 
+
 ?>
 
 

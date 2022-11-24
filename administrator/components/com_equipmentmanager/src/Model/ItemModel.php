@@ -99,6 +99,7 @@ class ItemModel extends AdminModel
 
 		$data = $app->getUserState('com_equipmentmanager.edit.item.data', array());
 
+
 		if(empty($data))
 		{
 			$data = $this->getItem();

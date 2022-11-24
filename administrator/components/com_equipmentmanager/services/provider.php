@@ -49,7 +49,7 @@ return new class implements ServiceProviderInterface
 		$container->registerServiceProvider(new CategoryFactory('\\NXD\\Component\\Equipmentmanager'));
 		$container->registerServiceProvider(new MVCFactory('\\NXD\\Component\\Equipmentmanager'));
 		$container->registerServiceProvider(new ComponentDispatcherFactory('\\NXD\\Component\\Equipmentmanager'));
-        $container->registerServiceProvider(new RouterFactory('\\NXD\\Component\\Equipmentmanager'));
+//        $container->registerServiceProvider(new RouterFactory('\\NXD\\Component\\Equipmentmanager'));
 
 		$container->set(
 			ComponentInterface::class,
@@ -61,7 +61,7 @@ return new class implements ServiceProviderInterface
 				$component->setMVCFactory($container->get(MVCFactoryInterface::class));
 				$component->setCategoryFactory($container->get(CategoryFactoryInterface::class));
 				$component->setAssociationExtension($container->get(AssociationExtensionInterface::class));
-                $component->setRouterFactory($container->get(RouterFactoryInterface::class));
+//                $component->setRouterFactory($container->get(RouterFactoryInterface::class));
 
 				return $component;
 			}
