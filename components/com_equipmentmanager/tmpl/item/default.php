@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 
-echo $this->item->title;
+echo 'hello';
 
 //if ($this->item->params->get('show_name')) {
 //	if ($this->Params->get('show_equipmentmanager_name_label')) {

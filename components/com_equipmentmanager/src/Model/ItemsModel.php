@@ -20,7 +20,7 @@ use Joomla\CMS\MVC\Model\BaseDatabaseModel;
  *
  * @since  __BUMP_VERSION__
  */
-class ItemModel extends BaseDatabaseModel
+class ItemsModel extends BaseDatabaseModel
 {
 	/**
 	 * @var string item

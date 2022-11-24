@@ -22,41 +22,11 @@ use Joomla\Registry\Registry;
  */
 class HtmlView extends BaseHtmlView
 {
-	/**
-	 * The page parameters
-	 *
-	 * @var    \Joomla\Registry\Registry|null
-	 * @since  1.0.0
-	 */
-	protected $params = null;
 
-	/**
-	 * The item model state
-	 *
-	 * @var    \Joomla\Registry\Registry
-	 * @since  1.0.0
-	 */
-	protected $state;
-
-	/**
-	 * The item object details
-	 *
-	 * @var    \JObject
-	 * @since  1.0.0
-	 */
-	protected $item;
-
-	/**
-	 * Execute and display a template script.
-	 *
-	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
-	 *
-	 * @return  mixed  A string if successful, otherwise an Error object.
-	 */
 	public function display($tpl = null)
 	{
 
-		$this->item = $this->get('Item');
+//		$this->item = $this->get('Item');
 
 //		$item = $this->item = $this->get('Item');
 //		$state = $this->State = $this->get('State');
