@@ -63,3 +63,7 @@ ALTER TABLE `#__equipmentmanager_packages` ADD KEY `idx_language_p` (`language`)
 ALTER TABLE `#__equipmentmanager_items` ADD KEY `idx_checkout` (`checked_out`);
 ALTER TABLE `#__equipmentmanager_packages` ADD KEY `idx_checkout_p` (`checked_out`);
 
+ALTER TABLE `#__equipmentmanager_items` ADD COLUMN `manufacturer` varchar(255) NOT NULL DEFAULT '';
+ALTER TABLE `#__equipmentmanager_items` ADD COLUMN `ip65` tinyint(1) NOT NULL DEFAULT 0;
+ALTER TABLE `#__equipmentmanager_items` ADD COLUMN `battery` tinyint(1) NOT NULL DEFAULT 0;
+

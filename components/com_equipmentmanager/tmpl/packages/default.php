@@ -27,7 +27,7 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
 
 <?php echo JHtml::_('content.prepare', '{loadposition equipmentmanager-banner}'); ?>
 
-    <div class="uk-section">
+    <div class="uk-section uk-padding-remove-top">
 
 		<?php echo JHtml::_('content.prepare', '{loadposition equipmentmanager-before-packages}'); ?>
 

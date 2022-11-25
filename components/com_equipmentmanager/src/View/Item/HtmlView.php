@@ -26,7 +26,7 @@ class HtmlView extends BaseHtmlView
 	public function display($tpl = null)
 	{
 
-//		$this->item = $this->get('Item');
+		$this->item = $this->get('Item');
 
 //		$item = $this->item = $this->get('Item');
 //		$state = $this->State = $this->get('State');

@@ -31,6 +31,30 @@
 		/>
 
 		<field
+				name="ip65"
+				type="radio"
+				label="COM_EQUIPMENT_MANAGER_FIELD_IP65_LABEL"
+				layout="joomla.form.field.radio.switcher"
+				filter="integer"
+				default="0"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field
+				name="battery"
+				type="radio"
+				label="COM_EQUIPMENT_MANAGER_FIELD_BATTERY_LABEL"
+				layout="joomla.form.field.radio.switcher"
+				filter="integer"
+				default="0"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field
 				name="short_description"
 				type="editor"
 				label="COM_EQUIPMENT_MANAGER_FIELD_SHORT_DESCRIPTION_LABEL"

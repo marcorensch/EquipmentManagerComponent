@@ -68,6 +68,12 @@ class ItemModel extends BaseDatabaseModel
 			}
 		}
 
+		if($this->_item[$pk]) {
+			if($this->_item[$pk]->features){
+				$this->_item[$pk]->features = json_decode($this->_item[$pk]->features);
+			}
+		}
+
 		return $this->_item[$pk];
 	}
 }
