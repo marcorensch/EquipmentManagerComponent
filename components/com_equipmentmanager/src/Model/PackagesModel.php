@@ -19,7 +19,7 @@ class PackagesModel extends BaseDatabaseModel{
 
 	public function getPackages(){
 		$app = Factory::getApplication();
-		$categories_filter = $app->getParams()->get('categories_filter', '');
+		$categories_filter = $app->getParams()->get('categories_filter', []);
 		$categories_filter = array_map('intval', $categories_filter);
 		$categories_filter = $categories_filter ? implode(',', $categories_filter) : [];
 
@@ -37,6 +37,8 @@ class PackagesModel extends BaseDatabaseModel{
 				$query->where('a.catid IN (' .  $categories_filter . ')');
 			}
 
+			$query->order('a.ordering ASC');
+
 
 			$db->setQuery($query);
 			$this->_packages = $db->loadObjectList();
@@ -46,8 +48,16 @@ class PackagesModel extends BaseDatabaseModel{
 			$this->_packages = false;
 		}
 
+		if($this->_packages){
+			foreach($this->_packages as $package){
+				$package->related_items = json_decode($package->related_items);
+			}
+		}
+
 		return $this->_packages;
 	}
 
+	private function _getRelatedItems(){
 
+	}
 }

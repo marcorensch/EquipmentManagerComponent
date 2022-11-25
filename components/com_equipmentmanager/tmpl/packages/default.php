@@ -14,28 +14,32 @@ use Joomla\CMS\Factory;
 $params = Factory::getApplication()->getParams();
 
 $wa = $this->document->getWebAssetManager();
-if($params->get('load_uikit', 1)) {
-    $wa->useScript('com_equipmentmanager.uikit-js');
-    $wa->useStyle('com_equipmentmanager.uikit-css');
+if ($params->get('load_uikit', 1))
+{
+	$wa->useScript('com_equipmentmanager.uikit-js');
+	$wa->useStyle('com_equipmentmanager.uikit-css');
 }
-
-echo '<h1>Packages</h1>';
-echo '<pre>' . var_export($this->packages, true) . '</pre>';
-
 ?>
 
 <div class="uk-section">
-    <div class="uk-container uk-container-large">
-        <div class="uk-grid-small" uk-grid uk-height-match>
-			<?php foreach ($this->packages as $package) : ?>
-                <div>
-                    <div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
-                        <h3 class="uk-card-title"><?php echo $package->title; ?></h3>
-                        <p><?php echo $package->description; ?></p>
-                        <a href="<?php echo '/index.php?option=com_equipmentmanager&view=package&id=' . $package->id; ?>" class="uk-button uk-button-primary">View Package</a>
-                    </div>
-                </div>
-			<?php endforeach; ?>
+    <h1 class="uk-h1">All in One Packages</h1>
+
+    <div class="uk-flex">
+        <div class="uk-width-auto" style="min-width: 200px">
+            <ul class="uk-tab-left " uk-tab uk-switcher="connect: #packages-nav; animation: uk-animation-fade">
+				<?php foreach ($this->packages as $package) : ?>
+                    <li class=""><a href="#"><?php echo $package->title; ?></a></li>
+				<?php endforeach; ?>
+            </ul>
+        </div>
+        <div class="uk-width-expand">
+            <div class="uk-padding uk-padding-remove-vertical">
+                <ul id="packages-nav" class="uk-switcher">
+					<?php foreach ($this->packages as $package) : ?>
+                    <?php include 'default.item.php'; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
