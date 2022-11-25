@@ -8,7 +8,8 @@ use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Factory;
 
-class PackagesModel extends BaseDatabaseModel{
+class PackagesModel extends BaseDatabaseModel
+{
 
 	protected $_packages = [];
 
@@ -17,24 +18,27 @@ class PackagesModel extends BaseDatabaseModel{
 		parent::__construct($config, $factory);
 	}
 
-	public function getPackages(){
-		$app = Factory::getApplication();
+	public function getPackages()
+	{
+		$app               = Factory::getApplication();
 		$categories_filter = $app->getParams()->get('categories_filter', []);
 		$categories_filter = array_map('intval', $categories_filter);
 		$categories_filter = $categories_filter ? implode(',', $categories_filter) : [];
 
 		error_log(print_r($categories_filter, true));
 
-		try{
-			$db = $this->getDbo();
+		try
+		{
+			$db    = $this->getDbo();
 			$query = $db->getQuery(true);
 
 			$query->select('*')
 				->from($db->quoteName('#__equipmentmanager_packages', 'a'))
 				->where('a.published = 1');
 
-			if(!empty($categories_filter)){
-				$query->where('a.catid IN (' .  $categories_filter . ')');
+			if (!empty($categories_filter))
+			{
+				$query->where('a.catid IN (' . $categories_filter . ')');
 			}
 
 			$query->order('a.ordering ASC');
@@ -43,21 +47,125 @@ class PackagesModel extends BaseDatabaseModel{
 			$db->setQuery($query);
 			$this->_packages = $db->loadObjectList();
 
-		} catch (\Exception $e){
+		}
+		catch (\Exception $e)
+		{
 			$this->setError($e);
 			$this->_packages = false;
 		}
 
-		if($this->_packages){
-			foreach($this->_packages as $package){
-				$package->related_items = json_decode($package->related_items);
+		if ($this->_packages)
+		{
+			foreach ($this->_packages as $package)
+			{
+				$related_items                      = json_decode($package->related_items);
+				$related_items_from_db              = $this->_getRelatedItems($related_items);
+				$related_items_completed            = $this->_combineInformation($related_items, $related_items_from_db);
+				$package->related_items_by_cat      = $this->_buildCategoriesList($related_items_completed);
 			}
 		}
 
 		return $this->_packages;
 	}
 
-	private function _getRelatedItems(){
+	private function _combineInformation($related_items, $related_items_from_db)
+	{
+		if ($related_items)
+		{
+			foreach ($related_items as $related_item)
+			{
+				$related_items_from_db[$related_item->equipment_item]->count     = $related_item->count;
+				$related_items_from_db[$related_item->equipment_item]->quickinfo = $related_item->description;
+				$related_items_from_db[$related_item->equipment_item]->link      = \JRoute::_('index.php?option=com_equipmentmanager&view=item&id=' . $related_item->equipment_item . ':' . $related_items_from_db[$related_item->equipment_item]->alias);
+				if ($related_items_from_db[$related_item->equipment_item]->image)
+				{
+					$related_items_from_db[$related_item->equipment_item]->image = json_decode($related_items_from_db[$related_item->equipment_item]->image);
+				}
+			}
+		}
 
+		return $related_items_from_db;
 	}
+
+	private function _getRelatedItemIds($related_items): array
+	{
+		$relatedItemIds = [];
+		if ($related_items)
+		{
+			foreach ($related_items as $related_item)
+			{
+				$relatedItemIds[] = $related_item->equipment_item;
+			}
+		}
+
+		return $relatedItemIds;
+	}
+
+	private function _getRelatedItems($related_items): array
+	{
+		$relatedItems = [];
+		$ids          = $this->_getRelatedItemIds($related_items);
+		if ($ids)
+		{
+			try
+			{
+				$db    = $this->getDatabase();
+				$query = $db->getQuery(true);
+
+				$query
+					->select($db->quoteName(array('a.title', 'a.catid', 'a.id', 'a.alias', 'a.image', 'a.ordering')))
+					->select($db->quoteName('c.title', 'category_title'))
+					->select($db->quoteName('c.alias', 'category_alias'))
+					->select($db->quoteName('c.lft', 'category_ordering'))
+					->from($db->quoteName('#__equipmentmanager_items', 'a'))
+					->join('LEFT', $db->quoteName('#__categories', 'c') . ' ON ' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid'))
+					->where('a.published = 1')
+					->where('a.id IN (' . implode(',', $ids) . ')')
+					->order('c.lft ASC')
+					->order('a.ordering ASC');
+
+
+				$db->setQuery($query);
+				$relatedItems = $db->loadObjectList('id');
+			}
+			catch (\Exception $e)
+			{
+				$this->setError($e);
+				Factory::getApplication()->enqueueMessage($e->getMessage(), 'error');
+			}
+		}
+
+		return $relatedItems;
+	}
+
+	private function _buildCategoriesList($related_items)
+	{
+		$categories = [];
+		if ($related_items)
+		{
+			foreach ($related_items as $related_item)
+			{
+				if (!isset($categories[$related_item->catid]))
+				{
+					$categories[$related_item->catid]           = new \stdClass();
+					$categories[$related_item->catid]->id       = $related_item->catid;
+					$categories[$related_item->catid]->title    = $related_item->category_title;
+					$categories[$related_item->catid]->alias    = $related_item->category_alias;
+					$categories[$related_item->catid]->ordering = $related_item->category_ordering;
+					$categories[$related_item->catid]->items    = [];
+				}
+				$categories[$related_item->catid]->items[] = $this->_cleanUpRelatedItem($related_item);
+			}
+		}
+
+		return $categories;
+	}
+
+	private function _cleanUpRelatedItem($item) :\stdClass{
+		unset($item->category_title);
+		unset($item->category_alias);
+		unset($item->category_ordering);
+		return $item;
+	}
+
 }
