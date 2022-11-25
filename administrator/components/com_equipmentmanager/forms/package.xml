@@ -76,6 +76,14 @@
 				multiple="false"
 				default=""
 		/>
+		<field
+			name="usage"
+			type="textarea"
+			label="COM_EQUIPMENT_MANAGER_FIELD_USAGE_LABEL"
+			rows="1"
+			limit="255"
+			filter="safehtml"
+		/>
 
 		<field
 			name="language"

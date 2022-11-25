@@ -23,6 +23,13 @@
                     label="COM_EQUIPMENT_MANAGER_FIELD_CATEGORIES_FILTER_LABEL"
                     multiple="true"
             />
+            <field
+                    name="mailto_address"
+                    type="text"
+                    label="COM_EQUIPMENTMANAGER_FIELD_MAILTO_ADDRESS_LABEL"
+                    description=""
+                    filter="email"
+            />
         </fieldset>
     </fields>
 </metadata>

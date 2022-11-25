@@ -70,6 +70,7 @@ $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=componen
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-8 form-vertical">
+						<?php echo $this->getForm()->renderField('usage'); ?>
 						<?php echo $this->getForm()->renderField('description'); ?>
 					</div>
 

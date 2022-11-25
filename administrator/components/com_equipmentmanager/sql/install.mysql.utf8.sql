@@ -62,3 +62,4 @@ ALTER TABLE `#__equipmentmanager_packages` ADD KEY `idx_language_p` (`language`)
 
 ALTER TABLE `#__equipmentmanager_items` ADD KEY `idx_checkout` (`checked_out`);
 ALTER TABLE `#__equipmentmanager_packages` ADD KEY `idx_checkout_p` (`checked_out`);
+

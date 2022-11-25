@@ -35,6 +35,14 @@
       "name": "com_equipmentmanager.uikit-css",
       "type": "style",
       "uri": "com_equipmentmanager/uikit.min.css"
+    },
+    {
+      "name": "com_equipmentmanager.mailme-js",
+      "type": "script",
+      "attributes": {
+        "defer": true
+      },
+      "uri": "com_equipmentmanager/mailme.js"
     }
   ]
 }

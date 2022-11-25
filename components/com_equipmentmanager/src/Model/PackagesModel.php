@@ -77,10 +77,6 @@ class PackagesModel extends BaseDatabaseModel
 				$related_items_from_db[$related_item->equipment_item]->count     = $related_item->count;
 				$related_items_from_db[$related_item->equipment_item]->quickinfo = $related_item->description;
 				$related_items_from_db[$related_item->equipment_item]->link      = \JRoute::_('index.php?option=com_equipmentmanager&view=item&id=' . $related_item->equipment_item . ':' . $related_items_from_db[$related_item->equipment_item]->alias);
-				if ($related_items_from_db[$related_item->equipment_item]->image)
-				{
-					$related_items_from_db[$related_item->equipment_item]->image = json_decode($related_items_from_db[$related_item->equipment_item]->image);
-				}
 			}
 		}
 
@@ -116,6 +112,8 @@ class PackagesModel extends BaseDatabaseModel
 					->select($db->quoteName(array('a.title', 'a.catid', 'a.id', 'a.alias', 'a.image', 'a.ordering')))
 					->select($db->quoteName('c.title', 'category_title'))
 					->select($db->quoteName('c.alias', 'category_alias'))
+					->select($db->quoteName('c.description', 'category_description'))
+					->select($db->quoteName('c.params', 'category_params'))
 					->select($db->quoteName('c.lft', 'category_ordering'))
 					->from($db->quoteName('#__equipmentmanager_items', 'a'))
 					->join('LEFT', $db->quoteName('#__categories', 'c') . ' ON ' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid'))
@@ -152,6 +150,8 @@ class PackagesModel extends BaseDatabaseModel
 					$categories[$related_item->catid]->title    = $related_item->category_title;
 					$categories[$related_item->catid]->alias    = $related_item->category_alias;
 					$categories[$related_item->catid]->ordering = $related_item->category_ordering;
+					$categories[$related_item->catid]->description = $related_item->category_description;
+					$categories[$related_item->catid]->params   = json_decode($related_item->category_params);
 					$categories[$related_item->catid]->items    = [];
 				}
 				$categories[$related_item->catid]->items[] = $this->_cleanUpRelatedItem($related_item);
@@ -164,6 +164,8 @@ class PackagesModel extends BaseDatabaseModel
 	private function _cleanUpRelatedItem($item) :\stdClass{
 		unset($item->category_title);
 		unset($item->category_alias);
+		unset($item->category_description);
+		unset($item->category_params);
 		unset($item->category_ordering);
 		return $item;
 	}
