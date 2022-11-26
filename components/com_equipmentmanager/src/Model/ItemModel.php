@@ -48,7 +48,7 @@ class ItemModel extends BaseDatabaseModel
 
 		if (!isset($this->_item[$pk])) {
 			try {
-				$db = $this->getDbo();
+				$db = $this->getDatabase();
 				$query = $db->getQuery(true);
 
 				$query->select('*')
@@ -73,11 +73,48 @@ class ItemModel extends BaseDatabaseModel
 			if($this->_item[$pk]->features){
 				$this->_item[$pk]->features = json_decode($this->_item[$pk]->features);
 			}
+
+			$this->_item[$pk]->related_items_bycat = $this->_getRelatedItems($this->_item[$pk]->catid);
+
 		}
 
 		$this->_item[$pk]->galleryImages = $this->_getGalleryImages($this->_item[$pk]->gallery_path);
 
 		return $this->_item[$pk];
+	}
+
+	private function _getRelatedItems($catid){
+		$params = Factory::getApplication()->getParams();
+		$related_items_limit = $params->get('related_items_limit', 10);
+		$db = $this->getDatabase();
+		$query = $db->getQuery(true);
+		try
+		{
+			$query->select($db->quoteName(array('a.title', 'a.catid', 'a.id', 'a.alias', 'a.image')))
+				->from($db->quoteName('#__equipmentmanager_items', 'a'))
+				->where('a.catid = ' . (int) $catid)
+				->where('a.published = 1')
+				->order('a.ordering ASC');
+			if($related_items_limit){
+				$query->setLimit($related_items_limit);
+			}
+
+			$db->setQuery($query);
+			$data = $db->loadObjectList();
+		}
+		catch (RuntimeException $e)
+		{
+			$this->setError($e->getMessage());
+			return false;
+		}
+
+		if($data){
+			foreach($data as $key => $item){
+				$data[$key]->link = \JRoute::_('index.php?option=com_equipmentmanager&view=item&id=' . $item->id . ':' . $item->alias);
+			}
+		}
+
+		return $data;
 	}
 
 	private function _getGalleryImages($relativeDirPath){

@@ -37,12 +37,19 @@
       "uri": "com_equipmentmanager/uikit.min.css"
     },
     {
-      "name": "com_equipmentmanager.mailme-js",
+      "name": "com_equipmentmanager.frontend-main-css",
+      "type": "style",
+      "uri": "com_equipmentmanager/frontend-main.css"
+    },
+    {
+      "name": "com_equipmentmanager.fa-solid-css",
+      "type": "style",
+      "uri": "com_equipmentmanager/fa.solid.min.css"
+    },
+    {
+      "name": "com_equipmentmanager.fa-solid-js",
       "type": "script",
-      "attributes": {
-        "defer": true
-      },
-      "uri": "com_equipmentmanager/mailme.js"
+      "uri": "com_equipmentmanager/fa.solid.min.js"
     }
   ]
 }

@@ -18,8 +18,8 @@ if ($params->get('load_uikit', 1))
 {
 	$wa->useScript('com_equipmentmanager.uikit-js');
 	$wa->useScript('com_equipmentmanager.uikit-icons');
-	$wa->useScript('com_equipmentmanager.mailme-js');
 	$wa->useStyle('com_equipmentmanager.uikit-css');
+	$wa->useStyle('com_equipmentmanager.frontend-main-css');
 }
 $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', '') : 'info@' . $_SERVER['SERVER_NAME'];
 
@@ -35,21 +35,28 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
 
         <div class="uk-flex">
             <div class="uk-width-auto" style="min-width: 200px">
-                <ul class="uk-tab-left " uk-tab uk-switcher="connect: #packages-nav; animation: uk-animation-fade">
+                <ul class="uk-tab-left nxd-tab-container" uk-tab uk-switcher="connect: .packages-nav; animation: uk-animation-fade">
 					<?php foreach ($this->packages as $package) : ?>
-                        <li class=""><a href="#" class="package-selector"><?php echo $package->title; ?></a></li>
+                        <li class="package-item-selector "><a href="#" class="uk-text-bold package-selector"><?php echo $package->title; ?></a></li>
 					<?php endforeach; ?>
                 </ul>
             </div>
             <div class="uk-width-expand">
                 <div class="uk-padding uk-padding-remove-vertical">
-                    <ul id="packages-nav" class="uk-switcher">
+                    <ul id="packages-content" class="uk-switcher packages-nav">
 						<?php foreach ($this->packages as $package) : ?>
 							<?php include 'default.item.php'; ?>
 						<?php endforeach; ?>
                     </ul>
                 </div>
             </div>
+        </div>
+        <div class="">
+            <ul id="packages-footer" class="uk-switcher packages-nav">
+			    <?php foreach ($this->packages as $package) : ?>
+				    <?php include 'default.item.footer.php'; ?>
+			    <?php endforeach; ?>
+            </ul>
         </div>
 
 		<?php echo JHtml::_('content.prepare', '{loadposition equipmentmanager-after-packages}'); ?>

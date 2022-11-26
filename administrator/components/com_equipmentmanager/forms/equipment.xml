@@ -31,6 +31,15 @@
 		/>
 
 		<field
+				name="manufacturer"
+				type="text"
+				label="COM_EQUIPMENT_MANAGER_FIELD_MANUFACTURER_LABEL"
+				size="255"
+				limit="255"
+				hint="COM_EQUIPMENT_MANAGER_FIELD_MANUFACTURER_HINT"
+		/>
+
+		<field
 				name="ip65"
 				type="radio"
 				label="COM_EQUIPMENT_MANAGER_FIELD_IP65_LABEL"

@@ -1,75 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset
-		name="equipmentmanager"
-		label="COM_EQUIPMENT_MANAGER_FIELDSET_CONFIG_INDIVIDUAL"
-		description="COM_EQUIPMENT_MANAGER_FIELDSET_CONFIG_INDIVIDUAL_DESC"
-		>
+    <fieldset
+            name="equipmentmanager"
+            label="COM_EQUIPMENT_MANAGER_FIELDSET_CONFIG_INDIVIDUAL"
+            description="COM_EQUIPMENT_MANAGER_FIELDSET_CONFIG_INDIVIDUAL_DESC"
+    >
 
-		<field
-			name="load_uikit"
-			type="radio"
-			class="btn-group btn-group-yesno"
-			label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_LOAD_UIKIT"
-			description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_LOAD_UIKIT_DESC"
-			default="1"
-			filter="integer"
-			>
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                name="load_uikit"
+                type="radio"
+                class="btn-group btn-group-yesno"
+                label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_LOAD_UIKIT"
+                description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_LOAD_UIKIT_DESC"
+                default="1"
+                filter="integer"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-	</fieldset>
-	<fieldset
-	name="packages" label="Packages">
-		<field
-		name="category_grouping_lvl"
-		label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_CATEGORY_GROUPING_LVL_LABEL"
-		type="list"
-		default="parent"
-		>
-			<option value="parent">COM_EQUIPMENT_MANAGER_FIELD_CONFIG_CATEGORY_GROUPING_LVL_PARENT</option>
-			<option value="above-parent">COM_EQUIPMENT_MANAGER_FIELD_CONFIG_CATEGORY_GROUPING_LVL_ABOVE_PARENT</option>
-		</field>
+    </fieldset>
+    <fieldset name="items" label="COM_EQUIPMENT_MANAGER_FIELDSET_CONFIG_EQUIPMENT">
+        <field
+                name="slideshow-params"
+                type="subform"
+                label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SLIDESHOW_PARAMS"
+                description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SLIDESHOW_PARAMS_DESC"
+                multiple="false"
+                layout="joomla.form.field.subform.default"
+        >
+            <form>
+                <field
+                        name="autoplay"
+                        type="radio"
+                        layout="joomla.form.field.radio.switcher"
+                        label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SLIDESHOW_AUTOPLAY"
+                        description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SLIDESHOW_AUTOPLAY_DESC"
+                        default="1"
+                        filter="integer"
+                >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="autoplay-interval"
+                        showon="autoplay:1"
+                        type="text"
+                        filter="integer"
+                        label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SLIDESHOW_AUTOPLAY_INTERVAL"
+                        default="5000" />
+                <field
+                        name="pause-on-hover"
+                        showon="autoplay:1"
+                        type="radio"
+                        layout="joomla.form.field.radio.switcher"
+                        label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SLIDESHOW_PASUE_ON_HOVER"
+                        description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SLIDESHOW_PASUE_ON_HOVER_DESC"
+                        default="1"
+                        filter="integer"
+                >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="animation"
+                        type="list"
+                        label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SLIDESHOW_ANIMATION"
+                        default="fade"
+                >
+                    <option value="fade">COM_EQUIPMENT_MANAGER_OPT_FADE</option>
+                    <option value="slide">COM_EQUIPMENT_MANAGER_OPT_SLIDE</option>
+                    <option value="scale">COM_EQUIPMENT_MANAGER_OPT_SCALE</option>
+                    <option value="pull">COM_EQUIPMENT_MANAGER_OPT_PULL</option>
+                    <option value="push">COM_EQUIPMENT_MANAGER_OPT_PUSH</option>
+                </field>
 
-		<field
-			name="show_category_description"
-			type="radio"
-			layout="joomla.form.field.radio.switcher"
-			label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_CATEGORY_DESCRIPTION"
-			description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_CATEGORY_DESCRIPTION_DESC"
-			default="1"
-			filter="integer"
-		>
-			<option value="0">JNO</option>
-			<option value="1">JYES</option>
-		</field>
-		<field
-				name="show_item_image_hover"
-				type="radio"
-				layout="joomla.form.field.radio.switcher"
-				label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_ITEM_IMAGE_HOVER"
-				description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_ITEM_IMAGE_HOVER_DESC"
-				default="1"
-				filter="integer"
-		>
-			<option value="0">JNO</option>
-			<option value="1">JYES</option>
-		</field>
-	</fieldset>
-	<fieldset
-		name="permissions"
-		label="JCONFIG_PERMISSIONS_LABEL"
-		description="JCONFIG_PERMISSIONS_DESC"
-		>
-		<field
-			name="rules"
-			type="rules"
-			label="JCONFIG_PERMISSIONS_LABEL"
-			validate="rules"
-			filter="rules"
-			component="com_equipmentmanager"
-			section="component"
-		/>
-	</fieldset>
+            </form>
+        </field>
+        <field
+            name="limit_related_items"
+            type="text"
+            label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_LIMIT_RELATED_ITEMS"
+            default="10"
+            filter="integer"
+        />
+    </fieldset>
+    <fieldset
+            name="packages" label="COM_EQUIPMENT_MANAGER_FIELDSET_CONFIG_PACKAGES">
+        <field
+                name="category_grouping_lvl"
+                label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_CATEGORY_GROUPING_LVL_LABEL"
+                type="list"
+                default="parent"
+        >
+            <option value="parent">COM_EQUIPMENT_MANAGER_FIELD_CONFIG_CATEGORY_GROUPING_LVL_PARENT</option>
+            <option value="above-parent">COM_EQUIPMENT_MANAGER_FIELD_CONFIG_CATEGORY_GROUPING_LVL_ABOVE_PARENT</option>
+        </field>
+
+        <field
+                name="show_category_description"
+                type="radio"
+                layout="joomla.form.field.radio.switcher"
+                label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_CATEGORY_DESCRIPTION"
+                description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_CATEGORY_DESCRIPTION_DESC"
+                default="1"
+                filter="integer"
+        >
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+                name="show_item_image_hover"
+                type="radio"
+                layout="joomla.form.field.radio.switcher"
+                label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_ITEM_IMAGE_HOVER"
+                description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_ITEM_IMAGE_HOVER_DESC"
+                default="1"
+                filter="integer"
+        >
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+    </fieldset>
+    <fieldset
+            name="permissions"
+            label="JCONFIG_PERMISSIONS_LABEL"
+            description="JCONFIG_PERMISSIONS_DESC"
+    >
+        <field
+                name="rules"
+                type="rules"
+                label="JCONFIG_PERMISSIONS_LABEL"
+                validate="rules"
+                filter="rules"
+                component="com_equipmentmanager"
+                section="component"
+        />
+    </fieldset>
 </config>
