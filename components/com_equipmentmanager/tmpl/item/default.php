@@ -46,16 +46,21 @@ if ($params->get('load_uikit', 1))
                         <div class="nxd-equipment-introtext">
 							<?php echo $this->item->short_description; ?>
                         </div>
+	                    <?php if ($this->item->features): ?>
                         <h2 class="uk-h4 equipment-details-title "><?php echo Text::_("COM_EQUIPMENTMANAGER_FEATURES_HEADER"); ?></h2>
                         <div>
-                            <ul class="uk-list uk-margin-left">
-								<?php foreach ($this->item->features as $feature) : ?>
-                                    <li>
-                                        <span class="uk-text-warning" uk-icon="icon: chevron-right"></span>&nbsp;<?php echo $feature->feature; ?>
-                                    </li>
-								<?php endforeach; ?>
-                            </ul>
+
+                                <ul class="uk-list uk-margin-left">
+									<?php foreach ($this->item->features as $feature) : ?>
+                                        <li>
+                                            <span class="uk-text-warning"
+                                                  uk-icon="icon: chevron-right"></span>&nbsp;<?php echo $feature->feature; ?>
+                                        </li>
+									<?php endforeach; ?>
+                                </ul>
+
                         </div>
+	                    <?php endif; ?>
                         <div class="uk-margin-large-top">
                             <div class="uk-child-width-auto uk-grid-small uk-flex uk-flex-middle" uk-grid>
                                 <div>
@@ -80,7 +85,8 @@ if ($params->get('load_uikit', 1))
                                 <div class="uk-width-expand uk-flex uk-flex-right">
 									<?php if ($this->item->rental_price): ?>
                                         <div class="uk-card nxd-card-pricing uk-padding-small">
-                                            <div class="nxd-price"><span class="nxd-price-icon" uk-icon="icon: tag"></span>
+                                            <div class="nxd-price"><span class="nxd-price-icon"
+                                                                         uk-icon="icon: tag"></span>
                                                 <span class="nxd-price-text"><?php echo Text::sprintf('COM_EQUIPMENT_MANGER_RENTAL_PRICE', $this->item->rental_price); ?></span>
                                             </div>
                                         </div>
@@ -107,38 +113,40 @@ if ($params->get('load_uikit', 1))
 
 			<?php if ($params->get('related_items_limit', 10) > 0 && $this->item->related_items_bycat) : ?>
 
-                            <div class="uk-margin-large-top uk-padding-small nxd-tile-items-slider-container uk-overflow-hidden">
-                                <h3><?php echo Text::_('COM_EQUIPMENT_MANAGER_RELATED_ITEMS');?></h3>
-                                <div class="uk-slider-container-offset" uk-slider>
+                <div class="uk-margin-large-top uk-padding-small nxd-tile-items-slider-container uk-overflow-hidden">
+                    <h3><?php echo Text::_('COM_EQUIPMENT_MANAGER_RELATED_ITEMS'); ?></h3>
+                    <div class="uk-slider-container-offset" uk-slider>
 
-                                    <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
+                        <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
 
-                                        <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-5@m uk-grid uk-grid-small uk-grid-match">
-	                                        <?php foreach ($this->item->related_items_bycat as $relatedItem) : ?>
+                            <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-5@m uk-grid uk-grid-small uk-grid-match">
+								<?php foreach ($this->item->related_items_bycat as $relatedItem) : ?>
 
-                                                    <li>
-                                                        <div class="uk-card uk-card-default uk-card-small">
-                                                            <div class="uk-height-small uk-cover-container">
-                                                                <img src="<?php echo $relatedItem->image;?>" uk-cover>
-                                                            </div>
-                                                            <div class="uk-card-body">
-                                                                <span class="uk-text-bold"><?php echo $relatedItem->title;?></span>
-                                                            </div>
-                                                            <a href="<?php echo $relatedItem->link;?>" class="uk-position-cover"></a>
-                                                        </div>
-                                                    </li>
-						                        <?php endforeach; ?>
-                                        </ul>
+                                    <li>
+                                        <div class="uk-card uk-card-default uk-card-small">
+                                            <div class="uk-height-small uk-cover-container">
+                                                <img src="<?php echo $relatedItem->image; ?>" uk-cover>
+                                            </div>
+                                            <div class="uk-card-body">
+                                                <span class="uk-text-bold"><?php echo $relatedItem->title; ?></span>
+                                            </div>
+                                            <a href="<?php echo $relatedItem->link; ?>" class="uk-position-cover"></a>
+                                        </div>
+                                    </li>
+								<?php endforeach; ?>
+                            </ul>
 
-                                        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-                                        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
+                               uk-slidenav-previous uk-slider-item="previous"></a>
+                            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#"
+                               uk-slidenav-next uk-slider-item="next"></a>
 
-                                    </div>
+                        </div>
 
-                                    <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+                        <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
 
-                                </div>
-                            </div>
+                    </div>
+                </div>
 			<?php endif; ?>
 
         </div>
