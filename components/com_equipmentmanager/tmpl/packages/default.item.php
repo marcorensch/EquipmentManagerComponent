@@ -38,7 +38,7 @@ use Joomla\CMS\Factory;
                     <div class="uk-card uk-card-small">
                         <div class="uk-card-header">
                             <h3 class="uk-card-title uk-margin-remove-bottom"><?php echo $category->title; ?>
-                            <?php if($category->description): ?>
+                            <?php if($params->get('show_category_description',1) && $category->description): ?>
                                 <sup><span uk-icon="icon: info; ratio: 0.8" uk-tooltip="<?php echo $category->description; ?>"></span></sup>
                             </h3>
                             <div uk-drop="mode:click">
@@ -70,8 +70,8 @@ use Joomla\CMS\Factory;
                                         </div>
                                     </div>
                                     <a href="<?php echo $item->link; ?>" target="_blank" class="uk-position-cover"></a>
-                                        <?php if($item->image): ?>
-                                        <div uk-drop="mode: hover">
+                                        <?php if($params->get('show_item_image_hover',0) && $item->image): ?>
+                                        <div uk-drop="mode: hover; delay-hide:50">
                                             <div class="uk-width-small uk-height-small uk-border-rounded uk-overflow-hidden uk-cover-container uk-box-shadow-large">
                                                 <img uk-cover src="<?php echo $item->image; ?>" alt="<?php echo $item->title; ?>">
                                             </div>

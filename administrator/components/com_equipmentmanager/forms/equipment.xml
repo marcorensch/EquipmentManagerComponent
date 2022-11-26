@@ -85,10 +85,11 @@
 
 		<field
 			name="gallery_path"
-			type="text"
+			type="folderlist"
 			label="COM_EQUIPMENT_MANAGER_FIELD_GALLERY_PATH_LABEL"
-			size="255"
-			limit="255"
+			directory="/images/equipmentmanager/equipment"
+			hide_default="true"
+			recursive="true"
 			/>
 
 		<field

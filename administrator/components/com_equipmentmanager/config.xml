@@ -21,6 +21,43 @@
 
 	</fieldset>
 	<fieldset
+	name="packages" label="Packages">
+		<field
+		name="category_grouping_lvl"
+		label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_CATEGORY_GROUPING_LVL_LABEL"
+		type="list"
+		default="parent"
+		>
+			<option value="parent">COM_EQUIPMENT_MANAGER_FIELD_CONFIG_CATEGORY_GROUPING_LVL_PARENT</option>
+			<option value="above-parent">COM_EQUIPMENT_MANAGER_FIELD_CONFIG_CATEGORY_GROUPING_LVL_ABOVE_PARENT</option>
+		</field>
+
+		<field
+			name="show_category_description"
+			type="radio"
+			layout="joomla.form.field.radio.switcher"
+			label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_CATEGORY_DESCRIPTION"
+			description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_CATEGORY_DESCRIPTION_DESC"
+			default="1"
+			filter="integer"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field
+				name="show_item_image_hover"
+				type="radio"
+				layout="joomla.form.field.radio.switcher"
+				label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_ITEM_IMAGE_HOVER"
+				description="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_SHOW_ITEM_IMAGE_HOVER_DESC"
+				default="1"
+				filter="integer"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+	</fieldset>
+	<fieldset
 		name="permissions"
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC"

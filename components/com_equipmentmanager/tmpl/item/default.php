@@ -12,7 +12,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
 
 $params = Factory::getApplication()->getParams();
-$wa = $this->document->getWebAssetManager();
+$wa     = $this->document->getWebAssetManager();
 if ($params->get('load_uikit', 1))
 {
 	$wa->useScript('com_equipmentmanager.uikit-js');
@@ -21,30 +21,31 @@ if ($params->get('load_uikit', 1))
 	$wa->useStyle('com_equipmentmanager.uikit-css');
 }
 
-
 ?>
 <?php echo JHtml::_('content.prepare', '{loadposition equipmentmanager-banner}'); ?>
-<div class="uk-section uk-padding-remove-top">
-	<div>
-		<h1 class="uk-heading-large"><?php echo $this->item->title;?></h1>
-		<div class="uk-h3"><?php echo $this->item->manufacturer;?></div>
-	</div>
-</div>
+    <div class="uk-section uk-padding-remove-top">
+        <div>
+            <h1 class="uk-heading-large"><?php echo $this->item->title; ?></h1>
+            <div class="uk-h3"><?php echo $this->item->manufacturer; ?></div>
+        </div>
+    </div>
 
-<div class="uk-section uk-padding-remove-top">
+    <div class="uk-section uk-padding-remove-top">
 
-	<div class="uk-grid-small uk-chilld-width-1-1 uk-child-width-1-2@m" uk-grid>
-		<div class="uk-flex-last@m">
-			<div class="equipment-information">
-			<div class="uk-h2 equipment-title"><?php echo $this->item->title;?></div>
-			<h2 class="uk-h4 uk-margin-remove equipment-details-title "><?php echo Text::_("COM_EQUIPMENTMANAGER_DETAILS_HEADER");?></h2>
-			</div>
-		</div>
-		<div>
-			IMAGES
-		</div>
-	</div>
-</div>
+        <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m" uk-grid>
+            <div class="uk-width-expand uk-flex-last@m">
+                <div class="equipment-information">
+                    <div class="uk-h2 equipment-title"><?php echo $this->item->title; ?></div>
+                    <h2 class="uk-h4 uk-margin-remove equipment-details-title "><?php echo Text::_("COM_EQUIPMENTMANAGER_DETAILS_HEADER"); ?></h2>
+                </div>
+            </div>
+			<?php if ($this->item->galleryImages) : ?>
+                <div>
+					<?php include 'default.gallery.php'; ?>
+                </div>
+			<?php endif; ?>
+        </div>
+    </div>
 
 <?php echo JHtml::_('content.prepare', '{loadposition equipmentmanager-footer}'); ?>
 

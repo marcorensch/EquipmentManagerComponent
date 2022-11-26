@@ -101,6 +101,8 @@ class PackagesModel extends BaseDatabaseModel
 	{
 		$relatedItems = [];
 		$ids          = $this->_getRelatedItemIds($related_items);
+		$app		  = Factory::getApplication();
+		$params		  = $app->getParams();
 		if ($ids)
 		{
 			try
@@ -112,16 +114,34 @@ class PackagesModel extends BaseDatabaseModel
 					->select($db->quoteName(array('a.title', 'a.catid', 'a.id', 'a.alias', 'a.image', 'a.ordering')))
 					->select($db->quoteName('c.title', 'category_title'))
 					->select($db->quoteName('c.alias', 'category_alias'))
+					->select($db->quoteName('c.id', 'grouping_id'))
 					->select($db->quoteName('c.description', 'category_description'))
 					->select($db->quoteName('c.params', 'category_params'))
 					->select($db->quoteName('c.lft', 'category_ordering'))
 					->from($db->quoteName('#__equipmentmanager_items', 'a'))
-					->join('LEFT', $db->quoteName('#__categories', 'c') . ' ON ' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid'))
-					->where('a.published = 1')
-					->where('a.id IN (' . implode(',', $ids) . ')')
-					->order('c.lft ASC')
-					->order('a.ordering ASC');
+					->join('LEFT', $db->quoteName('#__categories', 'c') . ' ON ' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid'));
+				// Override Category Information if selected in Configuration
+				if($params->get('category_grouping_lvl','parent') === 'above-parent'){
+					$query->select($db->quoteName('c2.title', 'category_title'))
+						->select($db->quoteName('c2.id', 'grouping_id'))
+						->select($db->quoteName('c2.alias', 'category_alias'))
+						->select($db->quoteName('c2.description', 'category_description'))
+						->select($db->quoteName('c2.params', 'category_params'))
+						->select($db->quoteName('c2.lft', 'category_ordering'))
+						->join('LEFT', $db->quoteName('#__categories', 'c2') . ' ON ' . $db->quoteName('c2.id') . ' = ' . $db->quoteName('c.parent_id'));
+				}
+				$query->where('a.published = 1')
+					->where('a.id IN (' . implode(',', $ids) . ')');
+					if($params->get('category_grouping_lvl','parent') === 'above-parent')
+					{
+						$query->order('c2.lft ASC');
+					}
+					else
+					{
+						$query->order('c.lft ASC');
+					}
 
+				$query->order('a.ordering ASC');
 
 				$db->setQuery($query);
 				$relatedItems = $db->loadObjectList('id');
@@ -143,18 +163,18 @@ class PackagesModel extends BaseDatabaseModel
 		{
 			foreach ($related_items as $related_item)
 			{
-				if (!isset($categories[$related_item->catid]))
+				if (!isset($categories[$related_item->grouping_id]))
 				{
-					$categories[$related_item->catid]           = new \stdClass();
-					$categories[$related_item->catid]->id       = $related_item->catid;
-					$categories[$related_item->catid]->title    = $related_item->category_title;
-					$categories[$related_item->catid]->alias    = $related_item->category_alias;
-					$categories[$related_item->catid]->ordering = $related_item->category_ordering;
-					$categories[$related_item->catid]->description = $related_item->category_description;
-					$categories[$related_item->catid]->params   = json_decode($related_item->category_params);
-					$categories[$related_item->catid]->items    = [];
+					$categories[$related_item->grouping_id]           = new \stdClass();
+					$categories[$related_item->grouping_id]->id       = $related_item->grouping_id;
+					$categories[$related_item->grouping_id]->title    = $related_item->category_title;
+					$categories[$related_item->grouping_id]->alias    = $related_item->category_alias;
+					$categories[$related_item->grouping_id]->ordering = $related_item->category_ordering;
+					$categories[$related_item->grouping_id]->description = $related_item->category_description;
+					$categories[$related_item->grouping_id]->params   = json_decode($related_item->category_params);
+					$categories[$related_item->grouping_id]->items    = [];
 				}
-				$categories[$related_item->catid]->items[] = $this->_cleanUpRelatedItem($related_item);
+				$categories[$related_item->grouping_id]->items[] = $this->_cleanUpRelatedItem($related_item);
 			}
 		}
 

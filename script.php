@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\Installer\InstallerAdapter;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Log\Log;
@@ -242,9 +243,14 @@ class Com_EquipmentmanagerInstallerScript extends InstallerScript
 
 				return false;
 			}
+
+			Folder::create(JPATH_ROOT . '/images/equipmentmanager/packages');
+			Folder::create(JPATH_ROOT . '/images/equipmentmanager/equipment');
+			Folder::create(JPATH_ROOT . '/images/equipmentmanager/categories');
 		}
 
 		echo Text::_('COM_EQUIPMENT_MANAGER_INSTALLERSCRIPT_PREFLIGHT');
+
 
 		return true;
 	}
