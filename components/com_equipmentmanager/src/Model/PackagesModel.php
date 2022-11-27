@@ -7,6 +7,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Factory;
+use NXD\Component\Equipmentmanager\Site\Helper\GalleryHelper;
 
 class PackagesModel extends BaseDatabaseModel
 {
@@ -62,6 +63,7 @@ class PackagesModel extends BaseDatabaseModel
 				$related_items_from_db              = $this->_getRelatedItems($related_items);
 				$related_items_completed            = $this->_combineInformation($related_items, $related_items_from_db);
 				$package->related_items_by_cat      = $this->_buildCategoriesList($related_items_completed);
+				$package->gallery_images    	    = GalleryHelper::getGalleryImages('packages', $package->gallery_path);
 			}
 		}
 

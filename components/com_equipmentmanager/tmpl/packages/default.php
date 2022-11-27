@@ -51,7 +51,8 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
                 </div>
             </div>
         </div>
-        <div class="">
+
+        <div class="uk-margin">
             <ul id="packages-footer" class="uk-switcher packages-nav">
 			    <?php foreach ($this->packages as $package) : ?>
 				    <?php include 'default.item.footer.php'; ?>

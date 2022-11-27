@@ -11,9 +11,16 @@ namespace NXD\Component\Equipmentmanager\Site\Helper;
 use Joomla\Filesystem\Folder;
 
 abstract class GalleryHelper {
-	public function getGalleryImages($type, $selectedFolder){
+	public static function getGalleryImages($type, $selectedFolder): array
+	{
+
 		$galleryImages = [];
-		$folderToEquipmentImages = '/images/equipmentmanager/'.$type.'/';
+		if($type === 'packages'){
+			$folderToEquipmentImages = '/images/equipmentmanager/'.$type.'/galleries/';
+		}else{
+			$folderToEquipmentImages = '/images/equipmentmanager/'.$type.'/';
+		}
+
 		$imgsPath = JPATH_SITE . $folderToEquipmentImages . $selectedFolder;
 		if (is_dir($imgsPath))
 		{
