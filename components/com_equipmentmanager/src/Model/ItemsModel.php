@@ -36,38 +36,85 @@ class ItemsModel extends BaseDatabaseModel
 	 *
 	 * @since   __BUMP_VERSION__
 	 */
-	public function getItem($pk = null)
+	public function getChildCategories()
 	{
 		$app = Factory::getApplication();
-		$pk = $app->input->getInt('id');
+		$catId = $app->input->getInt('root_category');
+		$subCatId = $app->input->getInt('sub_category');
+		$isDetailed = false;
 
-		if ($this->_item === null) {
-			$this->_item = [];
+		if($subCatId) {
+			$catId = $subCatId;
+			$isDetailed = true;
+		}
+		try
+		{
+			$db    = $this->getDatabase();
+			$query = $db->getQuery(true);
+
+			$query->select('*')
+				->from($db->quoteName('#__categories', 'c'))
+				->where('c.published = 1')
+				->where('c.parent_id = ' . $catId);
+
+			$query->order('c.lft ASC');
+
+			$db->setQuery($query);
+			$categories = $db->loadObjectList();
+
+		}
+		catch (\Exception $e)
+		{
+			$app = Factory::getApplication();
+			$app->enqueueMessage($e->getMessage(), 'error');
+			$categories = false;
 		}
 
-		if (!isset($this->_item[$pk])) {
-			try {
-				$db = $this->getDbo();
-				$query = $db->getQuery(true);
+		if($categories && !$isDetailed)
+		{
+			$categories = array_map(function($category) use ($catId) {
+				$category->link = 'index.php?option=com_equipmentmanager&view=items&layout=categoryitems&category=' . $category->id;
+				$category->params = json_decode($category->params);
+				return $category;
+			}, $categories);
+		}
 
-				$query->select('*')
-					->from($db->quoteName('#__equipmentmanager_items', 'a'))
-					->where('a.id = ' . (int) $pk);
-
-				$db->setQuery($query);
-				$data = $db->loadObject();
-
-				if (empty($data)) {
-					throw new \Exception(Text::_('COM_EQUIPMENT_MANAGER_ERROR_ITEM_NOT_FOUND'), 404);
-				}
-
-				$this->_item[$pk] = $data;
-			} catch (\Exception $e) {
-				$this->setError($e);
-				$this->_item[$pk] = false;
+		if($categories && $isDetailed)
+		{
+			foreach($categories as $category)
+			{
+				$category->params = json_decode($category->params);
+				$category->items = $this->_getItemsByCategory($category->id);
 			}
 		}
 
-		return $this->_item[$pk];
+		return $categories;
+	}
+
+	private function _getItemsByCategory($catId){
+		try
+		{
+			$db    = $this->getDatabase();
+			$query = $db->getQuery(true);
+
+			$query->select('*')
+				->from($db->quoteName('#__equipmentmanager_items', 'a'))
+				->where('a.published = 1')
+				->where('c.catid = ' . $catId);
+
+			$query->order('a.ordering ASC');
+
+			$db->setQuery($query);
+			$items = $db->loadObjectList();
+
+		}
+		catch (\Exception $e)
+		{
+			$app = Factory::getApplication();
+			$app->enqueueMessage($e->getMessage(), 'error');
+			$items = array();
+		}
+
+		return $items;
 	}
 }

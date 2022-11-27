@@ -6,4 +6,19 @@
             <![CDATA[COM_EQUIPMENTMANAGER_ITEMS_VIEW_DEFAULT_DESC]]>
         </message>
     </layout>
+
+    <!-- Add fields to the request variables for the layout. -->
+    <fields name="request">
+        <fieldset name="request" addfieldprefix="NXD\Component\Equipmentmanager\Administrator\Field">
+            <field
+                    name="root_category"
+                    type="category"
+                    layout="joomla.form.field.list-fancy-select"
+                    extension="com_equipmentmanager"
+                    label="COM_EQUIPMENT_MANAGER_FIELD_ROOT_CATEGORY_LABEL"
+                    multiple="false"
+            />
+        </fieldset>
+    </fields>
+
 </metadata>

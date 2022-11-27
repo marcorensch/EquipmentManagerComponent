@@ -30,7 +30,7 @@ class PackagesModel extends BaseDatabaseModel
 
 		try
 		{
-			$db    = $this->getDbo();
+			$db    = $this->getDatabase();
 			$query = $db->getQuery(true);
 
 			$query->select('*')

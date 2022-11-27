@@ -22,9 +22,12 @@ use Joomla\Registry\Registry;
  */
 class HtmlView extends BaseHtmlView
 {
+	protected $categories;
 
 	public function display($tpl = null)
 	{
+		$this->categories = $this->get('ChildCategories');
+		$this->itemsByCategory = $this->get('ItemsByCategory');
 
 		return parent::display($tpl);
 	}
