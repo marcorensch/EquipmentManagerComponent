@@ -40,7 +40,7 @@ class ItemsModel extends BaseDatabaseModel
 	{
 		$app = Factory::getApplication();
 		$catId = $app->input->getInt('root_category');
-		$subCatId = $app->input->getInt('sub_category');
+		$subCatId = $app->input->getInt('category');
 		$isDetailed = false;
 
 		if($subCatId) {
@@ -100,7 +100,7 @@ class ItemsModel extends BaseDatabaseModel
 			$query->select('*')
 				->from($db->quoteName('#__equipmentmanager_items', 'a'))
 				->where('a.published = 1')
-				->where('c.catid = ' . $catId);
+				->where('a.catid = ' . $catId);
 
 			$query->order('a.ordering ASC');
 
@@ -113,6 +113,12 @@ class ItemsModel extends BaseDatabaseModel
 			$app = Factory::getApplication();
 			$app->enqueueMessage($e->getMessage(), 'error');
 			$items = array();
+		}
+
+		if($items){
+			foreach($items as  $item){
+				$item->link = \JRoute::_('index.php?option=com_equipmentmanager&view=item&id=' . $item->id . ':' . $item->alias);
+			}
 		}
 
 		return $items;

@@ -3,16 +3,10 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="7ab6cc1e-39be-42a3-ba02-3d8c87eecd2d" name="Deploy-Win" url="http://localhost">
-        <fileTransfer mountedRoot="/C:\Users\marco\Deployment\Joomla\EquipmentManager" accessType="MOUNT" port="0" />
+        <fileTransfer mountedRoot="C:\Users\marco\Deployment\Joomla\EquipmentManager" accessType="MOUNT" port="0" />
       </webServer>
       <webServer id="b4c64da6-d91f-4b49-8654-b34f8233a539" name="Joomla4-Win" url="http://localhost">
-        <fileTransfer mountedRoot="/H:\MAMP\htdocs\joomla4" accessType="MOUNT" port="0" />
-      </webServer>
-      <webServer id="3c83c5dd-89e8-44eb-88cb-8185ae81a29b" name="Deploy-Mac" url="http://localhost">
-        <fileTransfer mountedRoot="$USER_HOME$/Deployment/Joomla/EquipmentManager" accessType="MOUNT" port="0" />
-      </webServer>
-      <webServer id="82351bbe-178a-411b-a353-2099f7b2e3f8" name="Joomla4-Mac" url="http://localhost">
-        <fileTransfer mountedRoot="$USER_HOME$/Sites/joomla4" accessType="MOUNT" port="0" />
+        <fileTransfer mountedRoot="H:\MAMP\htdocs\joomla4" accessType="MOUNT" port="0" />
       </webServer>
     </option>
   </component>
