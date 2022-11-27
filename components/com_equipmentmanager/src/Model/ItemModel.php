@@ -15,6 +15,7 @@ namespace NXD\Component\Equipmentmanager\Site\Model;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Filesystem\Folder;
+use NXD\Component\Equipmentmanager\Site\Helper\GalleryHelper;
 
 /**
  * Foo model for the Joomla Foos component.
@@ -78,7 +79,7 @@ class ItemModel extends BaseDatabaseModel
 
 		}
 
-		$this->_item[$pk]->galleryImages = $this->_getGalleryImages($this->_item[$pk]->gallery_path);
+		$this->_item[$pk]->galleryImages = GalleryHelper::getGalleryImages('equipment', $this->_item[$pk]->gallery_path);
 
 		return $this->_item[$pk];
 	}
@@ -117,27 +118,5 @@ class ItemModel extends BaseDatabaseModel
 		return $data;
 	}
 
-	private function _getGalleryImages($relativeDirPath){
-		$galleryImages = [];
-		$folderToEquipmentImages = '/images/equipmentmanager/equipment/'; // Not in config!
-		$imgsPath = JPATH_SITE . $folderToEquipmentImages . $relativeDirPath;
-		if (is_dir($imgsPath))
-		{
-			// Allowed filetypes
-			$allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
-			// Also allow filetypes in uppercase
-			$allowedExtensions = array_merge($allowedExtensions, array_map('strtoupper', $allowedExtensions));
-			// Build the filter. Will return something like: "jpg|jpeg|png|JPG|JPEG|PNG|gif|GIF"
-			$filter = implode('|', $allowedExtensions);
-			$filter = "^.*\.(" . implode('|', $allowedExtensions) . ")$";
-			// Get the files
-			$galleryImages = Folder::files($imgsPath, $filter, false, false, $exclude = array('index.html'));
-			// Prepend the folder path to the filenames
-			$galleryImages = array_map(function($img) use ($folderToEquipmentImages, $relativeDirPath) {
-				return $folderToEquipmentImages . $relativeDirPath . '/' . $img;
-			}, $galleryImages);
 
-		}
-		return $galleryImages;
-	}
 }

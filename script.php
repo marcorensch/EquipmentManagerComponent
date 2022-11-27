@@ -244,7 +244,7 @@ class Com_EquipmentmanagerInstallerScript extends InstallerScript
 				return false;
 			}
 
-			Folder::create(JPATH_ROOT . '/images/equipmentmanager/packages');
+			Folder::create(JPATH_ROOT . '/images/equipmentmanager/packages/galleries');
 			Folder::create(JPATH_ROOT . '/images/equipmentmanager/equipment');
 			Folder::create(JPATH_ROOT . '/images/equipmentmanager/categories');
 		}

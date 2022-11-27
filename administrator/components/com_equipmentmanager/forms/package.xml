@@ -40,6 +40,15 @@
 			hint="JFIELD_ALIAS_PLACEHOLDER"
 		/>
 
+		<field
+				name="gallery_path"
+				type="folderlist"
+				label="COM_EQUIPMENT_MANAGER_FIELD_GALLERY_PATH_LABEL"
+				directory="/images/equipmentmanager/packages/galleries"
+				hide_default="true"
+				recursive="true"
+		/>
+
 
 		<field
 			name="description"

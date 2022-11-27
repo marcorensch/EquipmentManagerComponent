@@ -12,6 +12,7 @@
 .package-item-selector > a {
     background-image: none !important;
     border-right-color: transparent !important;
+    text-decoration: none;
 }
 
 .package-item-selector.uk-active > a {
