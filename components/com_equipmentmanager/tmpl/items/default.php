@@ -40,5 +40,5 @@ use Joomla\CMS\Language\Text;
 <?php endforeach;;?>
 </div>
 <?php
-echo '<pre>' . var_export($this->categories, true) . '</pre>';
-echo 'hello items';
+//echo '<pre>' . var_export($this->categories, true) . '</pre>';
+//echo 'hello items';

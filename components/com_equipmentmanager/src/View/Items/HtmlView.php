@@ -27,7 +27,6 @@ class HtmlView extends BaseHtmlView
 	public function display($tpl = null)
 	{
 		$this->categories = $this->get('ChildCategories');
-		$this->itemsByCategory = $this->get('ItemsByCategory');
 
 		return parent::display($tpl);
 	}
