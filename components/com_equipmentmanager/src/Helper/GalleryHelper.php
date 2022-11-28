@@ -1,13 +1,14 @@
 <?php
 /**
- * @package     ${NAMESPACE}
- * @subpackage
+ * @package     Joomla.Site
+ * @subpackage  com_equipmentmanager
  *
  * @copyright   A copyright
  * @license     A "Slug" license name e.g. GPL2
  */
 namespace NXD\Component\Equipmentmanager\Site\Helper;
 
+use Joomla\CMS\Image\Image;
 use Joomla\Filesystem\Folder;
 
 abstract class GalleryHelper {
@@ -35,7 +36,8 @@ abstract class GalleryHelper {
 			$galleryImages = Folder::files($imgsPath, $filter, false, false, $exclude = array('index.html'));
 			// Prepend the folder path to the filenames
 			$galleryImages = array_map(function($img) use ($folderToEquipmentImages, $selectedFolder) {
-				return $folderToEquipmentImages . $selectedFolder . '/' . $img;
+				$folderToEquipmentImages = preg_replace('#/#', '', $folderToEquipmentImages, 1);
+				return  \JUri::base() . $folderToEquipmentImages . $selectedFolder . '/' . $img;
 			}, $galleryImages);
 
 		}

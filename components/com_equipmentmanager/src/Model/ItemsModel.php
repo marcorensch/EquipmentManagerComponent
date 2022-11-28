@@ -27,15 +27,6 @@ class ItemsModel extends BaseDatabaseModel
 	 */
 	protected $_item = null;
 
-	/**
-	 * Gets a foo
-	 *
-	 * @param   integer  $pk  Id for the foo
-	 *
-	 * @return  mixed Object or null
-	 *
-	 * @since   __BUMP_VERSION__
-	 */
 	public function getChildCategories()
 	{
 		$app = Factory::getApplication();
@@ -55,9 +46,8 @@ class ItemsModel extends BaseDatabaseModel
 			$query->select('*')
 				->from($db->quoteName('#__categories', 'c'))
 				->where('c.published = 1')
-				->where('c.parent_id = ' . $catId);
-
-			$query->order('c.lft ASC');
+				->where('c.parent_id = ' . $catId)
+				->order('c.lft ASC');
 
 			$db->setQuery($query);
 			$categories = $db->loadObjectList();

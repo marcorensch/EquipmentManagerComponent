@@ -75,7 +75,7 @@ class ItemModel extends BaseDatabaseModel
 				$this->_item[$pk]->features = json_decode($this->_item[$pk]->features);
 			}
 
-			$this->_item[$pk]->related_items_bycat = $this->_getRelatedItems($this->_item[$pk]->catid);
+			$this->_item[$pk]->related_items_bycat = $this->_getRelatedItems($this->_item[$pk]->catid, $pk);
 
 		}
 
@@ -84,7 +84,7 @@ class ItemModel extends BaseDatabaseModel
 		return $this->_item[$pk];
 	}
 
-	private function _getRelatedItems($catid){
+	private function _getRelatedItems($catid, $itemId){
 		$params = Factory::getApplication()->getParams();
 		$related_items_limit = $params->get('related_items_limit', 10);
 		$db = $this->getDatabase();
@@ -94,6 +94,7 @@ class ItemModel extends BaseDatabaseModel
 			$query->select($db->quoteName(array('a.title', 'a.catid', 'a.id', 'a.alias', 'a.image')))
 				->from($db->quoteName('#__equipmentmanager_items', 'a'))
 				->where('a.catid = ' . (int) $catid)
+				->where('a.id != ' . (int) $itemId)
 				->where('a.published = 1')
 				->order('a.ordering ASC');
 			if($related_items_limit){

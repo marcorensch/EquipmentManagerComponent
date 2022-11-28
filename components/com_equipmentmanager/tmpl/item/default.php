@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+use NXD\Component\Equipmentmanager\Site\Helper\ItemHelper;
 
 $params = Factory::getApplication()->getParams();
 $wa     = $this->document->getWebAssetManager();
@@ -22,9 +23,12 @@ if ($params->get('load_uikit', 1))
 	$wa->addInlineStyle('#tm-main{position:relative;}');
 }
 
+$mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', '') : 'info@' . $_SERVER['SERVER_NAME'];
+
+
 ?>
 <?php echo JHtml::_('content.prepare', '{loadposition equipmentmanager-banner}'); ?>
-
+<div>
     <div class="uk-padding-remove-top uk-height-medium">
         <div class="uk-position-top uk-height-medium uk-cover-container">
             <img src="<?php echo $this->item->image; ?>" alt="" uk-cover>
@@ -67,7 +71,7 @@ if ($params->get('load_uikit', 1))
 									<?php if ($this->item->ip65): ?>
                                         <div class="nxd-icon-container">
                                             <img uk-tooltip="<?php echo Text::_('COM_EQUIPMENT_MANAGER_IP65_CERTIFIED'); ?>"
-                                                 src="<?php echo JUri::base() . '/media/com_equipmentmanager/images/icons/ip65.png'; ?>"
+                                                 src="<?php echo JUri::base() . 'media/com_equipmentmanager/images/icons/ip65.png'; ?>"
                                                  width="50" alt="Waterproof Icon">
                                         </div>
 									<?php endif; ?>
@@ -76,7 +80,7 @@ if ($params->get('load_uikit', 1))
 									<?php if ($this->item->battery): ?>
                                         <div class="nxd-icon-container">
                                             <img uk-tooltip="<?php echo Text::_('COM_EQUIPMENT_MANAGER_BATTERY_INCL'); ?>"
-                                                 src="<?php echo JUri::base() . '/media/com_equipmentmanager/images/icons/battery.png'; ?>"
+                                                 src="<?php echo JUri::base() . 'media/com_equipmentmanager/images/icons/battery.png'; ?>"
                                                  width="50" alt="Battery Icon">
                                         </div>
 									<?php endif; ?>
@@ -123,16 +127,9 @@ if ($params->get('load_uikit', 1))
 								<?php foreach ($this->item->related_items_bycat as $relatedItem) : ?>
 
                                     <li>
-                                        <div class="uk-card uk-card-default uk-card-small">
-                                            <div class="uk-height-small uk-cover-container">
-                                                <img src="<?php echo $relatedItem->image; ?>" uk-cover>
-                                            </div>
-                                            <div class="uk-card-body">
-                                                <span class="uk-text-bold"><?php echo $relatedItem->title; ?></span>
-                                            </div>
-                                            <a href="<?php echo $relatedItem->link; ?>" class="uk-position-cover"></a>
-                                        </div>
+	                                    <?php echo ItemHelper::buildItemLayout($relatedItem) ?>
                                     </li>
+
 								<?php endforeach; ?>
                             </ul>
 
@@ -150,9 +147,19 @@ if ($params->get('load_uikit', 1))
 			<?php endif; ?>
 
         </div>
-
     </div>
-
+    <div class="uk-margin-large-top">
+        <div class="uk-tile uk-tile-secondary uk-padding-small uk-flex uk-flex-center">
+            <a class="uk-width-1-1 uk-width-1-2@m"
+               href="mailto:<?php echo $mailto; ?>?subject=Anfrage%20für:%20<?php echo $this->item->title; ?>">
+                <button class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-flex uk-flex-middle uk-flex-center">
+                    <span uk-icon="icon: mail; ratio: 1.5"></span>
+                    <span><?php echo Text::_('COM_EQUIPMENTMANAGER_REQUEST_BTN_LBL'); ?></span>
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
 <?php echo JHtml::_('content.prepare', '{loadposition equipmentmanager-footer}'); ?>
 
 

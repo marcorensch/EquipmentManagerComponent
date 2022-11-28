@@ -22,6 +22,7 @@ if ($params->get('load_uikit', 1))
 }
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
 
 ?>
     <div class="uk-section">
@@ -57,9 +58,17 @@ use Joomla\CMS\Language\Text;
                                         <li>
                                             <div class="uk-card uk-card-default uk-card-small uk-position-relative">
                                                 <div class="uk-height-small uk-cover-container">
-                                                    <img src="<?php echo $item->image; ?>"
-                                                         alt="<?php echo $item->title; ?>"
-                                                         uk-cover>
+                                                    <?php
+                                                    $imgclass   = '';
+                                                    $layoutAttr = [
+	                                                    'src' => $item->image,
+	                                                    'alt' => empty($item->title) ? false : $item->title,
+                                                        'uk-cover' => true
+                                                    ];
+                                                    ?>
+                                                    <figure class="<?php echo $this->escape($imgclass); ?> item-image">
+	                                                <?php echo LayoutHelper::render('joomla.html.image', array_merge($layoutAttr, ['itemprop' => 'thumbnail'])); ?>
+                                                    </figure>
                                                 </div>
                                                 <div class="uk-card-body">
                                                     <span class="uk-text-bold uk-text-small"><?php echo $item->title; ?></span>

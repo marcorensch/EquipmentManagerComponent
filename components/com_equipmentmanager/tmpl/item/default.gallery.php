@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Filesystem\Folder;
+use Joomla\CMS\HTML\HTMLHelper;
 
 //echo '<pre>' . var_export($this->item->galleryImages, true) . '</pre>';
 
@@ -27,8 +28,8 @@ if($slideshowParamsObj) {
 			<?php foreach ($this->item->galleryImages as $image) : ?>
 				<li>
 					<div class="uk-position-cover">
-						<img src="<?php echo $image; ?>" alt="" uk-cover>
-						<a href="<?php echo $image; ?>" class="uk-position-cover"></a>
+						<?php echo HTMLHelper::image($image, '', ['uk-cover' => true], false ); ?>
+                        <a href="<?php echo $image; ?>" class="uk-position-cover"></a>
 					</div>
 				</li>
 			<?php endforeach; ?>

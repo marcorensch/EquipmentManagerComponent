@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use NXD\Component\Equipmentmanager\Site\Helper\ItemHelper;
 
 ?>
 
@@ -38,15 +39,7 @@ use Joomla\CMS\Language\Text;
 					<?php foreach ($package->related_items_by_cat as $category): ?>
 						<?php foreach ($category->items as $item): ?>
                             <li>
-                                <div class="uk-card uk-card-default uk-card-small">
-                                    <div class="uk-height-small uk-cover-container">
-                                        <img src="<?php echo $item->image; ?>" uk-cover>
-                                    </div>
-                                    <div class="uk-card-body">
-                                        <span class="uk-text-bold"><?php echo $item->title; ?></span>
-                                    </div>
-                                    <a href="<?php echo $item->link; ?>" class="uk-position-cover"></a>
-                                </div>
+                                <?php echo ItemHelper::buildItemLayout($item) ?>
                             </li>
 						<?php endforeach; ?>
 					<?php endforeach; ?>
