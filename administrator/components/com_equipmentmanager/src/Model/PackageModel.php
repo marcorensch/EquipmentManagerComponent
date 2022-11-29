@@ -204,7 +204,6 @@ class PackageModel extends AdminModel
 	{
 		$input = Factory::getApplication()->input;
 
-
 		if($input->get('task') == 'save2copy')
 		{
 			$origTable = $this->getTable();
