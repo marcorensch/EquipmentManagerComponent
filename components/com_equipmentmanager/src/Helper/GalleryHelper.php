@@ -14,32 +14,24 @@ use Joomla\Filesystem\Folder;
 abstract class GalleryHelper {
 	public static function getGalleryImages($type, $selectedFolder): array
 	{
-
 		$galleryImages = [];
+		$folderToEquipmentImages = "images/equipmentmanager/$type/";
 		if($type === 'packages'){
-			$folderToEquipmentImages = '/images/equipmentmanager/'.$type.'/galleries/';
-		}else{
-			$folderToEquipmentImages = '/images/equipmentmanager/'.$type.'/';
+			$folderToEquipmentImages .= 'galleries/';
 		}
 
-		$imgsPath = JPATH_SITE . $folderToEquipmentImages . $selectedFolder;
+		$imgsPath = JPATH_SITE . '/' . $folderToEquipmentImages . $selectedFolder;
 		if (is_dir($imgsPath))
 		{
-			// Allowed filetypes
-			$allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
-			// Also allow filetypes in uppercase
-			$allowedExtensions = array_merge($allowedExtensions, array_map('strtoupper', $allowedExtensions));
-			// Build the filter. Will return something like: "jpg|jpeg|png|JPG|JPEG|PNG|gif|GIF"
-			$filter = implode('|', $allowedExtensions);
-			$filter = "^.*\.(" . implode('|', $allowedExtensions) . ")$";
-			// Get the files
-			$galleryImages = Folder::files($imgsPath, $filter, false, false, $exclude = array('index.html'));
-			// Prepend the folder path to the filenames
-			$galleryImages = array_map(function($img) use ($folderToEquipmentImages, $selectedFolder) {
-				$folderToEquipmentImages = preg_replace('#/#', '', $folderToEquipmentImages, 1);
-				return  \JUri::base() . $folderToEquipmentImages . $selectedFolder . '/' . $img;
-			}, $galleryImages);
+			$allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+			// see https://www.regular-expressions.info/modifiers.html and here is a sub-demonstration: https://3v4l.org/fKXcL
+			$filter = "\.(?:(?i)" . implode('|', $allowedExtensions) . ")$";
 
+			// Prepend the folder path to the filenames (enjoying PHP7.4's arrow function syntax)
+			$galleryImages = array_map(
+				fn($img) => \JUri::base() . $folderToEquipmentImages . $selectedFolder . '/' . $img,
+				Folder::files($imgsPath, $filter, false, false, $exclude = ['index.html'])
+			);
 		}
 		return $galleryImages;
 	}
