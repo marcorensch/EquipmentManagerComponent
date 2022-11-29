@@ -8,7 +8,7 @@
  */
 namespace NXD\Component\Equipmentmanager\Site\Helper;
 
-
+use NXD\Component\Equipmentmanager\Site\Helper\RouteHelper;
 
 abstract class ItemHelper {
 	public static function buildItemLayout($item):String{
@@ -20,7 +20,7 @@ abstract class ItemHelper {
 		$layout .= '<div class="uk-card-body">';
 		$layout .= '<span class="uk-text-bold">'.$item->title.'</span>';
 		$layout .= '</div>';
-		$layout .= '<a href="'.$item->link.'" class="uk-position-cover"></a>';
+		$layout .= '<a href="'. RouteHelper::getItemRoute($item->id, $item->catid).'" class="uk-position-cover"></a>';
 		$layout .= '</div>';
 
 		return $layout;
