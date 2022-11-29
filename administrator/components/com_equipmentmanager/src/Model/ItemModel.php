@@ -197,4 +197,30 @@ class ItemModel extends AdminModel
 
 		parent::preprocessForm($form, $data, $group);
 	}
+
+	/**
+	 * @throws Exception
+	 */
+	public function save($data): bool
+	{
+		$input = Factory::getApplication()->input;
+
+		if($input->get('task') == 'save2copy')
+		{
+			$origTable = $this->getTable();
+			$origTable->load($input->getInt('id'));
+			if($origTable->title == $data['title'])
+			{
+				list($title, $alias) = $this->generateNewTitle($data['catid'], $data['alias'], $data['title']);
+				$data['title'] = $title;
+				$data['alias'] = $alias;
+			}
+		}
+
+		if (parent::save($data))
+		{
+			return true;
+		}
+		return false;
+	}
 }
