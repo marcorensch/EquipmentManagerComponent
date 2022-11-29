@@ -35,6 +35,7 @@ implements BootableExtensionInterface, CategoryServiceInterface, AssociationServ
 	use CategoryServiceTrait;
 	use AssociationServiceTrait;
 	use HTMLRegistryAwareTrait;
+//	use RouterServiceTrait;
 
 	/**
 	 * Booting the extension. This is the function to set up the environment of the extension like

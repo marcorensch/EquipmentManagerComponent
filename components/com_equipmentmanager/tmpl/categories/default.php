@@ -9,6 +9,8 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Router\Route;
+use NXD\Component\Equipmentmanager\Site\Helper\RouteHelper;
 
 $params = Factory::getApplication()->getParams();
 
@@ -21,7 +23,6 @@ if ($params->get('load_uikit', 1))
 	$wa->useStyle('com_equipmentmanager.frontend-main-css');
 }
 
-use Joomla\CMS\Language\Text;
 ?>
 <div class="uk-grid uk-child-width-1-2 uk-child-width-1-4@m" uk-grid>
 <?php foreach ($this->categories as $category): ?>
@@ -29,18 +30,18 @@ use Joomla\CMS\Language\Text;
 	<div class="uk-card uk-card-default uk-card-small uk-margin-bottom uk-position-relative">
 		<div class="uk-height-small uk-cover-container">
             <?php if($category->params->image): ?>
-                <img src="<?php echo $category->params->image; ?>" alt="<?php echo $category->params->alt; ?>" uk-cover>
+                <img src="<?php echo $category->params->image; ?>" alt="<?php echo $category->params->image; ?>" uk-cover>
 			<?php endif; ?>
 		</div>
         <div class="uk-card-body">
 		<h3 class="uk-card-title uk-margin-remove-bottom"><?php echo $category->title; ?></h3>
 		<p class="uk-text-meta uk-margin-remove-top"><?php echo $category->description; ?></p>
         </div>
-        <a class="uk-position-cover" href="<?php echo $category->link; ?>"></a>
+        <a class="uk-position-cover" href="<?php echo Route::_(RouteHelper::getCategoryRoute($category->id, $category->language))?>"></a>
 	</div>
 </div>
 <?php endforeach;;?>
 </div>
 <?php
-//echo '<pre>' . var_export($this->categories, true) . '</pre>';
+echo '<pre>' . var_export($this->categories, true) . '</pre>';
 //echo 'hello items';

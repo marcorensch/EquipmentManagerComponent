@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Categories\CategoryNode;
 use Joomla\CMS\Language\Multilanguage;
+use Joomla\CMS\Factory;
 
 /**
  * Equipment Manager Component Route Helper
@@ -24,6 +25,38 @@ use Joomla\CMS\Language\Multilanguage;
  */
 abstract class RouteHelper
 {
+
+	public static function getCategoryRoute($catid, $language = 0): string
+	{
+		if ($catid instanceof CategoryNode)
+		{
+			$id = $catid->id;
+		}
+		else
+		{
+			$id = (int) $catid;
+		}
+
+		if ($id < 1)
+		{
+			$link = '';
+		}
+		else
+		{
+			$input = Factory::getApplication()->input;
+			$itemId = $input->get('Itemid', 0, 'INT');
+
+			// Create the link
+			$link = 'index.php?option=com_equipmentmanager&view=category&Itemid='.$itemId.'&id=' . $id;
+
+			if ($language && $language !== '*' && Multilanguage::isEnabled())
+			{
+				$link .= '&lang=' . $language;
+			}
+		}
+
+		return $link;
+	}
 	/**
 	 * Get the URL route for a equipmentmanager from a item ID, equipmentmanager category ID and language
 	 *
@@ -37,26 +70,11 @@ abstract class RouteHelper
 	 */
 	public static function getItemRoute($id, $catid, $language = 0)
 	{
+		$input = Factory::getApplication()->input;
+		$itemId = $input->get('Itemid', 0, 'INT');
+
 		// Create the link
-		$link = 'index.php?option=com_equipmentmanager&view=item&id=' . $id;
-
-		if ($catid > 1)
-		{
-			$link .= '&catid=' . $catid;
-		}
-
-		if ($language && $language !== '*' && Multilanguage::isEnabled())
-		{
-			$link .= '&lang=' . $language;
-		}
-
-		return $link;
-	}
-
-	public static function getItemsRoute($catid, $language = 0)
-	{
-		// Create the link
-		$link = 'index.php?option=com_equipmentmanager&view=items';
+		$link = 'index.php?option=com_equipmentmanager&view=item&id=' . $id . '&catid=' . $catid . '&Itemid=' . $itemId;
 
 		if ($catid > 1)
 		{
@@ -84,45 +102,6 @@ abstract class RouteHelper
 		if ($language && $language !== '*' && Multilanguage::isEnabled())
 		{
 			$link .= '&lang=' . $language;
-		}
-
-		return $link;
-	}
-
-	/**
-	 * Get the URL route for a equipmentmanager category from a item category ID and language
-	 *
-	 * @param   mixed  $catid     The id of the item's category either an integer id or an instance of CategoryNode
-	 * @param   mixed  $language  The id of the language being used.
-	 *
-	 * @return  string  The link to the equipmentmanager
-	 *
-	 * @since   1.5
-	 */
-	public static function getCategoryRoute($catid, $language = 0)
-	{
-		if ($catid instanceof CategoryNode)
-		{
-			$id = $catid->id;
-		}
-		else
-		{
-			$id = (int) $catid;
-		}
-
-		if ($id < 1)
-		{
-			$link = '';
-		}
-		else
-		{
-			// Create the link
-			$link = 'index.php?option=com_equipmentmanager&view=category&id=' . $id;
-
-			if ($language && $language !== '*' && Multilanguage::isEnabled())
-			{
-				$link .= '&lang=' . $language;
-			}
 		}
 
 		return $link;

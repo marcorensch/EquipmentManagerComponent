@@ -41,31 +41,10 @@ class Router extends RouterView
 	 */
 	protected $noIDs = false;
 
-	/**
-	 * The category factory
-	 *
-	 * @var CategoryFactoryInterface
-	 *
-	 * @since  __BUMP_VERSION__
-	 */
 	private $categoryFactory;
 
-	/**
-	 * The category cache
-	 *
-	 * @var  array
-	 *
-	 * @since  __BUMP_VERSION__
-	 */
 	private $categoryCache = [];
 
-	/**
-	 * The db
-	 *
-	 * @var DatabaseInterface
-	 *
-	 * @since  __BUMP_VERSION__
-	 */
 	private $db;
 
 	/**
@@ -85,7 +64,7 @@ class Router extends RouterView
 		$this->noIDs = (bool) $params->get('sef_ids');
 
 		$categories = new RouterViewConfiguration('categories');
-		$categories->setKey('id');
+		$categories->setKey('id')->setNestable();
 		$this->registerView($categories);
 		$category = new RouterViewConfiguration('category');
 		$category->setKey('id')->setParent($categories, 'catid')->setNestable();
@@ -162,7 +141,7 @@ class Router extends RouterView
 	}
 
 	/**
-	 * Method to get the segment(s) for a foo
+	 * Method to get the segment(s) for an equipment item
 	 *
 	 * @param   string  $id     ID of the foo to retrieve the segments for
 	 * @param   array   $query  The request that is built right now
@@ -259,7 +238,7 @@ class Router extends RouterView
 	 *
 	 * @return  mixed   The id of this item or false
 	 */
-	public function getEquipmentitemId($segment, $query)
+	public function getItemId($segment, $query)
 	{
 		if ($this->noIDs) {
 			$dbquery = $this->db->getQuery(true);

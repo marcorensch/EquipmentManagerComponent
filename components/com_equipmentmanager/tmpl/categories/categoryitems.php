@@ -9,6 +9,8 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Router\Route;
+use NXD\Component\Equipmentmanager\Site\Helper\RouteHelper;
 
 $params = Factory::getApplication()->getParams();
 
@@ -73,7 +75,7 @@ use Joomla\CMS\Layout\LayoutHelper;
                                                 <div class="uk-card-body">
                                                     <span class="uk-text-bold uk-text-small"><?php echo $item->title; ?></span>
                                                 </div>
-                                                <a href="<?php echo $item->link; ?>" class="uk-position-cover"></a>
+                                                <a href="<?php echo Route::_(RouteHelper::getItemRoute($item->slug, $item->catid, $item->language))?>" class="uk-position-cover"></a>
                                             </div>
                                         </li>
 									<?php endforeach; ?>

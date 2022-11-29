@@ -119,5 +119,18 @@ class ItemModel extends BaseDatabaseModel
 		return $data;
 	}
 
+	public function getItemsForOverview($category){
+		$db	= $this->getDatabase();
+		$query = $db->getQuery(true);
+		$query->select(array('e.id','e.image', 'e.title','e.short_description', 'e.alias','e.params','e.language'))
+			->from($db->quoteName('#__equipmentmanager_items', 'e'))
+			->where('e.published = 1')
+			->where('e.catid = ' . $category->id)
+			->order('e.ordering ASC');
+		$db->setQuery($query);
+		$category->equipment = $db->loadObjectList();
+		return $category;
+	}
+
 
 }

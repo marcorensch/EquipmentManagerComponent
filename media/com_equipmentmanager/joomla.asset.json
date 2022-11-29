@@ -42,14 +42,12 @@
       "uri": "com_equipmentmanager/frontend-main.css"
     },
     {
-      "name": "com_equipmentmanager.fa-solid-css",
-      "type": "style",
-      "uri": "com_equipmentmanager/fa.solid.min.css"
-    },
-    {
-      "name": "com_equipmentmanager.fa-solid-js",
+      "name": "com_equipmentmanager.move-item-header-js",
       "type": "script",
-      "uri": "com_equipmentmanager/fa.solid.min.js"
+      "attributes": {
+        "defer": true
+      },
+      "uri": "com_equipmentmanager/move-item-header.js"
     }
   ]
 }

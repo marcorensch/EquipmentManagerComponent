@@ -11,7 +11,7 @@
     <fields name="request">
         <fieldset name="request" addfieldprefix="NXD\Component\Equipmentmanager\Administrator\Field">
             <field
-                    name="root_category"
+                    name="id"
                     type="category"
                     layout="joomla.form.field.list-fancy-select"
                     extension="com_equipmentmanager"

@@ -27,19 +27,12 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
 
 
 ?>
-<?php echo JHtml::_('content.prepare', '{loadposition equipmentmanager-banner}'); ?>
-<div>
-    <div class="uk-padding-remove-top uk-height-medium">
-        <div class="uk-position-top uk-height-medium uk-cover-container">
-            <img src="<?php echo $this->item->image; ?>" alt="" uk-cover>
-            <div class="uk-position-cover nxd-item-header-background-layer"></div>
-            <div class="uk-position-center uk-light uk-text-center nxd-item-header-container">
-                <div class="uk-margin-remove nxd-manufacturer-title"><?php echo $this->item->manufacturer; ?></div>
-                <h1 class="uk-heading-large uk-margin-remove nxd-item-header-title"><?php echo $this->item->title; ?></h1>
-            </div>
-        </div>
 
-    </div>
+<?php include 'default_header.php' ?>
+
+<?php echo JHtml::_('content.prepare', '{loadposition equipmentmanager-banner}'); ?>
+
+<div>
 
     <div class="uk-margin-top">
         <div class="uk-width-1-1 uk-position-relative">
@@ -103,7 +96,7 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
 				<?php if ($this->item->galleryImages) : ?>
                     <div>
                         <div class="nxd-gallery-container">
-							<?php include 'default.gallery.php'; ?>
+							<?php include 'default_gallery.php'; ?>
                         </div>
                     </div>
 

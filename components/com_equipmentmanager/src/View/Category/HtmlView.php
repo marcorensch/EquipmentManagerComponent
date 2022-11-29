@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace NXD\Component\Equipmentmanager\Site\View\Items;
+namespace NXD\Component\Equipmentmanager\Site\View\Category;
 
 defined('_JEXEC') or die;
 
@@ -22,11 +22,11 @@ use Joomla\Registry\Registry;
  */
 class HtmlView extends BaseHtmlView
 {
-	protected $categories;
+	protected $categories = null;
 
 	public function display($tpl = null)
 	{
-		$this->categories = $this->get('ChildCategories');
+		$this->categories = $this->get('CategoryChilds');
 
 		return parent::display($tpl);
 	}
