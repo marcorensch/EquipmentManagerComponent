@@ -34,4 +34,3 @@ if ($params->get('load_uikit', 1))
 	</div>
 </div>
 <?php
-echo '<pre>' . var_export($this->categories, true) . '</pre>';

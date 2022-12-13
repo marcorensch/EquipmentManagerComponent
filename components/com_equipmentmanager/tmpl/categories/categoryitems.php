@@ -99,5 +99,3 @@ use Joomla\CMS\Layout\LayoutHelper;
     </div>
 
 <?php
-//echo '<pre>' . var_export($this->categories, true) . '</pre>';
-//echo 'hello category items';
