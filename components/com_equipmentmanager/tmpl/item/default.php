@@ -100,6 +100,12 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
                         </div>
                     </div>
 
+                <?php else : ?>
+                    <div>
+                        <div class="nxd-gallery-container uk-cover-container uk-width-1-1 uk-height-large">
+                            <img src="<?php echo $this->item->image; ?>" alt="" uk-cover>
+                        </div>
+                    </div>
 				<?php endif; ?>
             </div>
             <div class="uk-margin-top">
@@ -157,8 +163,6 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
 
 
 <?php
-
-//echo '<pre>' . var_export($this->item, true) . '</pre>';
 
 //if ($this->item->params->get('show_name')) {
 //	if ($this->Params->get('show_equipmentmanager_name_label')) {

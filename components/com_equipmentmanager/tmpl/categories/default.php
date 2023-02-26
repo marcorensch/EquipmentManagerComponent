@@ -34,8 +34,8 @@ if ($params->get('load_uikit', 1))
 			<?php endif; ?>
 		</div>
         <div class="uk-card-body">
-		<h3 class="uk-card-title uk-margin-remove-bottom"><?php echo $category->title; ?></h3>
-		<p class="uk-text-meta uk-margin-remove-top"><?php echo $category->description; ?></p>
+		    <h3 class="uk-card-title uk-margin-remove-bottom"><?php echo $category->title; ?></h3>
+		    <p class="uk-text-meta uk-margin-remove-top"><?php echo $category->description; ?></p>
         </div>
         <a class="uk-position-cover" href="<?php echo Route::_(RouteHelper::getCategoryRoute($category->id, $category->language))?>"></a>
 	</div>
