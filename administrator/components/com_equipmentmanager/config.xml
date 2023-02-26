@@ -86,6 +86,15 @@
         />
     </fieldset>
     <fieldset
+            name="categories"
+            label="COM_EQUIPMENT_MANAGER_FIELDSET_CONFIG_CATEGORIES">
+        <field name="category_alignment" label="COM_EQUIPMENT_MANAGER_FIELD_CONFIG_CATEGORY_ALIGNMENT_LABEL" type="list" default="left">
+            <option value="left">COM_EQUIPMENT_MANAGER_OPT_LEFT</option>
+            <option value="center">COM_EQUIPMENT_MANAGER_OPT_CENTER</option>
+            <option value="right">COM_EQUIPMENT_MANAGER_OPT_RIGHT</option>
+        </field>
+    </fieldset>
+    <fieldset
             name="packages" label="COM_EQUIPMENT_MANAGER_FIELDSET_CONFIG_PACKAGES">
         <field
                 name="category_grouping_lvl"

@@ -122,7 +122,7 @@ class ItemModel extends BaseDatabaseModel
 	public function getItemsForOverview($category){
 		$db	= $this->getDatabase();
 		$query = $db->getQuery(true);
-		$query->select(array('e.id','e.image', 'e.title','e.short_description', 'e.alias','e.params','e.language'))
+		$query->select(array('e.id','e.image', 'e.title','e.short_description', 'e.alias','e.params','e.language','e.ip65','e.battery'))
 			->from($db->quoteName('#__equipmentmanager_items', 'e'))
 			->where('e.published = 1')
 			->where('e.catid = ' . $category->id)
