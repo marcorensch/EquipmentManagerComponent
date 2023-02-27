@@ -16,7 +16,7 @@ use Joomla\CMS\Factory;
 <li>
     <div>
         <div class="uk-grid-small" uk-grid>
-            <div class="uk-width-2-3">
+            <div class="uk-width-1-1 uk-width-2-3@m">
                 <h2 class="uk-h2"><?php echo $package->title; ?></h2>
                 <span class=""><?php echo $package->usage ? Text::sprintf('COM_EQUIPMENTMANAGER_PURPOSE_TXT', $package->usage) : ''; ?></span>
             </div>
@@ -33,52 +33,41 @@ use Joomla\CMS\Factory;
 			<?php echo $package->description; ?>
         </div>
         <div class="uk-margin">
-            <div class="uk-child-width-1-1 uk-child-width-1-2@m uk-grid-small" uk-grid>
+            <div class="uk-child-width-1-1 uk-child-width-1-2@m uk-grid-small" uk-grid="masonry:true">
 				<?php foreach ($package->related_items_by_cat as $category): ?>
-                    <div>
-                        <div class="uk-card uk-card-small">
-                            <div class="uk-card-header">
-                                <h3 class="uk-card-title uk-margin-remove-bottom"><?php echo $category->title; ?>
-									<?php if ($params->get('show_category_description', 1) && $category->description): ?>
-                                    <sup><span uk-icon="icon: info; ratio: 0.8"
-                                               uk-tooltip="<?php echo $category->description; ?>"></span></sup>
+                    <div class="">
+                        <div class="uk-card">
+                            <div class="uk-card-header uk-margin-remove uk-padding-remove-horizontal">
+                                <h3 class="uk-card-title"><?php echo $category->title; ?>
                                 </h3>
-                                <div uk-drop="mode:click">
-                                    <div class="uk-card uk-card-secondary uk-border-rounded uk-overflow-hidden">
-                                        <div class="uk-card-media-top">
-                                            <img src="<?php echo $category->params->image; ?>" alt="">
-                                        </div>
-                                        <div class="uk-card-body">
-                                            <p><?php echo $category->description; ?></p>
+								<?php if ($params->get('show_category_description', 1) && $category->description): ?>
+                                    <div uk-drop="mode:hover">
+                                        <div class="uk-card uk-card-secondary uk-border-rounded uk-overflow-hidden uk-position-z-index">
+                                            <div class="uk-card-media-top">
+                                                <img src="<?php echo $category->params->image; ?>" alt="">
+                                            </div>
+                                            <div class="uk-card-body">
+                                                <p><?php echo $category->description; ?></p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-								<?php else: ?>
-                                    </h3>
 								<?php endif; ?>
                             </div>
-                            <div class="uk-card-body uk-padding-remove-vertical">
-                                <ul class="uk-list uk-list-divider">
+                            <div class="uk-card-body uk-padding-remove">
+                                <ul class="uk-list uk-list-divider uk-position-relative">
 									<?php foreach ($category->items as $item): ?>
-                                        <li>
-                                            <div class="uk-position-relative">
+                                        <li class="uk-position-relative">
+                                            <div uk-lightbox>
                                                 <div class="uk-grid-small uk-flex uk-flex-middle" uk-grid>
-                                                    <div>
+                                                    <div class="nxd-width-xsmall">
                                                         <span class="uk-text-large"><?php echo Text::sprintf('COM_EQUIPMENTMANAGER_COUNT_X', $item->count); ?></span>
                                                     </div>
-                                                    <div>
+                                                    <div class="uk-width-expand">
                                                         <div><?php echo $item->title; ?></div>
                                                         <div class="uk-text-small uk-text-meta"><?php echo $item->quickinfo; ?></div>
                                                     </div>
                                                 </div>
-												<?php if ($params->get('show_item_image_hover', 0) && $item->image): ?>
-                                                    <div uk-drop="mode: hover; delay-hide:50">
-                                                        <div class="uk-width-small uk-height-small uk-border-rounded uk-overflow-hidden uk-cover-container uk-box-shadow-large">
-                                                            <img uk-cover src="<?php echo $item->image; ?>"
-                                                                 alt="<?php echo $item->title; ?>">
-                                                        </div>
-                                                    </div>
-												<?php endif; ?>
+                                                <a class="uk-position-cover" href="<?php echo $item->image; ?>" data-attrs="width: 800;" data-alt="<?php echo $item->title; ?>" data-caption="<?php echo $item->title; ?>"></a>
                                             </div>
                                         </li>
 									<?php endforeach; ?>

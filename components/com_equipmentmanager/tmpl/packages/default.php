@@ -33,16 +33,43 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
 
         <h1 class="uk-h1">All in One Packages</h1>
 
-        <div class="uk-flex">
-            <div class="uk-width-auto" style="min-width: 200px">
-                <ul class="uk-tab-left nxd-tab-container" uk-tab uk-switcher="connect: .packages-nav; animation: uk-animation-fade">
-					<?php foreach ($this->packages as $package) : ?>
-                        <li class="package-item-selector "><a href="#" class="uk-text-bold package-selector"><?php echo $package->title; ?></a></li>
-					<?php endforeach; ?>
+		<?php echo JHtml::_('content.prepare', '{loadposition packages-after-title}'); ?>
+
+
+
+        <div class="uk-grid-small" uk-grid>
+            <div class="uk-hidden@m uk-width-1-1">
+                <button class="uk-button uk-button-large uk-button-primary uk-width-1-1" type="button" uk-toggle="target: #offcanvas-overlay">
+                    <span uk-icon="icon: menu; ratio: 1.5"></span>
+                    <span class="uk-margin-small-left"><?php echo Text::_('COM_EQUIPMENT_MANAGER_SELECT_PACKAGE');?></span>
+                </button>
+                <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
+                    <div class="uk-offcanvas-bar">
+                        <button class="uk-offcanvas-close" type="button" uk-close></button>
+                        <h3><?php echo Text::_('COM_EQUIPMENT_MANAGER_SELECT_PACKAGE');?></h3>
+                        <ul class="uk-nav uk-nav-default" uk-switcher="connect: .packages-nav; animation: uk-animation-fade">
+		                    <?php foreach ($this->packages as $package) : ?>
+                                <li>
+                                    <a href="#" class="uk-offcanvas-close uk-position-relative uk-text-bold package-selector-mobile"><?php echo $package->title; ?></a>
+                                </li>
+		                    <?php endforeach; ?>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="uk-visible@m" style="min-width:200px;">
+                <ul class="uk-tab-left nxd-tab-container" uk-tab
+                    uk-switcher="connect: .packages-nav; animation: uk-animation-fade">
+			        <?php foreach ($this->packages as $package) : ?>
+                        <li class="package-item-selector uk-width-1-1">
+                            <a href="#" class="uk-text-bold package-selector"><?php echo $package->title; ?></a>
+                        </li>
+			        <?php endforeach; ?>
                 </ul>
             </div>
             <div class="uk-width-expand">
-                <div class="uk-padding uk-padding-remove-vertical">
+                <div class="uk-margin-small-top ">
                     <ul id="packages-content" class="uk-switcher packages-nav">
 						<?php foreach ($this->packages as $package) : ?>
 							<?php include 'default.item.php'; ?>
@@ -54,9 +81,9 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
 
         <div class="uk-margin">
             <ul id="packages-footer" class="uk-switcher packages-nav">
-			    <?php foreach ($this->packages as $package) : ?>
-				    <?php include 'default.item.footer.php'; ?>
-			    <?php endforeach; ?>
+				<?php foreach ($this->packages as $package) : ?>
+					<?php include 'default.item.footer.php'; ?>
+				<?php endforeach; ?>
             </ul>
         </div>
 

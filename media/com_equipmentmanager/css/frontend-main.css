@@ -69,3 +69,7 @@
     background: #333333 !important;
     color: #ff9900 !important;
 }
+
+.nxd-width-xsmall {
+    min-width: 60px;
+}
