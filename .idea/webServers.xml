@@ -6,7 +6,7 @@
         <fileTransfer mountedRoot="$USER_HOME$/Deployment/Joomla/EquipmentManager" accessType="MOUNT" port="0" />
       </webServer>
       <webServer id="c6e4aa26-2dec-4dd5-a38e-4e81a2e6a84f" name="Joomla 4" url="http://localhost">
-        <fileTransfer mountedRoot="$USER_HOME$/Sites/baier_2022" accessType="MOUNT" port="0" />
+        <fileTransfer mountedRoot="$USER_HOME$/Sites/joomla4" accessType="MOUNT" port="0" />
       </webServer>
     </option>
   </component>
