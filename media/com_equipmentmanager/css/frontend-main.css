@@ -1,0 +1,75 @@
+/* Packages */
+
+.nxd-tile-items-slider-container {
+    background: rgba(0, 0, 0, .5);
+}
+
+.package-item-selector {
+    background: rgba(0, 0, 0, .5);
+    margin-top: 8px;
+}
+
+.package-item-selector > a {
+    background-image: none !important;
+    border-right-color: transparent !important;
+    text-decoration: none;
+}
+
+.package-item-selector.uk-active > a {
+    color: #ff9900 !important;
+}
+
+.nxd-tab-container::before {
+    border-left-color: transparent;
+}
+
+/* items */
+.nxd-manufacturer-title{
+    color: #ff9900;
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+.nxd-item-header-background-layer {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.nxd-gallery-container {
+    padding: 8px;
+    background: rgba(0, 0, 0, .2)
+}
+
+.nxd-gallery-container #product-slideshow {
+    border-top: 4px solid #ff9900;
+}
+
+.nxd-card-pricing{
+    background: rgba(0, 0, 0, .5);
+    border-top: 5px solid #ff9900;
+}
+.nxd-price{
+    font-size: 1.2em;
+}
+.nxd-price-icon{
+    color: #ff9900 !important;
+}
+
+.nxd-feature-disabled {
+    filter: grayscale(100%) opacity(30%) blur(1px);
+}
+
+.nxd-request-btn {
+    background: #ff9900 !important;
+    color: #fff !important;
+    padding: 20px;
+}
+
+.nxd-request-btn:hover {
+    background: #333333 !important;
+    color: #ff9900 !important;
+}
+
+.nxd-width-xsmall {
+    min-width: 60px;
+}

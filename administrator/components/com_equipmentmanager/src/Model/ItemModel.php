@@ -53,8 +53,7 @@ class ItemModel extends AdminModel
 	 *
 	 * @var array
 	 */
-	protected $batch_commands
-		= [
+	protected $batch_commands = [
 			'assetgroup_id' => 'batchAccess',
 			'language_id'   => 'batchLanguage',
 			'user_id'       => 'batchUser',
@@ -97,7 +96,17 @@ class ItemModel extends AdminModel
 	{
 		$app = Factory::getApplication();
 
-		$data = $this->getItem();
+		$data = $app->getUserState('com_equipmentmanager.edit.item.data', array());
+
+
+		if(empty($data))
+		{
+			$data = $this->getItem();
+			if($this->getState('item.id') == 0)
+			{
+				$data->set('catid', $app->getInput()->getInt('catid', $app->getUserState('com_equipmentmanager.items.filter.category_id')));
+			}
+		}
 
 		$this->preprocessData('com_equipmentmanager.item', $data);
 
@@ -186,5 +195,31 @@ class ItemModel extends AdminModel
 		}
 
 		parent::preprocessForm($form, $data, $group);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public function save($data): bool
+	{
+		$input = Factory::getApplication()->input;
+
+		if($input->get('task') == 'save2copy')
+		{
+			$origTable = $this->getTable();
+			$origTable->load($input->getInt('id'));
+			if($origTable->title == $data['title'])
+			{
+				list($title, $alias) = $this->generateNewTitle($data['catid'], $data['alias'], $data['title']);
+				$data['title'] = $title;
+				$data['alias'] = $alias;
+			}
+		}
+
+		if (parent::save($data))
+		{
+			return true;
+		}
+		return false;
 	}
 }

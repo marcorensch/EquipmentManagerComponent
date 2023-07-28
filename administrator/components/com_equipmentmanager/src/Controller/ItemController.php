@@ -27,7 +27,7 @@ class ItemController extends FormController
 	 * @var    string
 	 * @since  1.0.0
 	 */
-	protected $text_prefix = 'COM_EQUIPMENT_MANAGER_EQUIPMENT_MANAGER';
+	protected $text_prefix = 'COM_EQUIPMENT_MANAGER_ITEM';
 
 	/**
 	 * Method to run batch operations.

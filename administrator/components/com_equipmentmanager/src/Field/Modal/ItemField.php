@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Joomla.Administrator
- * @subpackage  com_equipmentmanager
+ * @subpackage  com_foos
  *
  * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -9,7 +9,7 @@
 
 namespace NXD\Component\Equipmentmanager\Administrator\Field\Modal;
 
-defined('JPATH_BASE') or die;
+\defined('JPATH_BASE') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\FormField;
@@ -18,9 +18,9 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Session\Session;
 
 /**
- * Supports a modal equipmentmanager picker.
+ * Supports a modal foo picker.
  *
- * @since  1.0
+ * @since  __DEPLOY_VERSION__
  */
 class ItemField extends FormField
 {
@@ -28,48 +28,50 @@ class ItemField extends FormField
 	 * The form field type.
 	 *
 	 * @var     string
-	 * @since   1.0
+	 * @since   __DEPLOY_VERSION__
 	 */
-	protected $type = 'Modal_Equipment_manager';
+	protected $type = 'Modal_Item';
 
 	/**
 	 * Method to get the field input markup.
 	 *
 	 * @return  string  The field input markup.
 	 *
-	 * @since   1.0
+	 * @since   __DEPLOY_VERSION__
 	 */
 	protected function getInput()
 	{
 		$allowClear  = ((string) $this->element['clear'] != 'false');
 		$allowSelect = ((string) $this->element['select'] != 'false');
 
-		// The active equipmentmanager id field.
+		// The active foo id field.
 		$value = (int) $this->value > 0 ? (int) $this->value : '';
 
 		// Create the modal id.
-		$modalId = 'Equipment_manager_' . $this->id;
+		$modalId = 'Item_' . $this->id;
 
 		// Add the modal field script to the document head.
-		HTMLHelper::_('script', 'system/fields/modal-fields.min.js', array('version' => 'auto', 'relative' => true));
+		/** @var \Joomla\CMS\WebAsset\WebAssetManager $wa */
+		$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+
+		// Add the modal field script to the document head.
+		$wa->useScript('field.modal-fields');
 
 		// Script to proxy the select modal function to the modal-fields.js file.
-		if ($allowSelect)
-		{
+		if ($allowSelect) {
 			static $scriptSelect = null;
 
-			if (is_null($scriptSelect))
-			{
-				$scriptSelect = array();
+			if (is_null($scriptSelect)) {
+				$scriptSelect = [];
 			}
 
-			if (!isset($scriptSelect[$this->id]))
-			{
-				Factory::getDocument()->addScriptDeclaration("
-				function jSelectEquipment_manager_" . $this->id . "(id, title, object) {
-					window.processModalSelect('Equipment_manager', '" . $this->id . "', id, title, '', object);
-				}
-				"
+			if (!isset($scriptSelect[$this->id])) {
+				$wa->addInlineScript("
+				window.jSelectItem_" . $this->id . " = function (id, title, object) {
+					window.processModalSelect('Item', '" . $this->id . "', id, title, '', object);
+				}",
+					[],
+					['type' => 'module']
 				);
 
 				$scriptSelect[$this->id] = true;
@@ -77,72 +79,55 @@ class ItemField extends FormField
 		}
 
 		// Setup variables for display.
-		$linkEquipment_managers = 'index.php?option=com_equipmentmanager&amp;view=items&amp;layout=modal&amp;tmpl=component&amp;' . Session::getFormToken() . '=1';
-		$linkEquipment_manager  = 'index.php?option=com_equipmentmanager&amp;view=item&amp;layout=modal&amp;tmpl=component&amp;' . Session::getFormToken() . '=1';
-		$modalTitle   = Text::_('COM_EQUIPMENT_MANAGER_CHANGE_EQUIPMENT_MANAGER');
+		$linkFoos = 'index.php?option=com_equipmentmanager&amp;view=items&amp;layout=modal&amp;tmpl=component&amp;'
+			. Session::getFormToken() . '=1';
+		$linkFoo  = 'index.php?option=com_equipmentmanager&amp;view=item&amp;layout=modal&amp;tmpl=component&amp;'
+			. Session::getFormToken() . '=1';
+		$modalTitle   = Text::_('COM_EQUIPMENT_MANAGER_CHANGE_ITEM');
 
-		if (isset($this->element['language']))
-		{
-			$linkEquipment_managers .= '&amp;forcedLanguage=' . $this->element['language'];
-			$linkEquipment_manager   .= '&amp;forcedLanguage=' . $this->element['language'];
-			$modalTitle     .= ' &#8212; ' . $this->element['label'];
-		}
+		$urlSelect = $linkFoos . '&amp;function=jSelectItem_' . $this->id;
 
-		$urlSelect = $linkEquipment_managers . '&amp;function=jSelectEquipment_manager_' . $this->id;
-
-		if ($value)
-		{
+		if ($value) {
 			$db    = Factory::getDbo();
 			$query = $db->getQuery(true)
-				->select($db->quoteName('name'))
+				->select($db->quoteName('title'))
 				->from($db->quoteName('#__equipmentmanager_items'))
 				->where($db->quoteName('id') . ' = ' . (int) $value);
 			$db->setQuery($query);
 
-			try
-			{
+			try {
 				$title = $db->loadResult();
-			}
-			catch (\RuntimeException $e)
-			{
+			} catch (\RuntimeException $e) {
 				Factory::getApplication()->enqueueMessage($e->getMessage(), 'error');
 			}
 		}
 
-		$title = empty($title) ? Text::_('COM_EQUIPMENT_MANAGER_SELECT_A_EQUIPMENT_MANAGER') : htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+		$title = empty($title) ? Text::_('COM_EQUIPMENT_MANAGER_SELECT_AN_ITEM') : htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
 
-		// The current equipmentmanager display field.
+		// The current foo display field.
 		$html  = '';
 
-		if ($allowSelect || $allowNew || $allowEdit || $allowClear)
-		{
+		if ($allowSelect || $allowNew || $allowEdit || $allowClear) {
 			$html .= '<span class="input-group">';
 		}
 
-		$html .= '<input class="form-control" id="' . $this->id . '_name" type="text" value="' . $title . '" disabled="disabled" size="35">';
+		$html .= '<input class="form-control" id="' . $this->id . '_name" type="text" value="' . $title . '" readonly size="35">';
 
-		if ($allowSelect || $allowNew || $allowEdit || $allowClear)
-		{
-			$html .= '<span class="input-group-append">';
-		}
-
-		// Select equipmentmanager button
-		if ($allowSelect)
-		{
+		// Select foo button
+		if ($allowSelect) {
 			$html .= '<button'
 				. ' class="btn btn-primary hasTooltip' . ($value ? ' hidden' : '') . '"'
 				. ' id="' . $this->id . '_select"'
-				. ' data-toggle="modal"'
+				. ' data-bs-toggle="modal"'
 				. ' type="button"'
-				. ' data-target="#ModalSelect' . $modalId . '"'
-				. ' title="' . HTMLHelper::tooltipText('COM_EQUIPMENT_MANAGER_CHANGE_EQUIPMENT_MANAGER') . '">'
+				. ' data-bs-target="#ModalSelect' . $modalId . '"'
+				. ' title="' . HTMLHelper::tooltipText('COM_FOOS_CHANGE_FOO') . '">'
 				. '<span class="icon-file" aria-hidden="true"></span> ' . Text::_('JSELECT')
 				. '</button>';
 		}
 
-		// Clear equipmentmanager button
-		if ($allowClear)
-		{
+		// Clear foo button
+		if ($allowClear) {
 			$html .= '<button'
 				. ' class="btn btn-secondary' . ($value ? '' : ' hidden') . '"'
 				. ' id="' . $this->id . '_clear"'
@@ -152,35 +137,38 @@ class ItemField extends FormField
 				. '</button>';
 		}
 
-		if ($allowSelect || $allowNew || $allowEdit || $allowClear)
-		{
-			$html .= '</span></span>';
+		if ($allowSelect || $allowNew || $allowEdit || $allowClear) {
+			$html .= '</span>';
 		}
 
-		// Select equipmentmanager modal
-		if ($allowSelect)
-		{
+		// Select foo modal
+		if ($allowSelect) {
 			$html .= HTMLHelper::_(
 				'bootstrap.renderModal',
 				'ModalSelect' . $modalId,
-				array(
+				[
 					'title'       => $modalTitle,
 					'url'         => $urlSelect,
 					'height'      => '400px',
 					'width'       => '800px',
 					'bodyHeight'  => 70,
 					'modalWidth'  => 80,
-					'footer'      => '<a role="button" class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">'
-										. Text::_('JLIB_HTML_BEHAVIOR_CLOSE') . '</a>',
-				)
+					'footer'      => '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">'
+						. Text::_('JLIB_HTML_BEHAVIOR_CLOSE') . '</button>',
+				]
 			);
 		}
 
 		// Note: class='required' for client side validation.
 		$class = $this->required ? ' class="required modal-value"' : '';
 
-		$html .= '<input type="hidden" id="' . $this->id . '_id"' . $class . ' data-required="' . (int) $this->required . '" name="' . $this->name
-			. '" data-text="' . htmlspecialchars(Text::_('COM_EQUIPMENT_MANAGER_SELECT_A_EQUIPMENT_MANAGER', true), ENT_COMPAT, 'UTF-8') . '" value="' . $value . '">';
+		$html .= '<input type="hidden" id="'
+			. $this->id . '_id"'
+			. $class . ' data-required="' . (int) $this->required
+			. '" name="' . $this->name
+			. '" data-text="'
+			. htmlspecialchars(Text::_('COM_EQUIPMENT_MANAGER_SELECT_AN_ITEM', true), ENT_COMPAT, 'UTF-8')
+			. '" value="' . $value . '">';
 
 		return $html;
 	}
@@ -190,7 +178,7 @@ class ItemField extends FormField
 	 *
 	 * @return  string  The field label markup.
 	 *
-	 * @since   1.0
+	 * @since   __DEPLOY_VERSION__
 	 */
 	protected function getLabel()
 	{

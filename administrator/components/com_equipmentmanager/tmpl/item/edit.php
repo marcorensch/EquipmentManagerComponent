@@ -72,7 +72,14 @@ $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=componen
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-4 form-vertical">
+	                    <?php echo $this->getForm()->renderField('manufacturer'); ?>
 	                    <?php echo $this->getForm()->renderField('rental_price'); ?>
+                        <div class="row">
+                            <div class="col-md-6"><?php echo $this->getForm()->renderField('battery'); ?></div>
+                            <div class="col-md-6"><?php echo $this->getForm()->renderField('ip65'); ?></div>
+                        </div>
+
+
 	                    <?php echo $this->getForm()->renderField('features'); ?>
                     </div>
 				</div>
@@ -117,7 +124,7 @@ $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=componen
 			<div class="hidden"><?php echo $this->loadTemplate('associations'); ?></div>
 		<?php endif; ?>
 
-		<?php echo LayoutHelper::render('joomla.edit.params', $this); ?>
+<!--		--><?php //echo LayoutHelper::render('joomla.edit.params', $this); ?>
 
 		<?php echo HTMLHelper::_('uitab.endTabSet'); ?>
 	</div>

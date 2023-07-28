@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_equipmentmanager",
+  "version": "1.0.0",
+  "description": "Joomla CMS web assets for Equipment Manager Component",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "com_equipmentmanager.admin-items-modal",
+      "type": "script",
+      "uri": "com_equipmentmanager/admin-items-modal.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+      "name": "com_equipmentmanager.admin-package-edit",
+      "type": "style",
+      "uri": "com_equipmentmanager/admin-package-edit.css"
+    },
+    {
+      "name": "com_equipmentmanager.uikit-js",
+      "type": "script",
+      "uri": "com_equipmentmanager/uikit.min.js"
+    },
+    {
+      "name": "com_equipmentmanager.uikit-icons",
+      "type": "script",
+      "uri": "com_equipmentmanager/uikit-icons.min.js"
+    },
+    {
+      "name": "com_equipmentmanager.uikit-css",
+      "type": "style",
+      "uri": "com_equipmentmanager/uikit.min.css"
+    },
+    {
+      "name": "com_equipmentmanager.frontend-main-css",
+      "type": "style",
+      "uri": "com_equipmentmanager/frontend-main.css"
+    },
+    {
+      "name": "com_equipmentmanager.move-item-header-js",
+      "type": "script",
+      "attributes": {
+        "defer": true
+      },
+      "uri": "com_equipmentmanager/move-item-header.js"
+    }
+  ]
+}

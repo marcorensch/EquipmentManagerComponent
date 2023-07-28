@@ -31,7 +31,7 @@ class EquipmentmanagerHelper extends ContentHelper
 	 *
 	 * @since   1.0.0
 	 */
-	public static function addSubmenu($vName)
+	public static function addSubmenu($vName): void
 	{
 		if (ComponentHelper::isEnabled('com_fields') && ComponentHelper::getParams('com_equipmentmanager')->get('custom_fields_enable', '1'))
 		{

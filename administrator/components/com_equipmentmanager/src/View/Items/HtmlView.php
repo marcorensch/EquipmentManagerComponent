@@ -163,7 +163,7 @@ class HtmlView extends BaseHtmlView
 	protected function addToolbar()
 	{
 		$canDo = ContentHelper::getActions('com_equipmentmanager',
-			'category',
+			'component',
 			$this->state->get('filter.category_id'));
 		$user  = Factory::getApplication()->getIdentity();
 
@@ -212,14 +212,9 @@ class HtmlView extends BaseHtmlView
 				->listCheck(true);
 		}
 
-//		$toolbar->popupButton('batch')
-//			->text('JTOOLBAR_BATCH')
-//			->selector('collapseModal')
-//			->listCheck(true);
-
 		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
 		{
-			$toolbar->delete('equipmentmanager.delete')
+			$toolbar->delete('items.delete')
 				->text('JTOOLBAR_EMPTY_TRASH')
 				->message('JGLOBAL_CONFIRM_DELETE')
 				->listCheck(true);
@@ -233,7 +228,7 @@ class HtmlView extends BaseHtmlView
 		}
 
 		ToolbarHelper::divider();
-		ToolbarHelper::help('', false, 'http://joomla.org');
+		ToolbarHelper::help('', false, 'http://nx-designs.ch');
 
 		HTMLHelper::_('sidebar.setAction', 'index.php?option=com_equipmentmanager');
 	}
