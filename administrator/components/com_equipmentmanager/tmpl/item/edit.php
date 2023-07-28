@@ -124,7 +124,7 @@ $tmpl    = $isModal || $input->get('tmpl', '') === 'component' ? '&tmpl=componen
 			<div class="hidden"><?php echo $this->loadTemplate('associations'); ?></div>
 		<?php endif; ?>
 
-		<?php echo LayoutHelper::render('joomla.edit.params', $this); ?>
+<!--		--><?php //echo LayoutHelper::render('joomla.edit.params', $this); ?>
 
 		<?php echo HTMLHelper::_('uitab.endTabSet'); ?>
 	</div>
