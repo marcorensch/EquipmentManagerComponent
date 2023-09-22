@@ -216,10 +216,6 @@ class PackageModel extends AdminModel
 			}
 		}
 
-		if (parent::save($data))
-		{
-			return true;
-		}
-		return false;
+		return parent::save($data);
 	}
 }

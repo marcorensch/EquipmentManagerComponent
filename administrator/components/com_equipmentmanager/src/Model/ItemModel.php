@@ -217,10 +217,13 @@ class ItemModel extends AdminModel
 			}
 		}
 
-		if (parent::save($data))
-		{
-			return true;
+		// handle params field
+		if (isset($data['params']) ){
+			$data['params'] = json_encode($data['params']);
+		}else{
+			$data['params'] = '';
 		}
-		return false;
+
+		return parent::save($data);
 	}
 }
