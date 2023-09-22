@@ -17,7 +17,7 @@ use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\Registry\Registry;
 
 /**
- * Foo model for the Joomla Foos component.
+ * Categories model class for the Equipment Manager Component
  *
  * @since  __BUMP_VERSION__
  */

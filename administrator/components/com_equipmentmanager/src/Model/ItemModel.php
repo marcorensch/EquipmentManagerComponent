@@ -53,8 +53,7 @@ class ItemModel extends AdminModel
 	 *
 	 * @var array
 	 */
-	protected $batch_commands
-		= [
+	protected $batch_commands = [
 			'assetgroup_id' => 'batchAccess',
 			'language_id'   => 'batchLanguage',
 			'user_id'       => 'batchUser',

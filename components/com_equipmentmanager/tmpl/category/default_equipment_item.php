@@ -9,13 +9,36 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 use NXD\Component\Equipmentmanager\Site\Helper\RouteHelper;
 
 ?>
 
 <div class="uk-card uk-card-default uk-card-small uk-position-relative">
-    <div class="uk-height-small uk-cover-container">
+    <div class="uk-height-small uk-cover-container uk-position-relative">
 		<?php echo HTMLHelper::image($equipment_item->image, $equipment_item->title, array('uk-cover' => true, 'class' => '')); ?>
+        <div class="uk-position-bottom-right uk-padding-small">
+            <div class="uk-flex uk-grid-small">
+                <div>
+					<?php if ($equipment_item->ip65): ?>
+                        <div class="nxd-icon-container">
+                            <img uk-tooltip="<?php echo Text::_('COM_EQUIPMENT_MANAGER_IP65_CERTIFIED'); ?>"
+                                 src="<?php echo JUri::base() . 'media/com_equipmentmanager/images/icons/ip65.png'; ?>"
+                                 width="30" alt="Waterproof Icon">
+                        </div>
+					<?php endif; ?>
+                </div>
+                <div>
+					<?php if ($equipment_item->battery): ?>
+                        <div class="nxd-icon-container">
+                            <img uk-tooltip="<?php echo Text::_('COM_EQUIPMENT_MANAGER_BATTERY_INCL'); ?>"
+                                 src="<?php echo JUri::base() . 'media/com_equipmentmanager/images/icons/battery.png'; ?>"
+                                 width="30" alt="Battery Icon">
+                        </div>
+					<?php endif; ?>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="uk-card-body">
         <h3 class="uk-card-title"><?php echo $equipment_item->title; ?></h3>
