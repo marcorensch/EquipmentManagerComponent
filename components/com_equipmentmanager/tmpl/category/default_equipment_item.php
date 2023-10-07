@@ -9,13 +9,16 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Layout\LayoutHelper;
 use NXD\Component\Equipmentmanager\Site\Helper\RouteHelper;
 
 ?>
 
 <div class="uk-card uk-card-default uk-card-small uk-position-relative">
-    <div class="uk-height-small uk-cover-container">
-		<?php echo HTMLHelper::image(str_replace(' ', '%20', $equipment_item->image), $equipment_item->title, array('uk-cover' => true, 'class' => '')); ?>
+    <div class="uk-cover-container">
+        <canvas width="4000" height="2500"></canvas>
+		<?php
+        echo LayoutHelper::render('joomla.html.image', ['src' => $equipment_item->image, 'alt' => $equipment_item->title, 'uk-cover' => 'true']); ?>
     </div>
     <div class="uk-card-body">
         <h3 class="uk-card-title"><?php echo $equipment_item->title; ?></h3>
