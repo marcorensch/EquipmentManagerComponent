@@ -11,6 +11,8 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\HTML\HTMLHelper;
 
+//echo '<pre>' . var_export($this->item->galleryImages, true) . '</pre>';
+
 $slideshowParamsObj = $params->get('slideshow-params', array());
 $slideshowParams = '';
 if($slideshowParamsObj) {

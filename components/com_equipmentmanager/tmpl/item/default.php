@@ -25,9 +25,6 @@ if ($params->get('load_uikit', 1))
 
 $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', '') : 'info@' . $_SERVER['SERVER_NAME'];
 
-$ipCls= $this->item->ip65 ? '' : 'nxd-feature-disabled';
-$batteryCls= $this->item->battery ? '' : 'nxd-feature-disabled';
-
 
 ?>
 
@@ -61,55 +58,49 @@ $batteryCls= $this->item->battery ? '' : 'nxd-feature-disabled';
 
                         </div>
 	                    <?php endif; ?>
-                    </div>
-                </div>
-                <div>
-
-	                <?php if ($this->item->galleryImages) : ?>
-                        <div>
-                            <div class="nxd-gallery-container">
-				                <?php include 'default_gallery.php'; ?>
-                            </div>
-                        </div>
-
-	                <?php else : ?>
-                        <div>
-                            <div class="nxd-gallery-container uk-cover-container uk-width-1-1 uk-height-large">
-                                <img src="<?php echo $this->item->image; ?>" alt="" uk-cover>
-                            </div>
-                        </div>
-	                <?php endif; ?>
-
-                    <div class="uk-margin-small-top uk-card nxd-card-pricing uk-padding-small">
-                        <div class="uk-child-width-auto uk-grid-small uk-flex uk-flex-middle" uk-grid>
-                            <div class="uk-width-expand">
-		                        <?php if ($this->item->rental_price): ?>
-                                    <div class="">
-                                        <div class="nxd-price"><span class="nxd-price-icon"
-                                                                     uk-icon="icon: tag"></span>
-                                            <span class="nxd-price-text"><?php echo Text::sprintf('COM_EQUIPMENT_MANGER_RENTAL_PRICE', $this->item->rental_price); ?></span>
+                        <div class="uk-margin-large-top">
+                            <div class="uk-child-width-auto uk-grid-small uk-flex uk-flex-middle" uk-grid>
+                                <div>
+									<?php if ($this->item->ip65): ?>
+                                        <div class="nxd-icon-container">
+                                            <img uk-tooltip="<?php echo Text::_('COM_EQUIPMENT_MANAGER_IP65_CERTIFIED'); ?>"
+                                                 src="<?php echo JUri::base() . 'media/com_equipmentmanager/images/icons/ip65.png'; ?>"
+                                                 width="50" alt="Waterproof Icon">
                                         </div>
-                                    </div>
-		                        <?php endif; ?>
-                            </div>
-
-                            <div>
-                                <div class="nxd-icon-container <?php echo $ipCls;?>">
-                                    <img uk-tooltip="<?php echo $this->item->ip65 ? Text::_('COM_EQUIPMENT_MANAGER_IP65_CERTIFIED') : ''; ?>"
-                                         src="<?php echo JUri::base() . 'media/com_equipmentmanager/images/icons/ip65.png'; ?>"
-                                         width="50" alt="Waterproof Icon">
+									<?php endif; ?>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="nxd-icon-container <?php echo $batteryCls;?>">
-                                    <img uk-tooltip="<?php echo $this->item->battery ? Text::_('COM_EQUIPMENT_MANAGER_BATTERY_INCL') : ''; ?>"
-                                         src="<?php echo JUri::base() . 'media/com_equipmentmanager/images/icons/battery.png'; ?>"
-                                         width="50" alt="Battery Icon">
+                                <div>
+									<?php if ($this->item->battery): ?>
+                                        <div class="nxd-icon-container">
+                                            <img uk-tooltip="<?php echo Text::_('COM_EQUIPMENT_MANAGER_BATTERY_INCL'); ?>"
+                                                 src="<?php echo JUri::base() . 'media/com_equipmentmanager/images/icons/battery.png'; ?>"
+                                                 width="50" alt="Battery Icon">
+                                        </div>
+									<?php endif; ?>
+                                </div>
+
+                                <div class="uk-width-expand uk-flex uk-flex-right">
+									<?php if ($this->item->rental_price): ?>
+                                        <div class="uk-card nxd-card-pricing uk-padding-small">
+                                            <div class="nxd-price"><span class="nxd-price-icon"
+                                                                         uk-icon="icon: tag"></span>
+                                                <span class="nxd-price-text"><?php echo Text::sprintf('COM_EQUIPMENT_MANGER_RENTAL_PRICE', $this->item->rental_price); ?></span>
+                                            </div>
+                                        </div>
+									<?php endif; ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+				<?php if ($this->item->galleryImages) : ?>
+                    <div>
+                        <div class="nxd-gallery-container">
+							<?php include 'default_gallery.php'; ?>
+                        </div>
+                    </div>
+
+				<?php endif; ?>
             </div>
             <div class="uk-margin-top">
                 <div class="nxd-equipment-description">
@@ -151,12 +142,12 @@ $batteryCls= $this->item->battery ? '' : 'nxd-feature-disabled';
         </div>
     </div>
     <div class="uk-margin-large-top">
-        <div class=" uk-padding-small uk-flex uk-flex-center">
+        <div class="uk-tile uk-tile-secondary uk-padding-small uk-flex uk-flex-center">
             <a class="uk-width-1-1 uk-width-1-2@m"
                href="mailto:<?php echo $mailto; ?>?subject=Anfrage%20für:%20<?php echo $this->item->title; ?>">
-                <button class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-flex uk-flex-middle uk-flex-center nxd-request-btn ">
+                <button class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-flex uk-flex-middle uk-flex-center">
                     <span uk-icon="icon: mail; ratio: 1.5"></span>
-                    <span class="uk-margin-small-left"><?php echo Text::_('COM_EQUIPMENTMANAGER_REQUEST_BTN_LBL'); ?></span>
+                    <span><?php echo Text::_('COM_EQUIPMENTMANAGER_REQUEST_BTN_LBL'); ?></span>
                 </button>
             </a>
         </div>
@@ -167,6 +158,16 @@ $batteryCls= $this->item->battery ? '' : 'nxd-feature-disabled';
 
 <?php
 
+//echo '<pre>' . var_export($this->item, true) . '</pre>';
+
+//if ($this->item->params->get('show_name')) {
+//	if ($this->Params->get('show_equipmentmanager_name_label')) {
+//		echo Text::_('COM_EQUIPMENT_MANAGER_NAME') . $this->item->name;
+//	} else {
+//		echo $this->item->name;
+//	}
+//}
+//
 //echo $this->item->event->afterDisplayTitle;
 //echo $this->item->event->beforeDisplayContent;
 //echo $this->item->event->afterDisplayContent;

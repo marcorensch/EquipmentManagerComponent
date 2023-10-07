@@ -76,12 +76,9 @@ class PackagesModel extends BaseDatabaseModel
 		{
 			foreach ($related_items as $related_item)
 			{
-				if(isset($related_items_from_db[$related_item->equipment_item])){
-					$related_items_from_db[$related_item->equipment_item]->count     = $related_item->count;
-					$related_items_from_db[$related_item->equipment_item]->quickinfo = $related_item->description;
-					$related_items_from_db[$related_item->equipment_item]->link      = \JRoute::_('index.php?option=com_equipmentmanager&view=item&id=' . $related_item->equipment_item . ':' . $related_items_from_db[$related_item->equipment_item]->alias);
-				}
-
+				$related_items_from_db[$related_item->equipment_item]->count     = $related_item->count;
+				$related_items_from_db[$related_item->equipment_item]->quickinfo = $related_item->description;
+				$related_items_from_db[$related_item->equipment_item]->link      = \JRoute::_('index.php?option=com_equipmentmanager&view=item&id=' . $related_item->equipment_item . ':' . $related_items_from_db[$related_item->equipment_item]->alias);
 			}
 		}
 

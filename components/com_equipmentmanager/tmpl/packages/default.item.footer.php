@@ -8,18 +8,8 @@
  */
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use NXD\Component\Equipmentmanager\Site\Helper\ItemHelper;
-
-$params = Factory::getApplication()->getParams();
-
-$gallery_columns =  'uk-child-width-1-'.$params->get('package_gallery_columns').
-                    ' uk-child-width-1-'.$params->get('package_gallery_columns_s').'@s'.
-                    ' uk-child-width-1-'.$params->get('package_gallery_columns_m').'@m'.
-                    ' uk-child-width-1-'.$params->get('package_gallery_columns_l').'@l';
-
-
 
 ?>
 
@@ -27,7 +17,7 @@ $gallery_columns =  'uk-child-width-1-'.$params->get('package_gallery_columns').
 	<?php if($package->gallery_images): ?>
         <div class="uk-margin">
             <h3><?php echo Text::_('COM_EQUIPMENT_MANAGER_PACKAGE_USE'); ?></h3>
-            <div class="uk-grid-small <?php echo $gallery_columns;?>" uk-grid uk-lightbox>
+            <div class="uk-grid-small uk-child-witdth-1-2 uk-child-width-1-4@m" uk-grid uk-lightbox>
                 <?php foreach($package->gallery_images as $image): ?>
                     <div>
                         <div class="uk-position-relative uk-cover-container" tabindex="0" style="padding-bottom:100%;">
@@ -39,7 +29,6 @@ $gallery_columns =  'uk-child-width-1-'.$params->get('package_gallery_columns').
             </div>
         </div>
 	<?php endif; ?>
-
     <div class="uk-margin uk-padding-small nxd-tile-items-slider-container uk-overflow-hidden">
         <h3><?php echo Text::_('COM_EQUIPMENT_MANAGER_ITEMS_IN_PACKAGE'); ?></h3>
         <div class="uk-slider-container-offset" uk-slider>
@@ -73,7 +62,7 @@ $gallery_columns =  'uk-child-width-1-'.$params->get('package_gallery_columns').
                href="mailto:<?php echo $mailto; ?>?subject=Anfrage%20für:%20<?php echo $package->title; ?>%20Package">
                 <button class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-flex uk-flex-middle uk-flex-center">
                     <span uk-icon="icon: mail; ratio: 1.5"></span>
-                    <span class="uk-margin-small-left"><?php echo Text::_('COM_EQUIPMENTMANAGER_REQUEST_BTN_LBL'); ?></span>
+                    <span><?php echo Text::_('COM_EQUIPMENTMANAGER_REQUEST_BTN_LBL'); ?></span>
                 </button>
             </a>
         </div>
