@@ -13,7 +13,7 @@
       <paths name="Joomla 4">
         <serverdata>
           <mappings>
-            <mapping deploy="administrator/components" local="$PROJECT_DIR$/administrator" web="/" />
+            <mapping deploy="administrator" local="$PROJECT_DIR$/administrator" web="/" />
             <mapping deploy="components" local="$PROJECT_DIR$/components" web="/" />
           </mappings>
         </serverdata>

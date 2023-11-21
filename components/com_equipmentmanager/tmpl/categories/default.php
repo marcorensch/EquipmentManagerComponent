@@ -23,8 +23,11 @@ if ($params->get('load_uikit', 1))
 	$wa->useStyle('com_equipmentmanager.frontend-main-css');
 }
 
+// Build Grid View based on App Settings
+$childWidth = 'uk-child-width-1-' . $params->get('equipment-category-columns', 1) . ' uk-child-width-1-' . $params->get('equipment-category-columns-s', 1) . '@s uk-child-width-1-' . $params->get('equipment-category-columns-m', 3) . '@m uk-child-width-1-' . $params->get('equipment-category-columns-l', 4) . '@l';
+
 ?>
-<div class="uk-grid uk-child-width-1-2 uk-child-width-1-4@m" uk-grid>
+<div class="<?php echo $childWidth;?>" uk-grid>
 <?php foreach ($this->categories as $category): ?>
 <div>
 	<div class="uk-card uk-card-default uk-card-small uk-margin-bottom uk-position-relative">
