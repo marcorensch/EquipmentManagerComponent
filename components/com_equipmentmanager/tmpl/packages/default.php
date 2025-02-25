@@ -33,15 +33,15 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
 
         <h1 class="uk-h1">All in One Packages</h1>
 
-        <div class="uk-flex">
-            <div class="uk-width-auto" style="min-width: 200px">
+        <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-1-1 uk-width-small@m" style="min-width: 200px">
                 <ul class="uk-tab-left nxd-tab-container" uk-tab uk-switcher="connect: .packages-nav; animation: uk-animation-fade">
 					<?php foreach ($this->packages as $package) : ?>
-                        <li class="package-item-selector "><a href="#" class="uk-text-bold package-selector"><?php echo $package->title; ?></a></li>
+                        <li class="uk-width-1-1 package-item-selector"><a href="#" class="uk-text-bold package-selector"><?php echo $package->title; ?></a></li>
 					<?php endforeach; ?>
                 </ul>
             </div>
-            <div class="uk-width-expand">
+            <div class="uk-width-1-1 uk-width-expand@m">
                 <div class="uk-padding uk-padding-remove-vertical">
                     <ul id="packages-content" class="uk-switcher packages-nav">
 						<?php foreach ($this->packages as $package) : ?>
@@ -51,6 +51,8 @@ $mailto = $params->get('mailto_address', '') ? $params->get('mailto_address', ''
                 </div>
             </div>
         </div>
+
+
 
         <div class="uk-margin">
             <ul id="packages-footer" class="uk-switcher packages-nav">

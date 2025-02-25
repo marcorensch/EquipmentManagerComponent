@@ -16,11 +16,11 @@ use Joomla\CMS\Factory;
 <li>
     <div>
         <div class="uk-grid-small" uk-grid>
-            <div class="uk-width-2-3">
+            <div class="uk-width-1-1 uk-width-2-3@m">
                 <h2 class="uk-h2"><?php echo $package->title; ?></h2>
                 <span class=""><?php echo $package->usage ? Text::sprintf('COM_EQUIPMENTMANAGER_PURPOSE_TXT', $package->usage) : ''; ?></span>
             </div>
-            <div class="uk-width-expand">
+            <div class="uk-width-1-1 uk-width-expand@m">
                 <div class="uk-card uk-card-default uk-card-body uk-card-small uk-text-center">
 					<?php echo Text::_('COM_EQUIPMENTMANAGER_PRICE_TEXT_ONLY'); ?>
                     <div class="uk-text-large uk-text-bold"><?php echo Text::sprintf('COM_EQUIPMENTMANAGER_PRICE_TEXT', $package->rental_price_first); ?>
